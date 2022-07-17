@@ -1,0 +1,68 @@
+{%- liquid
+  if request.page_type == 'index'
+    assign class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
+  else
+    assign class = 'bg-contrast/80 text-primary'
+  endif
+-%}
+
+<header role="banner" class="{{ class }} flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8">
+  <div class="flex items-center justify-start w-full gap-4">
+    <button class="relative flex items-center justify-center w-8 h-8">
+      {% render 'icon-menu' %}
+      <span class="sr-only">{{ 'sections.header.menu' | t }}</span>
+    </button>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="items-center gap-2 sm:flex">
+      <button type="submit" class="relative flex items-center justify-center w-8 h-8">
+        {% render 'icon-search' %}
+        <span class="sr-only">{{ 'general.search.search' | t }}</span>
+      </button>
+
+      {%- liquid
+        if request.page_type == 'index'
+          assign class = 'focus:border-contrast/20 dark:focus:border-primary/20'
+        else
+          assign class = 'focus:border-primary/20'
+        endif
+      -%}
+
+      <input class="{{ class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
+        type="search"
+        name="q"
+        placeholder="{{ 'general.search.search' | t }}"
+      >
+    </form>
+  </div>
+
+  <a href="{{ routes.root_url }}" class="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full font-heading font-bold">
+    {%- if request.page_type == 'index' -%}
+      <h1>
+    {%- endif -%}
+        {{ shop.name }}
+    {%- if request.page_type == 'index' -%}
+      </h1>
+    {%- endif -%}
+  </a>
+
+  <div class="flex items-center justify-end w-full gap-4">
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="relative flex items-center justify-center w-8 h-8">
+        {% render 'icon-account' %}
+        <span class="sr-only">
+          {%- liquid
+            if customer
+              echo 'customer.account_fallback' | t
+            else
+              echo 'customer.log_in' | t
+            endif
+          -%}
+        </span>
+      </a>
+    {%- endif -%}
+
+    <button class="relative flex items-center justify-center w-8 h-8">
+      {% render 'icon-bag' %}
+      <span class="sr-only">{{ 'sections.header.view_cart' | t }}</span>
+    </button>
+  </div>
+</header>

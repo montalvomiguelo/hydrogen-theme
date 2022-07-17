@@ -51,12 +51,7 @@
 
     :root {
       --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-      --font-body-style: {{ settings.type_body_font.style }};
-      --font-body-weight: {{ settings.type_body_font.weight }};
-
       --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-      --font-heading-style: {{ settings.type_header_font.style }};
-      --font-heading-weight: {{ settings.type_header_font.weight }};
 
       --color-primary: {{ settings.colors_primary.red }} {{ settings.colors_primary.green }} {{ settings.colors_primary.blue }};
       --color-contrast: {{ settings.colors_contrast.red }} {{ settings.colors_contrast.green }} {{ settings.colors_contrast.blue }};
@@ -73,10 +68,11 @@
 <body class="flex flex-col min-h-screen">
   <div>
     <a href="#mainContent" class="sr-only">
-      Skip to content
+      {{- 'general.accessibility.skip_to_content' | t -}}
     </a>
   </div>
 
+  {% section 'header' %}
   <main role="main" id="mainContent" class="flex-grow">
     {{ content_for_layout }}
   </main>
