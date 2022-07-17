@@ -1,0 +1,30 @@
+.article {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-primary;
+  }
+  @apply mb-12 font-body prose mx-auto grid justify-center text-primary;
+  p,
+  ul,
+  li {
+    @apply mb-4 text-lg;
+  }
+  img {
+    @apply md:-mx-8 lg:-mx-16;
+
+    @media (min-width: 48em) {
+      width: calc(100% + 4rem);
+      max-width: 100vw;
+    }
+    @media (min-width: 64em) {
+      width: calc(100% + 8rem);
+    }
+  }
+}
+
+.swimlane {
+  @apply grid snap-mandatory grid-flow-col snap-x w-full gap-4 scroll-px-6 px-6 pb-4 overflow-x-scroll justify-start;
+}

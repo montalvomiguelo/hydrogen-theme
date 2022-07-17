@@ -8,6 +8,31 @@
     "theme_support_url": "https:\/\/THEME_SUPPORT_URL.com\/"
   },
   {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "colors_primary",
+        "default": "#FAFAFA",
+        "label": "Primary",
+        "info": "Text, buttons, etc."
+      },
+      {
+        "type": "color",
+        "id": "colors_contrast",
+        "default": "#202124",
+        "label": "Accent",
+        "info": "Backgrounds, borders, etc."
+      },
+      {
+        "type": "color",
+        "id": "colors_accent",
+        "default": "#EB5628",
+        "label": "Labels like \"On sale\""
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {

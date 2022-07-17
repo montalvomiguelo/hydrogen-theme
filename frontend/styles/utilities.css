@@ -1,0 +1,42 @@
+.fadeIn {
+  opacity: 0;
+  animation: fadeInAnimation ease 500ms forwards;
+}
+
+.hiddenScroll {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.absolute-center {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.strike {
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 108%;
+    height: 1.5px;
+    left: -4%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(var(--color-primary));
+    box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast));
+  }
+}
+
+.card-image {
+  @apply relative rounded overflow-clip flex justify-center items-center;
+  &::before {
+    content: ' ';
+    @apply z-10 absolute block top-0 left-0 w-full h-full shadow-border rounded;
+  }
+  img {
+    @apply object-cover w-full aspect-[inherit];
+  }
+}
