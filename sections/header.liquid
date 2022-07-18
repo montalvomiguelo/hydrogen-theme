@@ -1,1 +1,16 @@
+{% render 'desktop-header' %}
 {% render 'mobile-header' %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Primary navigation"
+    }
+  ]
+}
+{% endschema %}
