@@ -5,6 +5,20 @@
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'link_list' -%}
+        <section class="grid gap-4">
+          <button class="text-left md:cursor-default">
+            <h3 class="whitespace-pre-wrap max-w-prose font-bold text-lead flex justify-between">{{- block.settings.heading | escape -}}</h3>
+          </button>
+          <div class="overflow-hidden transition-all duration-300">
+            <nav class="grid gap-2 pb-6">
+              {%- for link in block.settings.menu.links -%}
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              {%- endfor -%}
+            </nav>
+          </div>
+        </section>
       {%- when 'country_selector' -%}
     {%- endcase -%}
   {%- endfor -%}
