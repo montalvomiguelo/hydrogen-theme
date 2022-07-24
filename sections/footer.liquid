@@ -20,6 +20,38 @@
           </div>
         </section>
       {%- when 'country_selector' -%}
+        <section class="grid gap-4 w-full md:max-w-[335px] md:ml-auto">
+          <h3 id="CountryListLabel" class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{- block.settings.heading | escape -}}</h3>
+          {%- if localization.available_countries.size > 1 -%}
+            <localization-form>
+              {% form 'localization', class: 'relative' %}
+                <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-contrast/30 dark:border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
+                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+
+                  {%- render 'icon-caret' -%}
+                </button>
+
+                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 grid content-start w-full overflow-y-scroll rounded-t border dark:border-white px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48">
+                  {% for country in localization.available_countries %}
+                    <li tabindex="-1">
+                      <a class="text-contrast dark:text-primary bg-primary dark:bg-contrast w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+
+                        {%- if country.iso_code == localization.country.iso_code -%}
+                          <span class="ml-2">
+                            {%- render 'icon-check' -%}
+                          </span>
+                        {%- endif -%}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+
+                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+              {% endform %}
+            </localization-form>
+          {%- endif -%}
+        </section>
     {%- endcase -%}
   {%- endfor -%}
 </footer>
