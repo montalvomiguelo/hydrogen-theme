@@ -59,16 +59,16 @@
     }
   {% endstyle %}
 
-  {%- render 'vite-client' -%}
+  {% render 'vite-client' %}
   {% render 'vite-tag' with 'theme.css' %}
   {% render 'vite-tag' with 'theme.js' %}
   {{ content_for_header }}
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="font-body flex flex-col min-h-screen">
   <div>
     <a href="#mainContent" class="sr-only">
-      {{- 'general.accessibility.skip_to_content' | t -}}
+      {{ 'general.accessibility.skip_to_content' | t }}
     </a>
   </div>
 
