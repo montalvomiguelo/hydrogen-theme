@@ -1,11 +1,11 @@
 {
   "frontend/entrypoints/theme.js": {
-    "file": "theme.f7a1f6b4.js",
+    "file": "theme.b64c4088.js",
     "src": "frontend/entrypoints/theme.js",
     "isEntry": true
   },
   "frontend/entrypoints/theme.css": {
-    "file": "theme.b4809926.css",
+    "file": "theme.8b0a47b4.css",
     "src": "frontend/entrypoints/theme.css",
     "isEntry": true
   }
