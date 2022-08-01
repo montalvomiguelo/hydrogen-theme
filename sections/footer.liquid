@@ -14,28 +14,30 @@
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'link_list' -%}
-        <section class="grid gap-4">
-          <button class="text-left md:cursor-default">
-            {%- if block.settings.heading != blank -%}
-              <h3 class="whitespace-pre-wrap max-w-prose font-bold text-lead flex justify-between">
-                {{- block.settings.heading | escape -}}
-                {%- if block.settings.menu != blank -%}
-                  {% render 'icon-caret' %}
-                {%- endif -%}
-              </h3>
+        <section>
+          <details-disclosure class="grid gap-4">
+            <button class="text-left md:cursor-default" aria-expanded="false" aria-controls="Panel-{{ block.id }}">
+              {%- if block.settings.heading != blank -%}
+                <h3 class="whitespace-pre-wrap max-w-prose font-bold text-lead flex justify-between">
+                  {{- block.settings.heading | escape -}}
+                  {%- if block.settings.menu != blank -%}
+                    {% render 'icon-caret' %}
+                  {%- endif -%}
+                </h3>
+              {%- endif -%}
+            </button>
+            {%- if block.settings.menu != blank -%}
+              <div id="Panel-{{ block.id }}" hidden>
+                <nav class="grid gap-2 pb-6">
+                  {%- for link in block.settings.menu.links -%}
+                    <a href="{{ link.url }}">
+                      {{ link.title }}
+                    </a>
+                  {%- endfor -%}
+                </nav>
+              </div>
             {%- endif -%}
-          </button>
-          {%- if block.settings.menu != blank -%}
-            <div class="max-h-0 md:max-h-fit overflow-hidden transition-all duration-300">
-              <nav class="grid gap-2 pb-6">
-                {%- for link in block.settings.menu.links -%}
-                  <a href="{{ link.url }}">
-                    {{ link.title }}
-                  </a>
-                {%- endfor -%}
-              </nav>
-            </div>
-          {%- endif -%}
+          </details-disclosure>
         </section>
       {%- when 'country_selector' -%}
         <section class="grid gap-4 w-full md:max-w-[335px]">
