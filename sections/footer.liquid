@@ -21,13 +21,15 @@
                 <h3 class="whitespace-pre-wrap max-w-prose font-bold text-lead flex justify-between">
                   {{- block.settings.heading | escape -}}
                   {%- if block.settings.menu != blank -%}
-                    {% render 'icon-caret' %}
+                    <span class="inline-flex lg:hidden">
+                      {% render 'icon-caret' %}
+                    </span>
                   {%- endif -%}
                 </h3>
               {%- endif -%}
             </button>
             {%- if block.settings.menu != blank -%}
-              <div id="Panel-{{ block.id }}" hidden>
+              <div id="Panel-{{ block.id }}" class="hidden lg:block">
                 <nav class="grid gap-2 pb-6">
                   {%- for link in block.settings.menu.links -%}
                     <a href="{{ link.url }}">
