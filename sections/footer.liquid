@@ -21,7 +21,7 @@
                 <h3 class="whitespace-pre-wrap max-w-prose font-bold text-lead flex justify-between">
                   {{- block.settings.heading | escape -}}
                   {%- if block.settings.menu != blank -%}
-                    <span class="inline-flex lg:hidden">
+                    <span class="inline-flex md:hidden">
                       {% render 'icon-caret' %}
                     </span>
                   {%- endif -%}
@@ -29,7 +29,7 @@
               {%- endif -%}
             </button>
             {%- if block.settings.menu != blank -%}
-              <div id="Panel-{{ block.id }}" class="lg:block" hidden>
+              <div id="Panel-{{ block.id }}" class="md:block" hidden>
                 <nav class="grid gap-2 pb-6">
                   {%- for link in block.settings.menu.links -%}
                     <a href="{{ link.url }}">
