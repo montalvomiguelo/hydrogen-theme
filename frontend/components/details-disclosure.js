@@ -14,7 +14,11 @@ class DetailsDisclosure extends window.HTMLElement {
 
     const isExpanded = this.button.getAttribute('aria-expanded') === 'true'
 
-    this.panel.classList.toggle('hidden')
+    if (isExpanded) {
+      this.panel.setAttribute('hidden', true)
+    } else {
+      this.panel.removeAttribute('hidden')
+    }
 
     this.button.setAttribute('aria-expanded', !isExpanded)
   }

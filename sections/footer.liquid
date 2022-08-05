@@ -29,7 +29,7 @@
               {%- endif -%}
             </button>
             {%- if block.settings.menu != blank -%}
-              <div id="Panel-{{ block.id }}" class="hidden lg:block">
+              <div id="Panel-{{ block.id }}" class="lg:block" hidden>
                 <nav class="grid gap-2 pb-6">
                   {%- for link in block.settings.menu.links -%}
                     <a href="{{ link.url }}">
