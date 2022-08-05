@@ -6,59 +6,61 @@
   endif
 -%}
 
-<header role="banner" class="{{ class }} hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8">
-  <div class="flex gap-12">
-    <a href="{{ routes.root_url }}" class="font-bold">
-      {{ shop.name }}
-    </a>
-    <nav class="flex gap-8">
-      {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">
-          {{ link.title }}
-        </a>
-      {%- endfor -%}
-    </nav>
-  </div>
-  <div class="flex items-center gap-1">
-    <form action="{{ routes.search_url }}" method="get" role="search" class="flex items-center gap-2">
-      {%- liquid
-        if request.page_type == 'index'
-          assign class = 'focus:border-contrast/20 dark:focus:border-primary/20'
-        else
-          assign class = 'focus:border-primary/20'
-        endif
-      -%}
-
-      <input class="{{ class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
-        type="search"
-        name="q"
-        placeholder="{{ 'general.search.search' | t }}"
-      >
-
-      <button type="submit" class="relative flex items-center justify-center w-8 h-8">
-        {% render 'icon-search' %}
-        <span class="sr-only">{{ 'general.search.search' | t }}</span>
-      </button>
-    </form>
-
-    {%- if shop.customer_accounts_enabled -%}
-      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="relative flex items-center justify-center w-8 h-8">
-        {% render 'icon-account' %}
-        <span class="sr-only">
-          {%- liquid
-            if customer
-              echo 'customer.account_fallback' | t
-            else
-              echo 'customer.log_in' | t
-            endif
-          -%}
-        </span>
+<sticky-header>
+  <header role="banner" class="{{ class }} hidden h-nav lg:flex items-center transition duration-300 backdrop-blur-lg justify-between w-full leading-none gap-8 px-12 py-8">
+    <div class="flex gap-12">
+      <a href="{{ routes.root_url }}" class="font-bold">
+        {{ shop.name }}
       </a>
-    {%- endif -%}
+      <nav class="flex gap-8">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      </nav>
+    </div>
+    <div class="flex items-center gap-1">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="flex items-center gap-2">
+        {%- liquid
+          if request.page_type == 'index'
+            assign class = 'focus:border-contrast/20 dark:focus:border-primary/20'
+          else
+            assign class = 'focus:border-primary/20'
+          endif
+        -%}
 
-    <button class="relative flex items-center justify-center w-8 h-8">
-      {% render 'icon-bag' %}
-      <span class="sr-only">{{ 'sections.header.view_cart' | t }}</span>
-    </button>
-  </div>
-</header>
+        <input class="{{ class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.search' | t }}"
+        >
+
+        <button type="submit" class="relative flex items-center justify-center w-8 h-8">
+          {% render 'icon-search' %}
+          <span class="sr-only">{{ 'general.search.search' | t }}</span>
+        </button>
+      </form>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="relative flex items-center justify-center w-8 h-8">
+          {% render 'icon-account' %}
+          <span class="sr-only">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      <button class="relative flex items-center justify-center w-8 h-8">
+        {% render 'icon-bag' %}
+        <span class="sr-only">{{ 'sections.header.view_cart' | t }}</span>
+      </button>
+    </div>
+  </header>
+</sticky-header>
