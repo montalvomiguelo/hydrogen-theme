@@ -16,6 +16,7 @@ class LocalizationForm extends window.HTMLElement {
   hidePanel () {
     this.elements.button.setAttribute('aria-expanded', 'false')
     this.elements.panel.setAttribute('hidden', true)
+    this.elements.button.classList.remove('rounded-bl-none', 'rounded-br-none')
   }
 
   onContainerKeyUp (event) {
