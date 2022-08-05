@@ -42,7 +42,7 @@
       {
         "type": "font_picker",
         "id": "type_header_font",
-        "default": "helvetica_n4",
+        "default": "helvetica_n7",
         "label": "Font",
         "info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https://help.shopify.com/manual/online-store/os/store-speed/improving-speed#fonts)"
       },

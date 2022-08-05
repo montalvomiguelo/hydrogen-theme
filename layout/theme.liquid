@@ -52,6 +52,9 @@
     :root {
       --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
       --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --font-body-weight: {{ settings.type_body_font.weight }};
+      --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
+      --font-heading-weight: {{ settings.type_header_font.weight }};
 
       --color-primary: {{ settings.colors_primary.red }} {{ settings.colors_primary.green }} {{ settings.colors_primary.blue }};
       --color-contrast: {{ settings.colors_contrast.red }} {{ settings.colors_contrast.green }} {{ settings.colors_contrast.blue }};
@@ -65,7 +68,7 @@
   {{ content_for_header }}
 </head>
 
-<body class="font-body flex flex-col min-h-screen">
+<body class="font-body font-body-weight flex flex-col min-h-screen">
   <div>
     <a href="#mainContent" class="sr-only">
       {{ 'general.accessibility.skip_to_content' | t }}

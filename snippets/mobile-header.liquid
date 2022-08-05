@@ -1,13 +1,13 @@
 {%- liquid
   if request.page_type == 'index'
-    assign class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
+    assign container_class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
   else
-    assign class = 'bg-contrast/80 text-primary'
+    assign container_class = 'bg-contrast/80 text-primary'
   endif
 -%}
 
 <sticky-header>
-  <header role="banner" class="{{ class }} flex lg:hidden items-center h-nav backdrop-blur-lg justify-between w-full leading-none gap-4 px-4 md:px-8">
+  <header role="banner" class="{{ container_class }} flex lg:hidden items-center h-nav backdrop-blur-lg justify-between w-full leading-none gap-4 px-4 md:px-8">
     <div class="flex items-center justify-start w-full gap-4">
       <button class="relative flex items-center justify-center w-8 h-8">
         {% render 'icon-menu' %}
@@ -21,13 +21,13 @@
 
         {%- liquid
           if request.page_type == 'index'
-            assign class = 'focus:border-contrast/20 dark:focus:border-primary/20'
+            assign input_class = 'focus:border-contrast/20 dark:focus:border-primary/20'
           else
-            assign class = 'focus:border-primary/20'
+            assign input_class = 'focus:border-primary/20'
           endif
         -%}
 
-        <input class="{{ class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
+        <input class="{{ input_class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
           type="search"
           name="q"
           placeholder="{{ 'general.search.search' | t }}"
@@ -35,7 +35,7 @@
       </form>
     </div>
 
-    <a href="{{ routes.root_url }}" class="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full font-heading font-bold">
+    <a href="{{ routes.root_url }}" class="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full font-heading font-heading-weight">
       {%- if request.page_type == 'index' -%}
         <h1>
       {%- endif -%}
