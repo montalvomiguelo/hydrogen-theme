@@ -16,5 +16,11 @@
   "customer": {
     "account_fallback": "Account",
     "log_in": "Log in"
+  },
+  "localization": {
+    "country_label": "Country/region",
+    "language_label": "Language",
+    "update_language": "Update language",
+    "update_country": "Update country/region"
   }
 }

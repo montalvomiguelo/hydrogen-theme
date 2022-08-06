@@ -47,7 +47,25 @@
             <h3 id="CountryListLabel" class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">{{- block.settings.heading | escape -}}</h3>
           {%- endif -%}
           {%- if localization.available_countries.size > 1 -%}
-            <localization-form>
+            <noscript>
+              {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
+                <div class="relative">
+                  <h2 class="sr-only" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                  <select class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
+                    {%- for language in localization.available_languages -%}
+                      <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                    {% render 'icon-caret' %}
+                  </span>
+                </div>
+                <button class="mt-4 text-center block w-full">{{ 'localization.update_language' | t }}</button>
+              {%- endform -%}
+            </noscript>
+            <localization-form class="no-js-hidden">
               {% form 'localization', class: 'relative' %}
                 <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-contrast/30 dark:border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
                   {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
