@@ -1,26 +1,32 @@
-class DetailsDisclosure extends window.HTMLElement {
+export default class DetailsDisclosure extends window.HTMLElement {
   constructor () {
     super()
+    this.mainDetailsToggle = this.querySelector('details')
+    this.content = this.mainDetailsToggle.querySelector('summary').nextElementSibling
 
-    this.button = this.querySelector('button')
-    this.controlFor = this.button.getAttribute('aria-controls')
-    this.panel = document.getElementById(this.controlFor)
-
-    this.button.addEventListener('click', this.onButtonClick.bind(this))
+    this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this))
+    this.mainDetailsToggle.addEventListener('toggle', this.onToggle.bind(this))
   }
 
-  onButtonClick (event) {
-    event.preventDefault()
+  onFocusOut () {
+    setTimeout(() => {
+      if (!this.contains(document.activeElement)) this.close()
+    })
+  }
 
-    const isExpanded = this.button.getAttribute('aria-expanded') === 'true'
+  onToggle () {
+    if (!this.animations) this.animations = this.content.getAnimations()
 
-    if (isExpanded) {
-      this.panel.setAttribute('hidden', true)
+    if (this.mainDetailsToggle.hasAttribute('open')) {
+      this.animations.forEach(animation => animation.play())
     } else {
-      this.panel.removeAttribute('hidden')
+      this.animations.forEach(animation => animation.cancel())
     }
+  }
 
-    this.button.setAttribute('aria-expanded', !isExpanded)
+  close () {
+    this.mainDetailsToggle.removeAttribute('open')
+    this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false)
   }
 }
 
