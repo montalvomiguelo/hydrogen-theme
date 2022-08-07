@@ -62,7 +62,20 @@ module.exports = {
         darkHeader: 'inset 0px -1px 0px 0px rgba(21, 21, 21, 0.4)',
         lightHeader: 'inset 0px -1px 0px 0px rgba(21, 21, 21, 0.05)'
       }
-    }
+    },
+    keyframes: ({ theme }) => ({
+      localization: {
+        '0%': {
+          maxHeight: theme('spacing.0')
+        },
+        '100%': {
+          maxHeight: theme('spacing.48')
+        }
+      }
+    }),
+    animation: ({ theme }) => ({
+      localization: `localization ${theme('transitionDuration.150')}`
+    })
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
 }
