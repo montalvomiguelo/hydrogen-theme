@@ -1,4 +1,4 @@
-import '@/components/footer-menu'
+import '@/components/details-disclosure'
 import '@/components/localization-form'
 import '@/components/sticky-header'
 import { onKeyUpEscape } from '@/lib/a11y'

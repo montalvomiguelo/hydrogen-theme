@@ -15,21 +15,18 @@
     {%- case block.type -%}
       {%- when 'link_list' -%}
         <section>
-          <details-disclosure class="grid gap-4">
-            <button class="text-left md:cursor-default" aria-expanded="false" aria-controls="Panel-{{ block.id }}">
-              {%- if block.settings.heading != blank -%}
-                <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between">
-                  {{- block.settings.heading | escape -}}
-                  {%- if block.settings.menu != blank -%}
-                    <span class="inline-flex md:hidden">
-                      {% render 'icon-caret' %}
-                    </span>
-                  {%- endif -%}
+          <details-disclosure>
+            <details id="Details-{{ block.id }}">
+              <summary>
+                <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
+                  {%- liquid
+                    assign icon_class = '[details[open]_&]:rotate-180'
+                    echo block.settings.heading | escape
+                    render 'icon-caret', class: icon_class
+                  -%}
                 </h3>
-              {%- endif -%}
-            </button>
-            {%- if block.settings.menu != blank -%}
-              <div id="Panel-{{ block.id }}" class="md:block" hidden>
+              </summary>
+              <div id="Panel-{{ block.id }}" class="pt-4 footer-panel">
                 <nav class="grid gap-2 pb-6">
                   {%- for link in block.settings.menu.links -%}
                     <a href="{{ link.url }}">
@@ -38,7 +35,7 @@
                   {%- endfor -%}
                 </nav>
               </div>
-            {%- endif -%}
+            </details>
           </details-disclosure>
         </section>
       {%- when 'country_selector' -%}
