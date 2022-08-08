@@ -15,7 +15,7 @@
     {%- case block.type -%}
       {%- when 'link_list' -%}
         <section>
-          <details-disclosure>
+          <details-disclosure class="md:hidden">
             <details id="Details-{{ block.id }}">
               <summary>
                 <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
@@ -37,6 +37,20 @@
               </div>
             </details>
           </details-disclosure>
+          <div class="hidden md:grid gap-4">
+            <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">
+              {{- block.settings.heading | escape -}}
+            </h3>
+            <div>
+              <nav class="grid gap-2 pb-6">
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}">
+                    {{ link.title }}
+                  </a>
+                {%- endfor -%}
+              </nav>
+            </div>
+          </div>
         </section>
       {%- when 'country_selector' -%}
         <section class="grid gap-4 w-full md:max-w-[335px]">
