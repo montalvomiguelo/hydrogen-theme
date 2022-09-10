@@ -9,25 +9,22 @@
 <footer
   role="contentinfo"
   style="--blocks-count: {{ section.blocks.size }};"
-  class="{{ container_class }} grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] bg-primary dark:bg-contrast dark:text-primary text-contrast"
+  class="{{ container_class }} md:grid min-h-[25rem] md:items-start md:grid-flow-row w-full py-8 px-6 md:px-8 lg:px-12 border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] bg-primary dark:bg-contrast dark:text-primary text-contrast"
 >
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'link_list' -%}
-        <section>
+        <section class="pt-10 first-of-type:-mt-10 first-of-type:md:mt-0 md:pt-0">
           <details-disclosure class="md:hidden">
             <details id="Details-{{ block.id }}">
-              <summary>
+              <summary class="list-none">
                 <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
-                  {%- liquid
-                    assign icon_class = '[details[open]_&]:rotate-180'
-                    echo block.settings.heading | escape
-                    render 'icon-caret', class: icon_class
-                  -%}
+                  <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
+                  {%- render 'icon-caret' -%}
                 </h3>
               </summary>
               <div id="Panel-{{ block.id }}" class="pt-4 footer-panel">
-                <nav class="grid gap-2 pb-6">
+                <nav class="grid gap-2 pb-2">
                   {%- for link in block.settings.menu.links -%}
                     <a href="{{ link.url }}">
                       {{ link.title }}
@@ -53,7 +50,7 @@
           </div>
         </section>
       {%- when 'country_selector' -%}
-        <section class="grid gap-4 w-full md:max-w-[335px]">
+        <section class="grid gap-4 w-full md:max-w-[335px] pt-10 md:pt-0">
           {%- if block.settings.heading != blank -%}
             <h3 id="CountryListLabel" class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">{{- block.settings.heading | escape -}}</h3>
           {%- endif -%}
@@ -107,7 +104,7 @@
         </section>
     {%- endcase -%}
   {%- endfor -%}
-  <div class="self-end pt-8 opacity-50 md:col-span-2 lg:col-[span_var(--blocks-count)]">
+  <div class="self-end pt-14 md:pt-8 opacity-50 md:col-span-2 lg:col-[span_var(--blocks-count)]">
     &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}
     {{ powered_by_link }}
   </div>
