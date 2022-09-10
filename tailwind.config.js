@@ -72,9 +72,6 @@ module.exports = {
           maxHeight: theme('spacing.48')
         }
       }
-    }),
-    animation: ({ theme }) => ({
-      localization: `localization ${theme('transitionDuration.150')}`
     })
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]

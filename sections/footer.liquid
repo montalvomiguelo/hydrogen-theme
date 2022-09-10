@@ -39,9 +39,11 @@
             <div>
               <nav class="grid gap-2 pb-6">
                 {%- for link in block.settings.menu.links -%}
-                  <a href="{{ link.url }}">
-                    {{ link.title }}
-                  </a>
+                  <div>
+                    <a href="{{ link.url }}">
+                      {{ link.title }}
+                    </a>
+                  </div>
                 {%- endfor -%}
               </nav>
             </div>
@@ -79,10 +81,10 @@
                   {%- render 'icon-caret' -%}
                 </button>
 
-                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border dark:border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b animate-localization max-h-48" hidden>
+                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border dark:border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
                   {% for country in localization.available_countries %}
                     <li tabindex="-1">
-                      <a class="text-contrast dark:text-primary bg-primary dark:bg-contrast w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                      <a class="text-contrast dark:text-primary bg-primary dark:bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
                         {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
 
                         {%- if country.iso_code == localization.country.iso_code -%}

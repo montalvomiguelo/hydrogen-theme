@@ -4,7 +4,6 @@ class LocalizationForm extends window.HTMLElement {
     this.elements = {
       input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
       button: this.querySelector('button'),
-      icon: this.querySelector('svg'),
       panel: this.querySelector('ul')
     }
     this.elements.button.addEventListener('click', this.openSelector.bind(this))
@@ -19,7 +18,6 @@ class LocalizationForm extends window.HTMLElement {
     this.elements.panel.setAttribute('hidden', true)
     this.elements.button.classList.remove('rounded-b', 'md:rounded-b-none', 'md:rounded-b-none')
     this.elements.button.classList.add('rounded')
-    this.elements.icon.classList.remove('rotate-180')
   }
 
   onContainerKeyUp (event) {
@@ -41,7 +39,6 @@ class LocalizationForm extends window.HTMLElement {
     this.elements.button.classList.toggle('rounded-b')
     this.elements.button.classList.toggle('md:rounded-t')
     this.elements.button.classList.toggle('md:rounded-b-none')
-    this.elements.icon.classList.toggle('rotate-180')
     this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString())
   }
 
