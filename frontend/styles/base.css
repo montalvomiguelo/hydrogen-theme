@@ -90,12 +90,6 @@ html.no-js .no-js-hidden {
 }
 
 /* base-details-summary */
-summary {
-  cursor: pointer;
-  list-style: none;
-  position: relative;
-}
-
 summary::-webkit-details-marker {
   display: none;
 }
