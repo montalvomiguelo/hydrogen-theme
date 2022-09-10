@@ -56,13 +56,13 @@
           {%- endif -%}
           {%- if localization.available_countries.size > 1 -%}
             <noscript>
-              {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
+              {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
                 <div class="relative">
-                  <h2 class="sr-only" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                  <select class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
-                    {%- for language in localization.available_languages -%}
-                      <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                        {{ language.endonym_name | capitalize }}
+                  <h2 class="sr-only" id="FooterCountryLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                  <select class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
                       </option>
                     {%- endfor -%}
                   </select>
@@ -70,7 +70,7 @@
                     {% render 'icon-caret' %}
                   </span>
                 </div>
-                <button class="mt-4 text-center block w-full">{{ 'localization.update_language' | t }}</button>
+                <button class="mt-4 text-center block w-full">{{ 'localization.update_country' | t }}</button>
               {%- endform -%}
             </noscript>
             <localization-form class="no-js-hidden">
