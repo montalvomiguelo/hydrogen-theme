@@ -8,7 +8,7 @@ class LocalizationForm extends window.HTMLElement {
       panel: this.querySelector('ul')
     }
     this.elements.button.addEventListener('click', this.openSelector.bind(this))
-    this.elements.button.addEventListener('focusout', this.closeSelector.bind(this))
+    this.elements.panel.addEventListener('focusout', this.closeSelector.bind(this))
     this.addEventListener('keyup', this.onContainerKeyUp.bind(this))
 
     this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)))
@@ -37,7 +37,6 @@ class LocalizationForm extends window.HTMLElement {
   }
 
   openSelector () {
-    this.elements.button.focus()
     this.elements.panel.toggleAttribute('hidden')
     this.elements.button.classList.toggle('rounded-b')
     this.elements.button.classList.toggle('md:rounded-t')
@@ -47,8 +46,8 @@ class LocalizationForm extends window.HTMLElement {
   }
 
   closeSelector (event) {
-    const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON'
-    if (event.relatedTarget === null || shouldClose) {
+    const childInFocus = event.currentTarget.contains(event.relatedTarget)
+    if (!childInFocus) {
       this.hidePanel()
     }
   }
