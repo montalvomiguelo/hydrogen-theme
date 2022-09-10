@@ -15,25 +15,23 @@
     {%- case block.type -%}
       {%- when 'link_list' -%}
         <section class="pt-10 first-of-type:-mt-10 first-of-type:md:mt-0 md:pt-0">
-          <details-disclosure class="md:hidden">
-            <details id="Details-{{ block.id }}">
-              <summary class="list-none">
-                <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
-                  <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
-                  {%- render 'icon-caret' -%}
-                </h3>
-              </summary>
-              <div id="Panel-{{ block.id }}" class="pt-4 footer-panel">
-                <nav class="grid gap-2 pb-2">
-                  {%- for link in block.settings.menu.links -%}
-                    <a href="{{ link.url }}">
-                      {{ link.title }}
-                    </a>
-                  {%- endfor -%}
-                </nav>
-              </div>
-            </details>
-          </details-disclosure>
+          <details id="Details-{{ block.id }}" class="md:hidden">
+            <summary class="list-none">
+              <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
+                <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
+                {%- render 'icon-caret' -%}
+              </h3>
+            </summary>
+            <div id="Panel-{{ block.id }}" class="pt-4 footer-panel">
+              <nav class="grid gap-2 pb-2">
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}">
+                    {{ link.title }}
+                  </a>
+                {%- endfor -%}
+              </nav>
+            </div>
+          </details>
           <div class="hidden md:grid gap-4">
             <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">
               {{- block.settings.heading | escape -}}
