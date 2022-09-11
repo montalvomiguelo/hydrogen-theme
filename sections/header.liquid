@@ -11,10 +11,27 @@
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
   <header role="banner" class="{{ container_class }} h-nav w-full leading-none backdrop-blur-lg px-4 flex justify-between items-center gap-4 md:transition md:px-8 md:duration-300 lg:gap-8 lg:px-12 lg:py-8">
     <div class="flex items-center justify-start w-full gap-4 lg:hidden">
-      <button class="flex items-center justify-center w-8 h-8">
-        {% render 'icon-menu' %}
-        <span class="sr-only">{{ 'sections.header.menu' | t }}</span>
-      </button>
+      {%- if section.settings.menu != blank -%}
+        <header-drawer data-breakpoint="tablet">
+          <details id="Details-menu-drawer-container">
+            <summary class="flex items-center justify-center w-8 h-8" aria-label="{{ 'sections.header.menu' | t }}">
+              <span>
+                {% render 'icon-menu' %}
+              </span>
+            </summary>
+            <div id="menu-drawer" class="absolute" tabindex="-1">
+              <nav class="grid gap-4 px-2 py-6 sm:gap-6 sm:px-12 sm:py-8">
+                {%- for link in section.settings.menu.links -%}
+                  <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
+                    {{ link.title | escape }}
+                  </a>
+                {%- endfor -%}
+              </nav>
+            </div>
+          </details>
+        </header-drawer>
+      {%- endif -%}
+
       <form action="{{ routes.search_url }}" method="get" role="search" class="items-center gap-2 sm:flex">
         <button type="submit" class="flex items-center justify-center w-8 h-8">
           {% render 'icon-search' %}
