@@ -8,7 +8,7 @@
   endif
 -%}
 
-<sticky-header>
+<{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
   <header role="banner" class="{{ container_class }} h-nav w-full leading-none backdrop-blur-lg px-4 flex justify-between items-center gap-4 md:transition md:px-8 md:duration-300 lg:gap-8 lg:px-12 lg:py-8">
     <div class="flex items-center justify-start w-full gap-4 lg:hidden">
       <button class="flex items-center justify-center w-8 h-8">
@@ -20,9 +20,6 @@
           {% render 'icon-search' %}
           <span class="sr-only">{{ 'general.search.search' | t }}</span>
         </button>
-
-        {%- liquid
-        -%}
 
         <input class="{{ input_class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
           type="search"
@@ -87,18 +84,24 @@
       </button>
     </div>
   </header>
-</sticky-header>
+</{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
 
 {% schema %}
 {
   "name": "Header",
-  "class": "sticky z-40 top-0",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
       "default": "main-menu",
       "label": "Primary navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "default": true,
+      "label": "Enable sticky header",
+      "info": "Header shows on the screen as customers scroll up."
     }
   ]
 }
