@@ -1,3 +1,7 @@
+.icon {
+  @apply w-5 h-5;
+}
+
 .article {
   h2,
   h3,
