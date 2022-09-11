@@ -16,7 +16,7 @@
       {%- when 'link_list' -%}
         <section class="pt-10 first-of-type:-mt-10 first-of-type:md:mt-0 md:pt-0">
           <details id="Details-{{ block.id }}" class="md:hidden">
-            <summary class="list-none">
+            <summary>
               <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
                 <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
                 {%- render 'icon-caret' -%}
