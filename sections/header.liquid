@@ -1,5 +1,93 @@
-{% render 'desktop-header' %}
-{% render 'mobile-header' %}
+{%- liquid
+  if request.page_type == 'index'
+    assign container_class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
+    assign input_class = 'focus:border-contrast/20 dark:focus:border-primary/20'
+  else
+    assign container_class = 'bg-contrast/80 text-primary'
+    assign input_class = 'focus:border-primary/20'
+  endif
+-%}
+
+<sticky-header>
+  <header role="banner" class="{{ container_class }} h-nav w-full leading-none backdrop-blur-lg px-4 flex justify-between items-center gap-4 md:transition md:px-8 md:duration-300 lg:gap-8 lg:px-12 lg:py-8">
+    <div class="flex items-center justify-start w-full gap-4 lg:hidden">
+      <button class="flex items-center justify-center w-8 h-8">
+        {% render 'icon-menu' %}
+        <span class="sr-only">{{ 'sections.header.menu' | t }}</span>
+      </button>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="items-center gap-2 sm:flex">
+        <button type="submit" class="flex items-center justify-center w-8 h-8">
+          {% render 'icon-search' %}
+          <span class="sr-only">{{ 'general.search.search' | t }}</span>
+        </button>
+
+        {%- liquid
+        -%}
+
+        <input class="{{ input_class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.search' | t }}"
+        >
+      </form>
+    </div>
+
+    <div class="flex items-center gap-12 w-full lg:w-auto">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="w-full lg:w-auto">
+      {%- endif %}
+          <a href="{{ routes.root_url }}" class="flex items-center self-stretch leading-[3rem] justify-center flex-grow w-full h-full font-heading font-heading-weight md:leading-[4rem] lg:inline lg:w-auto lg:h-auto lg:leading-none">
+            {{ shop.name }}
+          </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif %}
+
+      <nav class="hidden lg:flex gap-8">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <div class="flex items-center justify-end w-full gap-4 lg:gap-1 lg:w-auto">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="hidden lg:flex items-center gap-2">
+        <input class="{{ input_class }} bg-transparent hidden md:inline-block text-left lg:text-right border-b transition border-transparent -mb-px border-x-0 border-t-0 appearance-none px-0 py-1 focus:ring-transparent placeholder:opacity-20 placeholder:text-inherit"
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.search' | t }}"
+        >
+
+        <button type="submit" class="flex items-center justify-center w-8 h-8">
+          {% render 'icon-search' %}
+          <span class="sr-only">{{ 'general.search.search' | t }}</span>
+        </button>
+      </form>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="flex items-center justify-center w-8 h-8">
+          {% render 'icon-account' %}
+          <span class="sr-only">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      <button class="flex items-center justify-center w-8 h-8">
+        {% render 'icon-bag' %}
+        <span class="sr-only">{{ 'sections.header.view_cart' | t }}</span>
+      </button>
+    </div>
+  </header>
+</sticky-header>
 
 {% schema %}
 {
