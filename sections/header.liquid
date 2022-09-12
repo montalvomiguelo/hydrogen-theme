@@ -15,12 +15,16 @@
         <header-drawer data-breakpoint="tablet">
           <details id="Details-menu-drawer-container">
             <summary class="flex items-center justify-center w-8 h-8" aria-label="{{ 'sections.header.menu' | t }}">
-              <span>
-                {% render 'icon-menu' %}
-              </span>
+              {% render 'icon-menu' %}
             </summary>
-            <div id="menu-drawer" class="absolute" tabindex="-1">
-              <nav class="grid gap-4 px-2 py-6 sm:gap-6 sm:px-12 sm:py-8">
+            <div id="menu-drawer" class="fixed top-0 right-0 bottom-0 left-0 h-screen bg-contrast z-50 max-w-lg" tabindex="-1">
+              <div class="sticky top-0 flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
+                <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.header.menu' | t }}</h2>
+                <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50" aria-label="{{ 'accessibility.close' | t }}">
+                  {%- render 'icon-close' -%}
+                </button>
+              </div>
+              <nav class="grid gap-4 px-6 py-6 sm:gap-6 sm:px-12 sm:py-8">
                 {%- for link in section.settings.menu.links -%}
                   <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
                     {{ link.title | escape }}
