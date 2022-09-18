@@ -77,10 +77,8 @@
               {% form 'localization', class: 'relative' %}
                 <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-contrast/30 dark:border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
                   {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
-
                   {%- render 'icon-caret' -%}
                 </button>
-
                 <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border dark:border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
                   {% for country in localization.available_countries %}
                     <li tabindex="-1">
@@ -96,7 +94,6 @@
                     </li>
                   {% endfor %}
                 </ul>
-
                 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
               {% endform %}
             </localization-form>

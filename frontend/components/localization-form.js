@@ -7,10 +7,13 @@ class LocalizationForm extends window.HTMLElement {
       panel: this.querySelector('ul')
     }
     this.elements.button.addEventListener('click', this.openSelector.bind(this))
+    this.elements.button.addEventListener('focusout', this.onButtonFocusOut.bind(this))
     this.elements.panel.addEventListener('focusout', this.closeSelector.bind(this))
     this.addEventListener('keyup', this.onContainerKeyUp.bind(this))
 
     this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)))
+
+    document.body.addEventListener('click', this.onBodyClick.bind(this))
   }
 
   hidePanel () {
@@ -42,9 +45,27 @@ class LocalizationForm extends window.HTMLElement {
     this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString())
   }
 
+  onButtonFocusOut (event) {
+    const disclosureLostFocus =
+      this.contains(event.relatedTarget) === false
+
+    if (disclosureLostFocus) {
+      this.hidePanel()
+    }
+  }
+
   closeSelector (event) {
     const childInFocus = event.currentTarget.contains(event.relatedTarget)
     if (!childInFocus) {
+      this.hidePanel()
+    }
+  }
+
+  onBodyClick (event) {
+    const isOption = this.contains(event.target)
+    const isVisible = this.elements.button.getAttribute('aria-expanded') === 'true'
+
+    if (isVisible && !isOption) {
       this.hidePanel()
     }
   }
