@@ -22,8 +22,8 @@
                 {%- render 'icon-close' -%}
               </span>
             </summary>
-            <div id="menu-drawer" class="fixed inset-0 h-screen bg-contrast z-20 max-w-lg" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}" tabindex="-1">
-              <div class="sticky top-0 flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
+            <div id="menu-drawer" class="fixed inset-0 h-screen bg-contrast z-20 max-w-lg overflow-y-auto" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}" tabindex="-1">
+              <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
                 <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.header.menu' | t }}</h2>
                 <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50 [.no-js_details[open]_&]:hidden" aria-label="{{ 'accessibility.close' | t }}">
                   {%- render 'icon-close' -%}
