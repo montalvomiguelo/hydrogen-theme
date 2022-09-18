@@ -2,6 +2,11 @@ import { removeTrapFocus, trapFocus } from '@/lib/a11y'
 import DetailsModal from './details-modal'
 
 class HeaderDrawer extends DetailsModal {
+  constructor () {
+    super()
+    this.summaryToggle.nextElementSibling.classList.add('transition', 'duration-300', '-translate-x-full')
+  }
+
   open (event) {
     setTimeout(() => {
       this.summaryToggle.nextElementSibling.classList.add('translate-x-0')
