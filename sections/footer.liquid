@@ -83,7 +83,6 @@
                     <li tabindex="-1">
                       <a class="text-contrast dark:text-primary bg-primary dark:bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
                         {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-
                         {%- if country.iso_code == localization.country.iso_code -%}
                           <span class="ml-2">
                             {%- render 'icon-check' -%}
