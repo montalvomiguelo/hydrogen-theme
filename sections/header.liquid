@@ -29,7 +29,7 @@
                   {%- render 'icon-close' -%}
                 </button>
               </div>
-              <nav class="grid gap-4 px-6 py-6 sm:gap-6 sm:px-12 sm:py-8 text-copy">
+              <nav class="grid gap-4 px-6 py-6 sm:gap-6 sm:px-12 sm:py-8 text-copy after:content-[''] after:block after:h-nav">
                 {%- for link in section.settings.menu.links -%}
                   <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
                     {{ link.title | escape }}
