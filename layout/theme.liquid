@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}"
+<html class="no-js h-full" lang="{{ request.locale.iso_code }}"
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,15 +72,13 @@
   </script>
 </head>
 
-<body class="font-body font-body-weight flex flex-col min-h-screen">
-  <div>
-    <a href="#mainContent" class="sr-only">
-      {{ 'accessibility.skip_to_text' | t }}
-    </a>
-  </div>
+<body class="min-h-full grid grid-rows-[auto_1fr_auto] grid-cols-[100%] font-body font-body-weight">
+  <a href="#MainContent" class="button bg-primary text-contrast sr-only focus:not-sr-only focus:absolute focus:z-50 focus:py-3 focus:px-6">
+    {{ 'accessibility.skip_to_text' | t }}
+  </a>
 
   {% section 'header' %}
-  <main role="main" id="mainContent" class="flex-grow">
+  <main role="main" id="MainContent" class="flex-grow">
     {{ content_for_layout }}
   </main>
 
