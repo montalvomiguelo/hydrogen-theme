@@ -1,16 +1,21 @@
 {
   "general": {
-    "accessibility": {
-      "skip_to_content": "Skip to content"
-    },
     "search": {
       "search": "Search"
     }
   },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "close": "Close"
+  },
   "sections": {
     "header": {
-      "menu": "Menu",
-      "view_cart": "View cart"
+      "menu": "Menu"
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Cart"
     }
   },
   "customer": {
@@ -18,8 +23,6 @@
     "log_in": "Log in"
   },
   "localization": {
-    "country_label": "Country/region",
-    "language_label": "Language",
     "update_country": "Update country/region"
   }
 }
