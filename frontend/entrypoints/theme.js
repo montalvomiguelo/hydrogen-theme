@@ -1,3 +1,4 @@
+import 'vite/modulepreload-polyfill'
 import '@/components/localization-form'
 import '@/components/sticky-header'
 import '@/components/header-drawer'
