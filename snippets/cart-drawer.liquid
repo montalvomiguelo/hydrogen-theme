@@ -1,0 +1,33 @@
+{% comment %}
+  Renders cart drawer
+
+  Usage:
+  {% render 'cart-drawer' %}
+{% endcomment %}
+
+<cart-drawer class="{% if cart == empty %} is-empty{% endif %}">
+  <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 overflow-y-auto flex justify-end">
+    <div id="CartDrawer-Overlay" class="absolute inset-0 bg-black/25"></div>
+    <div class="relative max-w-lg w-full bg-contrast h-full grid grid-rows-[auto_1fr] grid-cols-[100%]" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+      <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
+        <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
+        <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50" aria-label="{{ 'accessibility.close' | t }}">
+          {%- render 'icon-close' -%}
+        </button>
+      </div>
+      {%- if cart == empty -%}
+        <div class="px-6 sm:px-8 md:px-12">
+          <p class="text-copy">{{ 'sections.cart.empty' | t }}</p>
+        </div>
+      {%- endif -%}
+      <cart-drawer-items{% if cart == empty %} class="is-empty"{% endif %}>
+        <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="" method="post">
+          <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+            {%- if cart != empty -%}
+            {%- endif %}
+          </div>
+        </form>
+      </cart-drawer-items>
+    </div>
+  </div>
+</cart-drawer>

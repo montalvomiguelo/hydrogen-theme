@@ -77,6 +77,10 @@
     {{ 'accessibility.skip_to_text' | t }}
   </a>
 
+  {%- if settings.cart_type == 'drawer' -%}
+    {%- render 'cart-drawer' -%}
+  {%- endif -%}
+
   {% section 'header' %}
   <main role="main" id="MainContent" tabindex="-1">
     {{ content_for_layout }}

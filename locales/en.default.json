@@ -11,6 +11,10 @@
   "sections": {
     "header": {
       "menu": "Menu"
+    },
+    "cart": {
+      "title": "Your cart",
+      "empty": "Your cart is currently empty."
     }
   },
   "templates": {

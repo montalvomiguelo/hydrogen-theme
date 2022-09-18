@@ -2,6 +2,7 @@ import 'vite/modulepreload-polyfill'
 import '@/components/localization-form'
 import '@/components/sticky-header'
 import '@/components/header-drawer'
+import '@/components/cart-drawer'
 import { onKeyUpEscape } from '@/lib/a11y'
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {

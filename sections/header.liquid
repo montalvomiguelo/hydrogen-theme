@@ -104,10 +104,10 @@
         </a>
       {%- endif -%}
 
-      <button class="flex items-center justify-center w-8 h-8">
+      <a href="{{ routes.cart_url }}" class="flex items-center justify-center w-8 h-8" id="cart-icon-bubble">
         {% render 'icon-bag' %}
         <span class="sr-only">{{ 'templates.cart.cart' | t }}</span>
-      </button>
+      </a>
     </div>
   </header>
 </{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
