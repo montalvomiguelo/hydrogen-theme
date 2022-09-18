@@ -14,11 +14,11 @@
       {%- if section.settings.menu != blank -%}
         <header-drawer>
           <details>
-            <summary class="flex items-center justify-center w-8 h-8 [.no-js_details[open]_&]:absolute [.no-js_details[open]_&]:left-1/2 [.no-js_details[open]_&]:top-0 [.no-js_details[open]_&]:z-50 [.no-js_details[open]_&]:h-full [.no-js_details[open]_&]:-translate-x-1/2" aria-haspopup="dialog" aria-label="{{ 'sections.header.menu' | t }}">
-              <span class="[.no-js_details[open]_&]:hidden">
+            <summary class="w-8 h-8 [.no-js_details[open]_&]:absolute [.no-js_details[open]_&]:left-1/2 [.no-js_details[open]_&]:z-50 [.no-js_details[open]_&]:-translate-x-1/2 [.no-js_details[open]_&]:-translate-y-1/2 [.menu-opening_&]:before:absolute [.menu-opening_&]:before:inset-0 [.menu-opening_&]:before:h-screen [.menu-opening_&]:before:bg-black/25" aria-haspopup="dialog" aria-label="{{ 'sections.header.menu' | t }}">
+              <span class="w-full h-full flex items-center justify-center [.no-js_details[open]_&]:hidden">
                 {% render 'icon-menu' %}
               </span>
-              <span class="hidden [.no-js_details[open]_&]:block">
+              <span class="w-full h-full hidden items-center justify-center [.no-js_details[open]_&]:flex">
                 {%- render 'icon-close' -%}
               </span>
             </summary>

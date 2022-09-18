@@ -18,6 +18,8 @@ export default class DetailsModal extends window.HTMLElement {
       'click',
       this.close.bind(this)
     )
+
+    this.summaryToggle.setAttribute('role', 'button')
   }
 
   isOpen () {
@@ -50,28 +52,9 @@ export default class DetailsModal extends window.HTMLElement {
 
   close (focusToggle = true) {
     removeTrapFocus(focusToggle ? this.summaryToggle : null)
+    this.detailsContainer.removeAttribute('open')
     document.body.removeEventListener('click', this.onBodyClickEvent)
     document.body.classList.remove('overflow-hidden')
-    this.closeAnimation()
-  }
-
-  closeAnimation () {
-    let animationStart
-
-    const handleAnimation = time => {
-      if (animationStart === undefined) {
-        animationStart = time
-      }
-      const elapsedTime = time - animationStart
-
-      if (elapsedTime < 400) {
-        window.requestAnimationFrame(handleAnimation)
-      } else {
-        this.detailsContainer.removeAttribute('open')
-      }
-    }
-
-    window.requestAnimationFrame(handleAnimation)
   }
 }
 
