@@ -69,26 +69,6 @@ input[type='search']::-webkit-search-results-decoration {
   }
 }
 
-.no-js:not(html) {
-  display: none !important;
-}
-
-html.no-js .no-js:not(html) {
-  display: block !important;
-}
-
-.no-js-inline {
-  display: none !important;
-}
-
-html.no-js .no-js-inline {
-  display: inline-block !important;
-}
-
-html.no-js .no-js-hidden {
-  display: none !important;
-}
-
 /* base-details-summary */
 summary {
   cursor: pointer;

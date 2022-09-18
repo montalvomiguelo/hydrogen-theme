@@ -73,7 +73,7 @@
                 <button class="mt-4 text-center block w-full">{{ 'localization.update_country' | t }}</button>
               {%- endform -%}
             </noscript>
-            <localization-form class="no-js-hidden">
+            <localization-form class="[.no-js_&]:hidden">
               {% form 'localization', class: 'relative' %}
                 <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-contrast/30 dark:border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
                   {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
