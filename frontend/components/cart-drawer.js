@@ -5,8 +5,10 @@ class CartDrawer extends window.HTMLElement {
     super()
     this.dialog = this.querySelector('[role="dialog"]')
     this.overlay = this.querySelector('#CartDrawer-Overlay')
+    this.closeButton = this.querySelector('.js-close-button')
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close())
     this.overlay.addEventListener('click', this.close.bind(this))
+    this.closeButton.addEventListener('click', this.close.bind(this))
     this.setHeaderCartIconAccessibility()
   }
 
