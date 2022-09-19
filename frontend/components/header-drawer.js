@@ -8,8 +8,8 @@ class HeaderDrawer extends DetailsModal {
   }
 
   open (event) {
+    this.detailsContainer.classList.add('menu-opening')
     setTimeout(() => {
-      this.detailsContainer.classList.add('menu-opening')
       this.summaryToggle.nextElementSibling.classList.add('translate-x-0')
     })
     this.onBodyClickEvent =
