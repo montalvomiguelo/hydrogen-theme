@@ -10,7 +10,11 @@
   },
   "sections": {
     "header": {
-      "menu": "Menu"
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
     },
     "cart": {
       "title": "Your cart",
