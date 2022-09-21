@@ -6,7 +6,10 @@
   },
   "accessibility": {
     "skip_to_text": "Skip to content",
-    "close": "Close"
+    "close": "Close",
+    "link_messages": {
+      "new_window": "Opens in a new window."
+    }
   },
   "sections": {
     "header": {
@@ -18,7 +21,18 @@
     },
     "cart": {
       "title": "Your cart",
-      "empty": "Your cart is currently empty."
+      "empty": "Your cart is currently empty.",
+      "remove_title": "Remove {{ title }}"
+    }
+  },
+  "products": {
+    "product": {
+      "quantity": {
+        "label": "Quantity",
+        "input_label": "Quantity for {{ product }}",
+        "increase": "Increase quantity for {{ product }}",
+        "decrease": "Decrease quantity for {{ product }}"
+      }
     }
   },
   "templates": {
