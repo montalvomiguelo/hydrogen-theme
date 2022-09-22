@@ -32,6 +32,10 @@
         "input_label": "Quantity for {{ product }}",
         "increase": "Increase quantity for {{ product }}",
         "decrease": "Decrease quantity for {{ product }}"
+      },
+      "price": {
+        "regular_price": "Regular price",
+        "sale_price": "Sale price"
       }
     }
   },
@@ -42,7 +46,10 @@
   },
   "customer": {
     "account_fallback": "Account",
-    "log_in": "Log in"
+    "log_in": "Log in",
+    "order": {
+      "discount": "Discount"
+    }
   },
   "localization": {
     "update_country": "Update country/region"

@@ -5,10 +5,10 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-<cart-drawer class="invisible{% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden"></div>
-    <div class="relative max-w-lg w-full bg-contrast h-full grid grid-rows-[auto_1fr] grid-cols-[100%] overflow-y-auto transition-all duration-300 translate-x-full" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
       <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
         <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
         <button type="button" class="js-close-button p-4 -m-4 transition text-primary hover:text-primary/50" aria-label="{{ 'accessibility.close' | t }}">
@@ -24,7 +24,7 @@
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" method="post">
           <div id="CartDrawer-CartItems" class="px-6 pb-6 sm-max:pt-2 md:px-12 grid gap-6 md:gap-10">
             {%- for item in cart.items -%}
-              <div class="flex gap-4">
+              <div class="grid grid-cols-[auto_1fr] gap-4">
                 <div class="relative flex-shrink">
                   {% if item.image %}
                     {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -73,6 +73,15 @@
                         </dl>
 
                         <p class="flex max-w-prose whitespace-pre-wrap text-primary/50 text-copy">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+
+                        <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                          {%- for discount in item.discounts -%}
+                            <li class="flex gap-2 items-center text-primary/50">
+                              {%- render 'icon-discount' -%}
+                              {{ discount.title }}
+                            </li>
+                          {%- endfor -%}
+                        </ul>
                       </div>
                     {%- endif -%}
 
@@ -100,12 +109,25 @@
                           {% render 'icon-remove' %}
                         </button>
                       </cart-remove-button>
-
-                      <p aria-live="polite" data-cart-item-error></p>
                     </div>
                   </div>
-                  <div class="max-w-prose whitespace-pre-wrap inherit text-copy"><span>{{ item.original_line_price | money }}</span></div>
+                  <div class="inherit text-copy">
+                    {%- if item.original_price != item.final_price -%}
+                      <div class="grid">
+                        <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
+                        <s class="text-primary/50">{{- item.original_price | money -}}</s>
+                        <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
+                        <span>{{ item.final_price | money }}</span>
+                      </div>
+                    {%- else -%}
+                      <div>
+                        {{ item.original_price | money }}
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </div>
+
+                <p id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="col-span-2 text-copy text-primary/50 text-red-500" role="alert"></p>
               </div>
             {%- endfor -%}
           </div>
