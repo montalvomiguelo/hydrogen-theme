@@ -8,7 +8,7 @@
 <cart-drawer class="invisible{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden"></div>
-    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto transition-all duration-300 translate-x-full" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto grid grid-rows-[auto_1fr] transition-all duration-300 translate-x-full" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
       <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
         <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
         <button type="button" class="js-close-button p-4 -m-4 transition text-primary hover:text-primary/50" aria-label="{{ 'accessibility.close' | t }}">
@@ -132,7 +132,7 @@
             {%- endfor -%}
 
             {% if settings.show_cart_note %}
-              <div class="grid gap-2">
+              <div class="grid gap-2 [.is-empty_&]:hidden">
                 <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
                 <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>
               </div>
@@ -144,7 +144,7 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
-      <div class="grid gap-6 p-6 border-t md:px-12">
+      <div class="grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
           <div class="flex items-center justify-between font-medium" role="status">
             <h2 class="inherit text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
