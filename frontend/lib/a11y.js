@@ -1,9 +1,17 @@
 export function getFocusableElements (container) {
-  return Array.from(
+  const elements = Array.from(
     container.querySelectorAll(
       "summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
     )
   )
+
+  // Filter out elements that are not visible.
+  // Copied from jQuery https://github.com/jquery/jquery/blob/2d4f53416e5f74fa98e0c1d66b6f3c285a12f0ce/src/css/hiddenVisibleSelectors.js
+  return elements.filter(element => !!(
+    element.offsetWidth ||
+    element.offsetHeight ||
+    element.getClientRects().length
+  ))
 }
 
 const trapFocusHandlers = {}
