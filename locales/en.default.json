@@ -45,7 +45,9 @@
       "price": {
         "regular_price": "Regular price",
         "sale_price": "Sale price"
-      }
+      },
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out"
     }
   },
   "templates": {

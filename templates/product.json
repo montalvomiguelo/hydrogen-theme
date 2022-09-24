@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "buy_buttons"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+
