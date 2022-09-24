@@ -3,12 +3,9 @@ import { trapFocus, removeTrapFocus } from '@/lib/a11y'
 class CartDrawer extends window.HTMLElement {
   constructor () {
     super()
-    this.dialog = this.querySelector('[role="dialog"]')
-    this.overlay = this.querySelector('#CartDrawer-Overlay')
-    this.closeButton = this.querySelector('.js-close-button')
+
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close())
-    this.overlay.addEventListener('click', this.close.bind(this))
-    this.closeButton.addEventListener('click', this.close.bind(this))
+    this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this))
     this.setHeaderCartIconAccessibility()
   }
 
@@ -30,43 +27,51 @@ class CartDrawer extends window.HTMLElement {
 
   open (triggeredBy) {
     if (triggeredBy) this.setActiveElement(triggeredBy)
-    this.classList.remove('invisible')
-    this.overlay.classList.remove('hidden')
-    this.dialog.classList.remove('translate-x-full')
+    // here the animation doesn't seem to always get triggered. A timeout seem to help
+    setTimeout(() => { this.classList.add('active') })
 
-    // a timeout seems to help trap the focus on the dialog after the cart-drawer is visible
-    setTimeout(() => {
-      trapFocus(this.dialog)
-    }, 100)
+    this.addEventListener('transitionend', () => {
+      const containerToTrapFocusOn = document.getElementById('CartDrawer')
+      const focusElement = this.querySelector('[tabindex="-1"]') || this.querySelector('.js-close-button')
+      trapFocus(containerToTrapFocusOn, focusElement)
+    }, { once: true })
 
     document.body.classList.add('overflow-hidden')
   }
 
   close () {
+    this.classList.remove('active')
     removeTrapFocus(this.activeElement)
-    this.overlay.classList.add('hidden')
-    this.dialog.classList.add('translate-x-full')
     document.body.classList.remove('overflow-hidden')
-    this.closeAnimation()
   }
 
-  closeAnimation () {
-    let animationStart
+  renderContents (parsedState) {
+    this.productId = parsedState.id
+    this.getSectionsToRender().forEach(section => {
+      const sectionElement = section.selector ? document.querySelector(section.selector) : document.getElementById(section.id)
+      sectionElement.innerHTML =
+        this.getSectionInnerHTML(parsedState.sections[section.id], section.selector)
+    })
 
-    const handleAnimation = time => {
-      if (animationStart === undefined) {
-        animationStart = time
+    setTimeout(() => {
+      this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this))
+      this.open()
+    })
+  }
+
+  getSectionInnerHTML (html, selector = '.shopify-section') {
+    return new window.DOMParser()
+      .parseFromString(html, 'text/html')
+      .querySelector(selector).innerHTML
+  }
+
+  getSectionsToRender () {
+    return [
+      {
+        id: 'cart-drawer',
+        selector: '#CartDrawer'
       }
-      const elapsedTime = time - animationStart
-
-      if (elapsedTime < 400) {
-        window.requestAnimationFrame(handleAnimation)
-      } else {
-        this.classList.add('invisible')
-      }
-    }
-
-    window.requestAnimationFrame(handleAnimation)
+    ]
   }
 
   setActiveElement (element) {

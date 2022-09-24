@@ -62,9 +62,15 @@
     }
   {% endstyle %}
 
-  {% render 'vite-client' %}
-  {% render 'vite-tag' with 'theme.css' %}
-  {% render 'vite-tag' with 'theme.js' %}
+  {%- liquid
+    render 'vite-client'
+    render 'vite-tag' with 'theme.css'
+    render 'vite-tag' with 'theme.js'
+    if request.page_type == 'product'
+      render 'vite-tag' with 'product.js'
+    endif
+  -%}
+
   {{ content_for_header }}
 
   <script>
@@ -91,5 +97,11 @@
   <ul hidden>
     <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
   </ul>
+
+  <script>
+    window.routes = {
+      cart_add_url: '{{ routes.cart_add_url }}'
+    };
+  </script>
 </body>
 </html>

@@ -5,13 +5,13 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-<cart-drawer class="invisible{% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
-    <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden"></div>
-    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto grid grid-rows-[auto_1fr] transition-all duration-300 translate-x-full" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+    <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden [.active_&]:block"></div>
+    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto grid grid-rows-[auto_1fr] transition-all duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
       <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
         <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
-        <button type="button" class="js-close-button p-4 -m-4 transition text-primary hover:text-primary/50" aria-label="{{ 'accessibility.close' | t }}">
+        <button type="button" class="js-close-button p-4 -m-4 transition text-primary hover:text-primary/50" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">
           {%- render 'icon-close' -%}
         </button>
       </div>
