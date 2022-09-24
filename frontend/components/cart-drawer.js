@@ -32,7 +32,7 @@ class CartDrawer extends window.HTMLElement {
 
     this.addEventListener('transitionend', () => {
       const containerToTrapFocusOn = document.getElementById('CartDrawer')
-      const focusElement = this.querySelector('[tabindex="-1"]') || this.querySelector('.js-close-button')
+      const focusElement = this.querySelector('[tabindex="-1"]')
       trapFocus(containerToTrapFocusOn, focusElement)
     }, { once: true })
 
