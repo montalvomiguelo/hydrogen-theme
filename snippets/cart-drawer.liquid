@@ -130,20 +130,20 @@
                 <p id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="col-span-2 text-copy text-primary/50 text-red-500" role="alert"></p>
               </div>
             {%- endfor -%}
-
-            {% if settings.show_cart_note %}
-              <div class="grid gap-2 [.is-empty_&]:hidden">
-                <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
-                <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>
-              </div>
-            {% endif %}
-
-            <p id="CartDrawer-LiveRegionText" class="sr-only" role="status"></p>
-            <p id="CartDrawer-LineItemStatus" class="sr-only" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
           </div>
-          <div id="CartDrawer-CartErrors" role="alert"></div>
+          <p id="CartDrawer-LiveRegionText" class="sr-only" role="status"></p>
+          <p id="CartDrawer-LineItemStatus" class="sr-only" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+          <div class="px-6 md:px-12" id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
+
+      {% if settings.show_cart_note %}
+        <div class="p-6 md:px-12 grid gap-2 [.is-empty_&]:hidden">
+          <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
+          <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>
+        </div>
+      {% endif %}
+
       <div class="grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
           <div class="flex items-center justify-between font-medium" role="status">
