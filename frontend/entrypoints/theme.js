@@ -6,6 +6,7 @@ import '@/components/cart-drawer'
 import '@/components/quantity-input'
 import '@/components/cart-drawer-items'
 import '@/components/cart-remove-button'
+import '@/components/cart-note'
 import { onKeyUpEscape } from '@/lib/a11y'
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
