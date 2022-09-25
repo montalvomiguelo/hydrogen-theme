@@ -78,3 +78,14 @@ summary {
 summary::-webkit-details-marker {
   display: none;
 }
+
+/* hide up & down arrow buttons (spinner) in input number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
