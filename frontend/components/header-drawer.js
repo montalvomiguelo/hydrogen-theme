@@ -2,15 +2,9 @@ import { removeTrapFocus, trapFocus } from '@/lib/a11y'
 import DetailsModal from './details-modal'
 
 class HeaderDrawer extends DetailsModal {
-  constructor () {
-    super()
-    this.summaryToggle.nextElementSibling.classList.add('transition', 'duration-300', '-translate-x-full')
-  }
-
   open (event) {
-    this.detailsContainer.classList.add('menu-opening')
     setTimeout(() => {
-      this.summaryToggle.nextElementSibling.classList.add('translate-x-0')
+      this.detailsContainer.classList.add('menu-opening')
     })
     this.onBodyClickEvent =
       this.onBodyClickEvent || this.onBodyClick.bind(this)
@@ -27,7 +21,6 @@ class HeaderDrawer extends DetailsModal {
     removeTrapFocus(focusToggle ? this.summaryToggle : null)
     document.body.removeEventListener('click', this.onBodyClickEvent)
     this.detailsContainer.classList.remove('menu-opening')
-    this.summaryToggle.nextElementSibling.classList.remove('translate-x-0')
     document.body.classList.remove('overflow-hidden', 'lg:overflow-auto')
     this.closeAnimation()
   }
