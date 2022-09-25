@@ -91,9 +91,13 @@ export default class CartItems extends window.HTMLElement {
       .querySelector(selector).innerHTML
   }
 
-  enableLoading (_line) {
+  enableLoading (line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems')
     mainCartItems.classList.add('loading')
+
+    const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading-overlay`)
+
+    cartDrawerItemElements.forEach((overlay) => overlay.classList.remove('hidden'))
 
     document.activeElement.blur()
     this.lineItemStatusElement.setAttribute('aria-hidden', false)

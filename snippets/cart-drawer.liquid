@@ -22,9 +22,9 @@
       {%- endif -%}
       <cart-drawer-items{% if cart == empty %} class="is-empty"{% endif %}>
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" method="post">
-          <div id="CartDrawer-CartItems" class="px-6 pb-6 sm-max:pt-2 md:px-12 grid gap-6 md:gap-10">
+          <div id="CartDrawer-CartItems" class="px-6 pb-6 sm-max:pt-2 md:px-12 grid gap-6 md:gap-10 [.loading&]:pointer-events-none">
             {%- for item in cart.items -%}
-              <div class="grid grid-cols-[auto_1fr] gap-4">
+              <div id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="grid grid-cols-[auto_1fr] gap-4">
                 <div class="relative flex-shrink">
                   {% if item.image %}
                     {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -111,9 +111,15 @@
                       </cart-remove-button>
                     </div>
                   </div>
-                  <div class="inherit text-copy">
+                  <div class="relative text-copy">
+                    <div class="loading-overlay absolute top-0 right-0 hidden">
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    </div>
                     {%- if item.original_price != item.final_price -%}
-                      <div class="grid text-right">
+                      <div class="grid text-right [.loading-overlay:not(.hidden)_+_&]:invisible">
                         <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
                         <s class="text-primary/50">{{- item.original_price | money -}}</s>
                         <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
@@ -147,8 +153,8 @@
       <div class="grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
           <div class="flex items-center justify-between font-medium" role="status">
-            <h2 class="inherit text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
-            <p class="inherit text-copy">{{ cart.total_price | money_with_currency }}</p>
+            <h2 class="text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
+            <p class="text-copy">{{ cart.total_price | money_with_currency }}</p>
           </div>
 
           <div>
