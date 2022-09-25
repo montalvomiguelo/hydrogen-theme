@@ -24,7 +24,7 @@
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" method="post">
           <div id="CartDrawer-CartItems" class="px-6 pb-6 sm-max:pt-2 md:px-12 grid gap-6 md:gap-10 [.loading&]:pointer-events-none">
             {%- for item in cart.items -%}
-              <div id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="grid grid-cols-[auto_1fr] gap-4">
+              <div id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item grid grid-cols-[auto_1fr] gap-4">
                 <div class="relative flex-shrink">
                   {% if item.image %}
                     {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -40,7 +40,7 @@
                 </div>
                 <div class="flex justify-between flex-grow">
                   <div class="grid gap-2">
-                    <h3 class="whitespace-pre-wrap max-w-prose font-medium text-copy"><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
+                    <h3 class="whitespace-pre-wrap max-w-prose font-medium text-copy"><a class="cart-item-name" href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
                     {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
                       <div class="pb-2">
                         <dl class="grid">

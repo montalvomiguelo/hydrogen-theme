@@ -1,4 +1,5 @@
 import { debounce, fetchConfig } from '@/lib/utils'
+import { trapFocus } from '@/lib/a11y'
 
 export default class CartItems extends window.HTMLElement {
   constructor () {
@@ -54,6 +55,14 @@ export default class CartItems extends window.HTMLElement {
         })
 
         this.updateLiveRegions(line, parsedState.item_count)
+        const lineItem = document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`)
+        if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
+          cartDrawerWrapper ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`)) : lineItem.querySelector(`[name="${name}"]`).focus()
+        } else if (parsedState.item_count === 0 && cartDrawerWrapper) {
+          trapFocus(cartDrawerWrapper.querySelector('#CartDrawer'), cartDrawerWrapper.querySelector('[tabindex="-1"]'))
+        } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
+          trapFocus(cartDrawerWrapper, document.querySelector('.cart-item-name'))
+        }
         this.disableLoading()
       })
       .catch(() => {
