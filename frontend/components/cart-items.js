@@ -66,6 +66,7 @@ export default class CartItems extends window.HTMLElement {
         this.disableLoading()
       })
       .catch(() => {
+        this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'))
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors')
         errors.textContent = window.cartStrings.error
         this.disableLoading()
