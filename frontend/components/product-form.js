@@ -63,8 +63,12 @@ class ProductForm extends window.HTMLElement {
   }
 
   handleErrorMessage (errorMessage = false) {
+    this.errorMessage = this.errorMessage || this.querySelector('[data-error-message]')
+
+    this.errorMessage.toggleAttribute('hidden', !errorMessage)
+
     if (errorMessage) {
-      console.log(errorMessage)
+      this.errorMessage.textContent = errorMessage
     }
   }
 }
