@@ -8,8 +8,8 @@
 <cart-drawer class="invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden [.active_&]:block"></div>
-    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto grid grid-rows-[auto_1fr] transition-transform duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
-      <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
+    <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto flex flex-col transition-transform duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+      <div class="flex shrink-0 items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
         <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
         <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">
           {%- render 'icon-close' -%}
@@ -136,21 +136,19 @@
                 <p id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="col-span-2 text-copy text-primary/50 text-red-500" role="alert"></p>
               </div>
             {%- endfor -%}
+            <div class="empty:hidden" id="CartDrawer-CartErrors" role="alert"></div>
+            {% if settings.show_cart_note %}
+              <div class="grid gap-2 [.is-empty_&]:hidden">
+                <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
+                <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>
+              </div>
+            {% endif %}
           </div>
           <p id="CartDrawer-LiveRegionText" class="sr-only" role="status"></p>
           <p id="CartDrawer-LineItemStatus" class="sr-only" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
-          <div class="px-6 md:px-12" id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
-
-      {% if settings.show_cart_note %}
-        <div class="p-6 md:px-12 grid gap-2 [.is-empty_&]:hidden">
-          <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
-          <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>
-        </div>
-      {% endif %}
-
-      <div class="grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
+      <div class="mt-auto grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
           <div class="flex items-center justify-between font-medium" role="status">
             <h2 class="text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
