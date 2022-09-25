@@ -70,6 +70,9 @@ class CartDrawer extends window.HTMLElement {
       {
         id: 'cart-drawer',
         selector: '#CartDrawer'
+      },
+      {
+        id: 'cart-icon-bubble'
       }
     ]
   }
