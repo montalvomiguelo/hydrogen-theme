@@ -92,7 +92,7 @@ export default class CartItems extends window.HTMLElement {
 
     setTimeout(() => {
       cartStatus.setAttribute('aria-hidden', true)
-    })
+    }, 1000)
   }
 
   getSectionInnerHTML (html, selector) {
