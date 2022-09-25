@@ -118,16 +118,16 @@
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                     </div>
-                    {%- if item.original_price != item.final_price -%}
+                    {%- if item.original_line_price != item.final_line_price -%}
                       <div class="grid text-right [.loading-overlay:not(.hidden)_+_&]:invisible">
                         <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
-                        <s class="text-primary/50">{{- item.original_price | money -}}</s>
+                        <s class="text-primary/50">{{ item.original_line_price | money }}</s>
                         <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
-                        <span>{{ item.final_price | money }}</span>
+                        <span>{{ item.final_line_price | money }}</span>
                       </div>
                     {%- else -%}
                       <div>
-                        {{ item.original_price | money }}
+                        {{ item.original_line_price | money }}
                       </div>
                     {%- endif -%}
                   </div>
