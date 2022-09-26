@@ -3,7 +3,7 @@
 }
 
 .button {
-  @apply inline-block rounded font-medium text-center py-3 px-6;
+  @apply inline-block rounded font-body-weight-bold text-center py-3 px-6;
 }
 
 .article {

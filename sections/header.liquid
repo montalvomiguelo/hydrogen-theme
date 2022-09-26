@@ -24,7 +24,7 @@
             </summary>
             <div id="menu-drawer" class="fixed inset-0 h-screen bg-contrast z-20 max-w-lg overflow-y-auto [.js_&]:transition [.js_&]:duration-300 [.js_&]:-translate-x-full [.js_.menu-opening_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}" tabindex="-1">
               <div class="flex items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
-                <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.header.menu' | t }}</h2>
+                <h2 class="max-w-prose font-body-weight-bold text-lead">{{ 'sections.header.menu' | t }}</h2>
                 <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50 [.no-js_details[open]_&]:hidden" aria-label="{{ 'accessibility.close' | t }}">
                   {%- render 'icon-close' -%}
                 </button>
@@ -108,7 +108,7 @@
         {% render 'icon-bag' %}
         <span class="sr-only">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
-          <div class="text-contrast bg-primary absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full px-[0.125rem] pb-px">
+          <div class="text-contrast bg-primary absolute bottom-1 right-1 text-[0.625rem] subpixel-antialiased h-3 w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full px-[0.125rem] pb-px">
             {%- if cart.item_count < 100 -%}
               <span aria-hidden="true">{{ cart.item_count }}</span>
             {%- endif -%}

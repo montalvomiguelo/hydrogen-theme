@@ -10,7 +10,7 @@
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden [.active_&]:block"></div>
     <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto flex flex-col transition-transform duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
       <div class="flex shrink-0 items-center px-6 h-nav sm:px-8 md:px-12 justify-between">
-        <h2 class="whitespace-pre-wrap max-w-prose font-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="whitespace-pre-wrap max-w-prose font-body-weight-bold text-lead">{{ 'sections.cart.title' | t }}</h2>
         <button type="button" class="p-4 -m-4 transition text-primary hover:text-primary/50" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">
           {%- render 'icon-close' -%}
         </button>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="flex justify-between flex-grow">
                   <div class="grid gap-2">
-                    <h3 class="whitespace-pre-wrap max-w-prose font-medium text-copy"><a class="cart-item-name" href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
+                    <h3 class="whitespace-pre-wrap max-w-prose font-body-weight-bold text-copy"><a class="cart-item-name" href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
                     {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
                       <div class="pb-2">
                         <dl class="grid">
@@ -152,7 +152,7 @@
       </cart-drawer-items>
       <div class="mt-auto grid gap-6 p-6 border-t md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
-          <div class="flex items-center justify-between font-medium" role="status">
+          <div class="flex items-center justify-between font-body-weight-bold" role="status">
             <h2 class="text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
             <p class="text-copy">{{ cart.total_price | money_with_currency }}</p>
           </div>
