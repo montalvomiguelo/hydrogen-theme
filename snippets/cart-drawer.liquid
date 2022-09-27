@@ -5,7 +5,7 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-<cart-drawer class="invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="absolute invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden [.active_&]:block"></div>
     <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto flex flex-col transition-transform duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">

@@ -2,7 +2,8 @@
   "general": {
     "search": {
       "search": "Search"
-    }
+    },
+    "continue_shopping": "Continue shopping"
   },
   "accessibility": {
     "skip_to_text": "Skip to content",

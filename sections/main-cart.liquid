@@ -1,0 +1,23 @@
+<div>
+  <div class="grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
+    <h1 class="font-heading font-heading-weight text-heading inline-block">{{ 'sections.cart.title' | t }}</h1>
+  </div>
+  <div class="w-full gap-4 md:gap-8 grid p-6 md:p-8 lg:p-12 border-none max-w-7xl mx-auto">
+    <cart-items{% if cart == empty %} class="is-empty"{% endif %}>
+      <div class="gap-6 hidden [.is-empty_&]:grid">
+        <p class="text-copy">{{ 'sections.cart.empty' | t }}</p>
+        <div>
+          <a href="{{ routes.root_url }}" class="button bg-primary text-contrast w-auto">
+            {{ 'general.continue_shopping' | t }}
+          </a>
+        </div>
+      </div>
+    </cart-items>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart page"
+}
+{% endschema %}

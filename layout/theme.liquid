@@ -69,6 +69,8 @@
     render 'vite-tag' with 'theme.js'
     if request.page_type == 'product'
       render 'vite-tag' with 'product.js'
+    elsif request.page_type == 'cart'
+      render 'vite-tag' with 'cart.js'
     endif
   -%}
 
