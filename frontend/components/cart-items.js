@@ -23,6 +23,26 @@ export default class CartItems extends window.HTMLElement {
 
   getSectionsToRender () {
     return [
+      {
+        id: 'main-cart-items',
+        section: document.getElementById('main-cart-items').dataset.id,
+        selector: '.js-contents'
+      },
+      {
+        id: 'cart-icon-bubble',
+        section: 'cart-icon-bubble',
+        selector: '.shopify-section'
+      },
+      {
+        id: 'cart-live-region-text',
+        section: 'cart-live-region-text',
+        selector: '.shopify-section'
+      },
+      {
+        id: 'cart-subtotal',
+        section: 'cart-subtotal',
+        selector: '.shopify-section'
+      }
     ]
   }
 
@@ -105,9 +125,10 @@ export default class CartItems extends window.HTMLElement {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems')
     mainCartItems.classList.add('loading')
 
+    const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading-overlay`)
     const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading-overlay`)
 
-    cartDrawerItemElements.forEach((overlay) => overlay.classList.remove('hidden'))
+    ;[...cartItemElements, ...cartDrawerItemElements].forEach((overlay) => overlay.classList.remove('hidden'))
 
     document.activeElement.blur()
     this.lineItemStatusElement.setAttribute('aria-hidden', false)

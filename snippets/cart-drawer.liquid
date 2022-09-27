@@ -86,7 +86,7 @@
                     {%- endif -%}
 
                     <div class="flex items-center gap-2">
-                      <quantity-input class="max-w-[107px] flex items-center border rounded">
+                      <quantity-input class="max-w-[107px] flex border rounded min-h-[theme(spacing.10)]">
                         <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0" type="button" name="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}">
                           &#8722;
                         </button>
@@ -157,7 +157,7 @@
             <p class="text-copy">{{ cart.total_price | money_with_currency }}</p>
           </div>
 
-          <div>
+          <div class="empty:hidden">
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
                 {%- for discount in cart.cart_level_discount_applications -%}
