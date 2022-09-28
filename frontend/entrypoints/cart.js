@@ -1,2 +1,5 @@
 import 'vite/modulepreload-polyfill'
+import '@/components/quantity-input'
 import '@/components/cart-items'
+import '@/components/cart-remove-button'
+import '@/components/cart-note'
