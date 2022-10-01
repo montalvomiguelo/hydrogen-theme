@@ -72,9 +72,123 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
+              {%- when 'variant_picker' -%}
+                {%- unless product.has_only_default_variant -%}
+                  {%- if block.settings.picker_type == 'button' -%}
+                    <variant-radios
+                      class="[.no-js_&]:hidden grid gap-4 mb-10"
+                      data-section="{{ section.id }}"
+                      data-url="{{ product.url }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      {%- for option in product.options_with_values -%}
+                        <fieldset class="flex flex-wrap mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
+                          <legend class="block pb-2 w-full font-body-weight-bold text-lead">{{ option.name }}</legend>
+                          {%- for value in option.values -%}
+                            <div>
+                              <input
+                                class="sr-only peer"
+                                type="radio"
+                                id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                name="{{ option.name }}"
+                                value="{{ value | escape }}"
+                                form="{{ product_form_id }}"
+                                {% if option.selected_value == value %}
+                                  checked
+                                {% endif %}
+                              >
+                              <label class="leading-none py-1 peer-checked:border-b-[1.5px] cursor-pointer transition-all duration-200 peer-checked:border-primary/50" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                                {{ value }}
+                              </label>
+                            </div>
+                          {%- endfor -%}
+                        </fieldset>
+                      {%- endfor -%}
+                      <script type="application/json">
+                        {{ product.variants | json }}
+                      </script>
+                    </variant-radios>
+                  {%- else -%}
+                    <variant-selects
+                      class="[.no-js_&]:hidden grid gap-4 mb-10"
+                      data-section="{{ section.id }}"
+                      data-url="{{ product.url }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      {%- for option in product.options_with_values -%}
+                        <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
+                          <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                            {{ option.name }}
+                          </label>
+                          <div class="relative">
+                            <select
+                              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                              class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none"
+                              name="options[{{ option.name | escape }}]"
+                              form="{{ product_form_id }}"
+                            >
+                              {%- for value in option.values -%}
+                                <option
+                                  value="{{ value | escape }}"
+                                  {% if option.selected_value == value %}
+                                    selected="selected"
+                                  {% endif %}
+                                >
+                                  {{ value }}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                            <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                              {% render 'icon-caret' %}
+                            </span>
+                          </div>
+                        </div>
+                      {%- endfor -%}
+
+                      <script type="application/json">
+                        {{ product.variants | json }}
+                      </script>
+                    </variant-selects>
+                  {%- endif -%}
+                {%- endunless -%}
+
+                <noscript class="mb-10">
+                  <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
+                    <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Variants-{{ section.id }}">
+                      {{- 'products.product.product_variants' | t -}}
+                    </label>
+                    <div class="relative">
+                      <select
+                        name="id"
+                        id="Variants-{{ section.id }}"
+                        class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none"
+                        form="{{ product_form_id }}"
+                      >
+                        {%- for variant in product.variants -%}
+                          <option
+                            {% if variant == product.selected_or_first_available_variant %}
+                              selected="selected"
+                            {% endif %}
+                            {% if variant.available == false %}
+                              disabled
+                            {% endif %}
+                            value="{{ variant.id }}"
+                          >
+                            {{ variant.title }}
+                            {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                            - {{ variant.price | money | strip_html }}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                      <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                        {% render 'icon-caret' %}
+                      </span>
+                    </div>
+                  </div>
+                </noscript>
               {%- when 'buy_buttons' -%}
                 <div {{ block.shopify_attributes }}>
-                  <product-form>
+                  <product-form class="mb-10">
                     <p class="text-red-500" role="alert" data-error-message hidden></p>
                     {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                       <input
@@ -181,6 +295,29 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "button",
+              "label": "Buttons"
+            }
+          ],
+          "default": "button",
+          "label": "Type"
+        }
+      ]
     },
     {
       "type": "buy_buttons",

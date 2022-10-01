@@ -3,6 +3,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -11,6 +17,7 @@
         }
       },
       "block_order": [
+        "variant_picker",
         "buy_buttons"
       ]
     }

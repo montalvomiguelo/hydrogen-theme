@@ -52,7 +52,8 @@
         "sale_price": "Sale price"
       },
       "add_to_cart": "Add to cart",
-      "sold_out": "Sold out"
+      "sold_out": "Sold out",
+      "product_variants": "Product variants"
     }
   },
   "templates": {
