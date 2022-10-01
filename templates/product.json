@@ -6,7 +6,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "dropdown"
+            "picker_type": "button"
           }
         },
         "buy_buttons": {
@@ -14,11 +14,15 @@
           "settings": {
             "show_dynamic_checkout": true
           }
+        },
+        "tab": {
+          "type": "tab"
         }
       },
       "block_order": [
         "variant_picker",
-        "buy_buttons"
+        "buy_buttons",
+        "tab"
       ]
     }
   },

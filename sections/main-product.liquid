@@ -56,12 +56,12 @@
       </div>
       <div
         id="ProductInfo-{{ section.id }}"
-        class="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll"
+        class="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-auto"
       >
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-        <div class="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
-          <div class="grid gap-2">
+        <div class="flex flex-col w-full max-w-xl p-6 md:mx-auto md:max-w-sm md:px-0">
+          <div class="grid gap-2 mb-8">
             <h1 class="font-heading-weight font-heading text-heading">{{ product.title | escape }}</h1>
             {% if section.settings.show_vendor %}
               <p class="text-copy opacity-50 font-body-weight-bold">{{ product.vendor }}</p>
@@ -72,6 +72,25 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
+              {%- when 'tab' -%}
+                <div class="mb-10 [.tab_+_&]:-mt-6 tab" {{ block.shopify_attributes }}>
+                  <details id="Details-{{ block.id }}-{{ section.id }}">
+                    <summary>
+                      <div>
+                        <h2 class="flex justify-between text-lead font-body-weight-bold">
+                          {{ block.settings.title | default: block.settings.page.title }}
+                          <span class="[details[open]_&]:rotate-180">
+                            {% render 'icon-caret' %}
+                          </span>
+                        </h2>
+                      </div>
+                    </summary>
+                    <div class="prose prose-invert pb-4 pt-2" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                      {{ block.settings.content }}
+                      {{ block.settings.page.content }}
+                    </div>
+                  </details>
+                </div>
               {%- when 'variant_picker' -%}
                 {%- unless product.has_only_default_variant -%}
                   {%- if block.settings.picker_type == 'button' -%}
@@ -331,6 +350,29 @@
           "default": true,
           "label": "Show dynamic checkout buttons",
           "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+        }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Shipping information"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Tab content from page"
         }
       ]
     }
