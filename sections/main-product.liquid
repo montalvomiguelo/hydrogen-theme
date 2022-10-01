@@ -197,10 +197,11 @@
                         value="{{ product.selected_or_first_available_variant.id }}"
                         disabled
                       >
-                      <div>
+                      <div class="grid items-stretch gap-4">
                         <button
                           type="submit"
                           name="add"
+                          class="button bg-primary text-contrast w-full disabled:opacity-50 disabled:cursor-not-allowed"
                           {% if product.selected_or_first_available_variant.available == false %}
                             disabled
                           {% endif %}
