@@ -14,14 +14,6 @@ class ProductRecommendations extends window.HTMLElement {
           if (recommendations && recommendations.innerHTML.trim().length) {
             this.innerHTML = recommendations.innerHTML
           }
-
-          if (!this.querySelector('slideshow-component') && this.classList.contains('complementary-products')) {
-            this.remove()
-          }
-
-          if (html.querySelector('.grid__item')) {
-            this.classList.add('product-recommendations--loaded')
-          }
         })
         .catch(e => {
           console.error(e)
