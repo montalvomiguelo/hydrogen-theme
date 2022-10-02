@@ -1,6 +1,6 @@
 {%- liquid
   if request.page_type == 'index'
-    assign container_class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
+    assign container_class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary'
     assign input_class = 'focus:border-contrast/20 dark:focus:border-primary/20'
   else
     assign container_class = 'bg-contrast/80 text-primary'
@@ -9,7 +9,7 @@
 -%}
 
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
-  <header role="banner" class="{{ container_class }} h-nav w-full leading-none backdrop-blur-lg px-4 flex justify-between items-center gap-4 md:transition md:px-8 md:duration-300 lg:gap-8 lg:px-12 lg:py-8">
+  <header role="banner" class="{{ container_class }} h-nav w-full leading-none backdrop-blur-lg px-4 flex justify-between items-center gap-4 md:px-8 lg:gap-8 lg:px-12 lg:py-8">
     <div class="flex items-center justify-start w-full gap-4 lg:hidden">
       {%- if section.settings.menu != blank -%}
         <header-drawer>
@@ -114,6 +114,7 @@
 {% schema %}
 {
   "name": "Header",
+  "class": "z-10",
   "settings": [
     {
       "type": "link_list",

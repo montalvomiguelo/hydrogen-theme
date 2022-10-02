@@ -4,7 +4,7 @@
 >
   <div class="w-full gap-4 md:gap-8 grid px-0 md:px-8 lg:px-12 border-none">
     <div class="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-      <div class="swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 w-screen md:w-full lg:col-span-2">
+      <div class="swimlane md:grid-flow-row md:p-0 md:overflow-x-auto md:grid-cols-2 w-screen md:w-full lg:col-span-2">
         {%- for media in product.media -%}
           {%- liquid
             assign decimal = forloop.index0 | modulo: 3
@@ -33,7 +33,7 @@
           -%}
           <div class="aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
             <img
-              class="w-full h-full aspect-square fadeIn object-cover"
+              class="w-full h-full aspect-square object-cover"
               srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
                       {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
                       {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445 }} 1445w,{%- endif -%}
@@ -56,7 +56,7 @@
       </div>
       <div
         id="ProductInfo-{{ section.id }}"
-        class="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-auto"
+        class="sticky md:top-0 md:h-screen md:overflow-y-auto"
       >
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 

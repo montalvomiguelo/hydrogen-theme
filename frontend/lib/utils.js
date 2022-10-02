@@ -1,5 +1,3 @@
-export const isHome = window.location.pathname === '/'
-
 export function fetchConfig (type = 'json') {
   return {
     method: 'POST',
