@@ -1,4 +1,4 @@
-class VariantSelects extends window.HTMLElement {
+export default class VariantSelects extends window.HTMLElement {
   constructor () {
     super()
     this.addEventListener('change', this.onVariantChange)
