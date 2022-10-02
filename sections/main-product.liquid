@@ -31,9 +31,9 @@
               assign media_wrapper_class = media_wrapper_class | append: ' md:aspect-[4/5]'
             endunless
           -%}
-          <div class="aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
+          <div class="aspect-square rounded overflow-hidden snap-center bg-white dark:bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
             <img
-              class="w-full h-full aspect-square object-cover"
+              class="w-full h-full aspect-[inherit] object-cover object-center"
               srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
                       {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
                       {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445 }} 1445w,{%- endif -%}
@@ -56,7 +56,7 @@
       </div>
       <div
         id="ProductInfo-{{ section.id }}"
-        class="sticky md:top-0 md:h-screen md:overflow-y-auto"
+        class="sticky md:top-0 md:h-screen"
       >
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 

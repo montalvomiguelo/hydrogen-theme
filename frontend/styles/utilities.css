@@ -17,14 +17,3 @@
     box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast));
   }
 }
-
-.card-image {
-  @apply relative rounded overflow-clip flex justify-center items-center;
-  &::before {
-    content: ' ';
-    @apply z-10 absolute block top-0 left-0 w-full h-full shadow-border rounded;
-  }
-  img {
-    @apply object-cover w-full aspect-[inherit];
-  }
-}
