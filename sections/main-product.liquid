@@ -61,7 +61,7 @@
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
         <div class="flex flex-col w-full max-w-xl p-6 md:mx-auto md:max-w-sm md:px-0">
-          <div class="grid gap-2 mb-8">
+          <div class="product-header grid gap-2 mb-8">
             <h1 class="font-heading-weight font-heading text-heading">{{ product.title | escape }}</h1>
             {% if section.settings.show_vendor %}
               <p class="text-copy opacity-50 font-body-weight-bold">{{ product.vendor }}</p>
@@ -72,6 +72,10 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
+              {%- when 'price' -%}
+                <div class="[.no-js]:hidden [.product-header_+_&]:-mt-6" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {%- render 'price', product: product, use_variant: true, price_class: 'mb-10' -%}
+                </div>
               {%- when 'tab' -%}
                 <div class="mb-10 [.tab_+_&]:-mt-6 tab" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -315,6 +319,11 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
     },
     {
       "type": "variant_picker",

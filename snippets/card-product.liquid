@@ -23,8 +23,8 @@
   -%}
   <div class="relative">
     <div class="grid gap-6 snap-start w-80">
-      {%- if card_product.featured_media -%}
-        <div class="rounded overflow-hidden aspect-[4/5] bg-primary/5">
+      <div class="rounded overflow-hidden aspect-[4/5] bg-primary/5">
+        {%- if card_product.featured_media -%}
           {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
           <img
             srcset="
@@ -47,8 +47,8 @@
             height="{{ card_product.featured_media.height }}"
           >
           {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
-        </div>
-      {%- endif -%}
+        {%- endif -%}
+      </div>
       <div class="grid gap-1">
         <h3
           class="text-copy"
@@ -65,22 +65,8 @@
             {{ card_product.title | escape }}
           </a>
         </h3>
-        <div class="flex gap-4 text-copy relative z-0">
-          {%- if card_product.compare_at_price > card_product.price -%}
-            <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
-            <span class="">{{ card_product.price | money_without_trailing_zeros }}</span>
-            <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
-            <span class="strike opacity-50">{{ card_product.compare_at_price | money_without_trailing_zeros }}</span>
-          {%- elsif card_product.price_varies -%}
-            {%- capture formatted_min_price -%}<span>{{ card_product.price_min | money_without_trailing_zeros }}</span>{%- endcapture -%}
-            {%- capture formatted_max_price -%}<span>{{ card_product.price_max | money_without_trailing_zeros }}</span>{%- endcapture -%}
-            <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
-            <span class="">{{ 'products.product.price.from_price_html' | t: min_price: formatted_min_price, max_price: formatted_max_price }}</span>
-          {%- else -%}
-            <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
-            <span class="">{{ card_product.price | money_without_trailing_zeros }}</span>
-          {%- endif -%}
-        </div>
+
+        {%- render 'price', product: card_product -%}
       </div>
     </div>
   </div>

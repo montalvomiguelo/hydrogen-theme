@@ -3,6 +3,10 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -20,6 +24,7 @@
         }
       },
       "block_order": [
+        "price",
         "variant_picker",
         "buy_buttons",
         "tab"
