@@ -31,7 +31,7 @@
               assign media_wrapper_class = media_wrapper_class | append: ' md:aspect-[4/5]'
             endunless
           -%}
-          <div class="aspect-square rounded overflow-hidden snap-center bg-white dark:bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
+          <div class="aspect-square rounded overflow-hidden snap-center bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
             <img
               class="w-full h-full aspect-[inherit] object-cover object-center"
               srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
@@ -146,7 +146,7 @@
                           <div class="relative">
                             <select
                               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                              class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none"
+                              class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
                               name="options[{{ option.name | escape }}]"
                               form="{{ product_form_id }}"
                             >
@@ -184,7 +184,7 @@
                       <select
                         name="id"
                         id="Variants-{{ section.id }}"
-                        class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none"
+                        class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
                         form="{{ product_form_id }}"
                       >
                         {%- for variant in product.variants -%}

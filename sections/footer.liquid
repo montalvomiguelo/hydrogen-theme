@@ -1,15 +1,11 @@
 {%- liquid
-  if request.page_type == 'index'
-    assign container_class = 'border-none'
-  else
-    assign container_class = 'border-t border-primary/05'
-  endif
+  assign container_class = 'border-none'
 -%}
 
 <footer
   role="contentinfo"
   style="--blocks-count: {{ section.blocks.size }};"
-  class="{{ container_class }} md:grid min-h-[25rem] md:items-start md:grid-flow-row w-full py-8 px-6 md:px-8 lg:px-12 border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] bg-primary dark:bg-contrast dark:text-primary text-contrast"
+  class="{{ container_class }} md:grid min-h-[25rem] md:items-start md:grid-flow-row w-full py-8 px-6 md:px-8 lg:px-12 border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] bg-contrast text-primary"
 >
   {%- for block in section.blocks -%}
     {%- case block.type -%}
@@ -58,7 +54,7 @@
             <noscript>
               {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
                 <div class="relative">
-                  <select class="block w-full py-3 px-4 border rounded border-contrast/30 dark:border-white bg-transparent bg-none appearance-none" name="country_code" aria-labelledby="CountryListLabel">
+                  <select class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" name="country_code" aria-labelledby="CountryListLabel">
                     {%- for country in localization.available_countries -%}
                       <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
                         {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
@@ -74,14 +70,14 @@
             </noscript>
             <localization-form class="[.no-js_&]:hidden">
               {% form 'localization', class: 'relative' %}
-                <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-contrast/30 dark:border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
+                <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
                   {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                   {%- render 'icon-caret' -%}
                 </button>
-                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border dark:border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
+                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
                   {% for country in localization.available_countries %}
                     <li tabindex="-1">
-                      <a class="text-contrast dark:text-primary bg-primary dark:bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                      <a class="text-primary bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
                         {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
                         {%- if country.iso_code == localization.country.iso_code -%}
                           <span class="ml-2">

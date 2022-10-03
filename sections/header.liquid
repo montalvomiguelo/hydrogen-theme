@@ -1,11 +1,6 @@
 {%- liquid
-  if request.page_type == 'index'
-    assign container_class = 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary'
-    assign input_class = 'focus:border-contrast/20 dark:focus:border-primary/20'
-  else
-    assign container_class = 'bg-contrast/80 text-primary'
-    assign input_class = 'focus:border-primary/20'
-  endif
+  assign container_class = 'bg-contrast/80 text-primary'
+  assign input_class = 'focus:border-primary/20'
 -%}
 
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
