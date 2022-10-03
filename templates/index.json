@@ -33,10 +33,19 @@
         "lazy_load_enable": false,
         "preload_first_image_enable": true
       }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "collection": "all",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
-    "image_banner"
+    "image_banner",
+    "featured_collection"
   ]
 }
 
