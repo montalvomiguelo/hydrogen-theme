@@ -1,0 +1,181 @@
+{%- liquid
+  assign banner_class = 'aspect-[4/5] sm:aspect-square md:aspect-[5/4] lg:aspect-[3/2] xl:aspect-[2/1]'
+  if section.settings.full_page_height_enable
+    assign banner_class = 'h-screen-no-nav'
+  endif
+
+  assign loading = 'lazy'
+  unless section.settings.lazy_load_enable
+    assign loading = 'eager'
+  endunless
+-%}
+
+<div id="Banner-{{ section.id }}" class="relative justify-end flex flex-col w-full {{ banner_class }}">
+  <div class="absolute inset-0 grid flex-grow grid-flow-col pointer-events-none auto-cols-fr -z-10 content-stretch overflow-clip">
+    {%- if section.settings.image != blank -%}
+      <div>
+        {%-liquid
+          assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
+          if section.settings.image_2 != blank
+            assign sizes = "50vw"
+          else
+            assign sizes = "100vw"
+          endif
+        -%}
+        {{ section.settings.image | image_url: width: 1500 | image_tag:
+          loading: loading,
+          width: section.settings.image.width,
+          height: image_height,
+          class: 'block object-cover w-full h-full',
+          sizes: sizes,
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          alt: section.settings.image.alt | escape
+        }}
+      </div>
+    {%- elsif section.settings.image_2 == blank -%}
+      <div>
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover fill-primary/20' }}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.image_2 != blank -%}
+      <div class="hidden md:block">
+        {%-liquid
+          assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
+          if section.settings.image != blank
+            assign sizes = "50vw"
+          else
+            assign sizes = "100vw"
+          endif
+        -%}
+        {{ section.settings.image_2 | image_url: width: 1500 | image_tag:
+          loading: loading,
+          width: section.settings.image_2.width,
+          height: image_height_2,
+          class: 'block object-cover w-full h-full',
+          sizes: sizes,
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          alt: section.settings.image_2.alt | escape
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <h2 class="font-heading font-heading-weight text-display max-w-md" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.heading | escape }}</span>
+          </h2>
+        {%- when 'text' -%}
+          <div class="max-w-prose-narrow text-lead font-body-weight-bold" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.text | escape }}</span>
+          </div>
+        {%- when 'buttons' -%}
+          <div {{ block.shopify_attributes }}>
+            {%- if block.settings.button_label_1 != blank -%}
+            <a{% if block.settings.button_link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_1 }}"{% endif %} class="max-w-prose text-lead font-body-weight-bold flex items-center gap-2">
+              {{ block.settings.button_label_1 | escape }}
+              {%- render 'icon-arrow' -%}
+            </a>
+            {%- endif -%}
+
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "First image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Second image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_page_height_enable",
+      "default": false,
+      "label": "Full page height"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy_load_enable",
+      "default": true,
+      "label": "Lazy load",
+      "info": "Enable lazy load for background images."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Image banner",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Give customers details about the banner image(s) or content on the template.",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "First button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "First button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
