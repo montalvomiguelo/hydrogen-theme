@@ -41,11 +41,31 @@
         "collection": "all",
         "products_to_show": 8
       }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "blocks": {
+        "featured-collection-0": {
+          "type": "featured_collection"
+        },
+        "featured-collection-1": {
+          "type": "featured_collection"
+        },
+        "featured-collection-2": {
+          "type": "featured_collection"
+       }
+      },
+      "block_order": [
+        "featured-collection-0",
+        "featured-collection-1",
+        "featured-collection-2"
+      ]
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "collection_list"
   ]
 }
 

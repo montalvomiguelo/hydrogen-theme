@@ -37,7 +37,7 @@
               {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
             "
             src="{{ card_product.featured_media | image_url: width: 533 }}"
-            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+            sizes="320px"
             alt="{{ card_product.featured_media.alt | escape }}"
             class="w-full h-full aspect-[inherit] object-cover object-center"
             {% unless lazy_load == false %}
@@ -60,7 +60,6 @@
             href="{{ card_product.url }}"
             id="CardLink-{{ section_id }}-{{ card_product.id }}"
             class="after:content-[''] after:inset-0 after:absolute after:z-10"
-            aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
           >
             {{ card_product.title | escape }}
           </a>

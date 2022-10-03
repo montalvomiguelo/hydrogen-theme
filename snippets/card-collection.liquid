@@ -1,0 +1,44 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+<div class="relative">
+  <div class="grid gap-4">
+    <div class="rounded overflow-hidden aspect-[3/2] bg-primary/5">
+      {%- if card_collection.featured_image -%}
+        <img
+          srcset="{%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 330 -%}{{ card_collection.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 535 -%}{{ card_collection.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 750 -%}{{ card_collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 1000 -%}{{ card_collection.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 1500 -%}{{ card_collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+            {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w"
+          src="{{ card_collection.featured_image | image_url: width: 1500 }}"
+          sizes="(max-width: 32em) 100vw, 33vw"
+          alt="{{ card_collection.title | escape }}"
+          height="{{ card_collection.featured_image.height }}"
+          width="{{ card_collection.featured_image.width }}"
+          loading="lazy"
+          class="w-full h-full aspect-[inherit] object-cover object-center"
+        >
+      {%- endif -%}
+    </div>
+    <h3 class="font-heading font-heading-weight text-copy">
+      <a{% if card_collection == blank %} role="link" aria-disabled="true"{% else %} href="{{ card_collection.url }}"{% endif %} class="after:content-[''] after:inset-0 after:absolute after:z-10">
+        {%- if card_collection.title != blank -%}
+          {{- card_collection.title | escape -}}
+        {%- else -%}
+          {{ 'onboarding.collection_title' | t }}
+        {%- endif -%}
+      </a>
+    </h3>
+  </div>
+</div>
