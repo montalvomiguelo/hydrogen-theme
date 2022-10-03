@@ -80,16 +80,14 @@
                 <div class="mb-10 [.tab_+_&]:-mt-6 tab" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
-                      <div>
-                        <h2 class="flex justify-between text-lead font-body-weight-bold">
-                          {{ block.settings.title | default: block.settings.page.title }}
-                          <span class="[details[open]_&]:rotate-180">
-                            {% render 'icon-caret' %}
-                          </span>
-                        </h2>
-                      </div>
+                      <h2 class="flex justify-between text-lead font-body-weight-bold">
+                        {{ block.settings.title | default: block.settings.page.title }}
+                        <span class="[details[open]_&]:rotate-180 w-5 h-5">
+                          {% render 'icon-caret' %}
+                        </span>
+                      </h2>
                     </summary>
-                    <div class="prose prose-invert pb-4 pt-2" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                    <div class="prose prose-invert pb-4 pt-4" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
                       {{ block.settings.content }}
                       {{ block.settings.page.content }}
                     </div>
