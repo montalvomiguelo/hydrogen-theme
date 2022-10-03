@@ -24,6 +24,7 @@
         -%}
         {{ section.settings.image | image_url: width: 1500 | image_tag:
           loading: loading,
+          preload: section.settings.preload_first_image_enable,
           width: section.settings.image.width,
           height: image_height,
           class: 'block object-cover w-full h-full',
@@ -103,7 +104,7 @@
     {
       "type": "checkbox",
       "id": "full_page_height_enable",
-      "default": false,
+      "default": true,
       "label": "Full page height"
     },
     {
@@ -111,7 +112,14 @@
       "id": "lazy_load_enable",
       "default": true,
       "label": "Lazy load",
-      "info": "Enable lazy load for background images."
+      "info": "The images aren't loaded until they're almost in view."
+    },
+    {
+      "type": "checkbox",
+      "id": "preload_first_image_enable",
+      "default": false,
+      "label": "Preload first image",
+      "info": "Preload the largest contentful paint image."
     }
   ],
   "blocks": [

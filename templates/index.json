@@ -30,7 +30,8 @@
       ],
       "settings": {
         "full_page_height_enable": true,
-        "lazy_load_enable": false
+        "lazy_load_enable": false,
+        "preload_first_image_enable": true
       }
     }
   },
