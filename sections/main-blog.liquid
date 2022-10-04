@@ -1,0 +1,19 @@
+{%- paginate blog.articles by 6 -%}
+  <div class="grid w-full gap-0 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
+    <h1 class="max-w-prose-narrow font-heading font-heading-weight text-heading inline-block">{{ blog.title | escape }}</h1>
+
+    <div class="grid-flow-row grid gap-6 grid-cols-2 pt-24 w-full">
+      {%- for article in blog.articles -%}
+        <div>
+          {%- render 'article-card', article: article -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog posts"
+}
+{% endschema %}
