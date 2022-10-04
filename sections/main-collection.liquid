@@ -1,8 +1,7 @@
-{%- assign paginate_by = 12 -%}
 <div id="ProductGridContainer" class="w-full gap-4 md:gap-8 grid p-6 md:p-8 lg:p-12 border-none">
   <div class="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="product-grid" data-id="{{ section.id }}">
     {%- liquid
-      paginate collection.products by paginate_by
+      paginate collection.products by 12
         for product in collection.products
           assign lazy_load = false
           if forloop.index > 2
