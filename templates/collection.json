@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-header",
+      "settings": {
+        "show_collection_description": true
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "main-collection"
+  ]
+}
+

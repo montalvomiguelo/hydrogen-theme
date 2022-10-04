@@ -1,0 +1,23 @@
+<div class="grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
+  <h1 class="max-w-prose-narrow font-heading font-heading-weight text-heading inline-block">
+    <span class="sr-only">{{ 'sections.collection_template.title' | t }}: </span>
+    {{- collection.title | escape -}}
+  </h1>
+  {%- if section.settings.show_collection_description -%}
+    <div class="flex items-baseline justify-between w-full max-w-prose-narrow text-copy empty:hidden">{{ collection.description }}</div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "Show collection description"
+    }
+  ]
+}
+{% endschema %}

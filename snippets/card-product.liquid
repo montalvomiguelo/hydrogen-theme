@@ -4,6 +4,7 @@
   Accepts:
   - card_product: {Object} Product Liquid object (optional)
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
 
   Usage:
   {% render 'card-product', card_product: product %}
@@ -22,7 +23,7 @@
     endif
   -%}
   <div class="relative">
-    <div class="grid gap-6 snap-start w-80">
+    <div class="grid gap-6 snap-start {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
       <div class="rounded overflow-hidden aspect-[4/5] bg-primary/5">
         {%- if card_product.featured_media -%}
           {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
