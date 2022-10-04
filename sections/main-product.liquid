@@ -30,27 +30,22 @@
             unless is_first or is_fourth
               assign media_wrapper_class = media_wrapper_class | append: ' md:aspect-[4/5]'
             endunless
+            assign loading = 'lazy'
+            if is_first
+              assign loading = 'eager'
+            endif
           -%}
           <div class="aspect-square rounded overflow-hidden snap-center bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
-            <img
-              class="w-full h-full aspect-[inherit] object-cover object-center"
-              srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
-                      {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
-                      {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445 }} 1445w,{%- endif -%}
-                      {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680 }} 1680w,{%- endif -%}
-                      {%- if media.preview_image.width >= 2048 -%}{{ media.preview_image | image_url: width: 2048 }} 2048w,{%- endif -%}
-                      {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200 }} 2200w,{%- endif -%}
-                      {%- if media.preview_image.width >= 2890 -%}{{ media.preview_image | image_url: width: 2890 }} 2890w,{%- endif -%}
-                      {%- if media.preview_image.width >= 4096 -%}{{ media.preview_image | image_url: width: 4096 }} 4096w,{%- endif -%}
-                      {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
-              sizes="{{ sizes }}"
-              src="{{ media.preview_image | image_url: width: 1445 }}"
-              alt="{{ media.preview_image.alt | escape }}"
-              loading="lazy"
-              width="{{ media.preview_image.width }}"
-              height="{{ media.preview_image.height }}"
-              data-media-id="{{ media.id }}"
-            >
+            {{ media.preview_image | image_url: width: 1445 | image_tag:
+              loading: loading,
+              preload: forloop.first,
+              width: media.preview_image.width,
+              height: media.preview_image.height,
+              class: 'w-full h-full aspect-[inherit] object-cover object-center',
+              sizes: sizes,
+              widths: '550, 1100, 1445, 1680, 2048, 22200, 2890, 4096',
+              alt: media.preview_image.alt | escape
+            }}
           </div>
         {%- endfor -%}
       </div>
