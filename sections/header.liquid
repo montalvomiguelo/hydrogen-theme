@@ -37,6 +37,8 @@
       {%- endif -%}
 
       <form action="{{ routes.search_url }}" method="get" role="search" class="items-center gap-2 sm:flex">
+        <input type="hidden" name="type" value="product">
+
         <button type="submit" class="flex items-center justify-center w-8 h-8">
           {% render 'icon-search' %}
           <span class="sr-only">{{ 'general.search.search' | t }}</span>

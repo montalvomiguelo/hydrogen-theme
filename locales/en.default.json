@@ -1,7 +1,9 @@
 {
   "general": {
     "search": {
-      "search": "Search"
+      "search": "Search",
+      "submit": "Go",
+      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results."
     },
     "continue_shopping": "Continue shopping"
   },
@@ -68,6 +70,9 @@
   "templates": {
     "cart": {
       "cart": "Cart"
+    },
+    "search": {
+      "title": "Search results"
     }
   },
   "customer": {

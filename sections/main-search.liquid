@@ -1,0 +1,44 @@
+<div class="grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
+  {%- if search.performed -%}
+    <h1 class="max-w-prose font-heading font-heading-weight text-copy">{{ 'templates.search.title' | t }}</h1>
+  {%- else -%}
+    <h1 class="max-w-prose font-heading font-heading-weight text-copy">{{ 'general.search.search' | t }}</h1>
+  {%- endif -%}
+  <form action="{{ routes.search_url }}" method="get" role="search" class="relative flex w-full text-heading">
+    <input type="hidden" name="type" value="product">
+    <input
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'general.search.search' | t }}"
+      class="bg-transparent px-0 py-2 text-heading w-full focus:ring-0 border-x-0 border-t-0 transition border-b-2 border-primary/10 focus:border-primary/90"
+    />
+    <input name="options[prefix]" type="hidden" value="last">
+    <button type="submit" class="absolute right-0 py-2">
+      {{ 'general.search.submit' | t }}
+    </button>
+  </form>
+</div>
+
+{% if search.performed %}
+  {%- if search.results_count == 0 -%}
+    <div class="w-full gap-4 md:gap-8 grid px-6 md:px-8 lg:px-12">
+      <p class="max-w-prose text-copy opacity-50">{{ 'general.search.no_results_html' | t: terms: search.terms | replace: '*', '' }}</p>
+    </div>
+  {%- endif -%}
+  {%- if search.results_count != 0 -%}
+    {% paginate search.results by 24 %}
+      <div class="grid-flow-row grid gap-2 gap-y-6 p-6 md:gap-4 lg:gap-6 grid-cols-2 sm:grid-cols-3 w-full md:p-8 lg:p-12 lg:grid-cols-4">
+        {%- liquid
+          for item in search.results
+            assign lazy_load = false
+            if forloop.index > 2
+              assign lazy_load = true
+            endif
+            render 'card-product', card_product: item, lazy_load: lazy_load
+          endfor
+        -%}
+      </div>
+    {% endpaginate %}
+  {%- endif -%}
+{% endif %}
