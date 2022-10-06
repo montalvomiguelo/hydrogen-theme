@@ -73,6 +73,10 @@
     },
     "search": {
       "title": "Search results"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "The page you requested does not exist."
     }
   },
   "customer": {
