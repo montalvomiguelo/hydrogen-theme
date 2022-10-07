@@ -13,7 +13,8 @@
     "link_messages": {
       "new_window": "Opens in a new window."
     },
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "error": "Error"
   },
   "sections": {
     "header": {
@@ -77,6 +78,11 @@
     "404": {
       "title": "404 Page Not Found",
       "subtext": "The page you requested does not exist."
+    },
+    "contact": {
+      "form": {
+        "error_heading": "Please adjust the following:"
+      }
     }
   },
   "customer": {
@@ -84,6 +90,23 @@
     "log_in": "Log in",
     "order": {
       "discount": "Discount"
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "subtext": "We will send you an email to reset your password",
+      "success": "We've sent you an email with a link to update your password."
+    },
+    "login_page": {
+      "cancel": "Cancel",
+      "create_account": "Create account",
+      "email": "Email",
+      "forgot_password": "Forgot your password?",
+      "guest_continue": "Continue",
+      "guest_title": "Continue as a guest",
+      "password": "Password",
+      "title": "Login",
+      "sign_in": "Sign in",
+      "submit": "Submit"
     }
   },
   "localization": {
