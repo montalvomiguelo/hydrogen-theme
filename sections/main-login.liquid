@@ -132,12 +132,12 @@
   </div>
 
   {%- if shop.checkout.guest_login -%}
-    <div>
+    <div class="max-w-md w-full pb-8 mb-4">
       <hr>
-      <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+      <h2 class="max-w-md w-full text-4xl mt-10">{{ 'customer.login_page.guest_title' | t }}</h2>
 
       {%- form 'guest_login' -%}
-        <button>
+        <button class="mt-10 button bg-primary text-contrast w-full">
           {{ 'customer.login_page.guest_continue' | t }}
         </button>
       {%- endform -%}
