@@ -1,23 +1,23 @@
 <div class="flex flex-col items-center my-24 px-4">
-  {% comment %}
-  <h1 id="recover" class="" tabindex="-1">
+  <h1 id="recover" class="max-w-md w-full text-4xl hidden target:block" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
   </h1>
-  <div class="">
+  <div class="max-w-md w-full pt-6 pb-8 mt-4 mb-4 [#recover_+_&]:hidden [#recover:target_+_&]:block">
     <p>
       {{ 'customer.recover_password.subtext' | t }}
     </p>
 
     {%- form 'recover_customer_password' -%}
       {% assign recover_success = form.posted_successfully? %}
-      <div class="grid">
-        <label for="RecoverEmail">
+      <div class="grid gap-2 mt-10">
+        <label for="RecoverEmail" class="block pb-2 w-full font-body-weight-bold text-lead">
           {{ 'customer.login_page.email' | t }}
         </label>
         <input type="email"
           value=""
           name="email"
           id="RecoverEmail"
+          class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
@@ -26,7 +26,6 @@
             aria-describedby="RecoverEmail-email-error"
             autofocus
           {% endif %}
-          placeholder="{{ 'customer.login_page.email' | t }}"
         >
       </div>
       {%- if form.errors -%}
@@ -41,21 +40,20 @@
         </small>
       {%- endif -%}
 
-      <button>
+      <button class="mt-10 button bg-primary text-contrast w-full">
         {{ 'customer.login_page.submit' | t }}
       </button>
 
-      <a href="#login">
+      <a href="#login" class="block fit-auto mt-4">
         {{ 'customer.login_page.cancel' | t }}
       </a>
     {%- endform -%}
   </div>
-  {% endcomment %}
 
-  <h1 id="login" class="max-w-md w-full text-4xl" tabindex="-1">
+  <h1 id="login" class="max-w-md w-full text-4xl [#recover:target_~_&]:hidden" tabindex="-1">
     {{ 'customer.login_page.title' | t }}
   </h1>
-  <div class="max-w-md w-full pt-6 pb-8 mt-4 mb-4">
+  <div class="max-w-md w-full pt-6 pb-8 mt-4 mb-4 [#recover:target_~_#login_+_&]:hidden">
     {%- if recover_success == true -%}
       <h3 class="" tabindex="-1" autofocus>
         <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13">
