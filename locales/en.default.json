@@ -1,5 +1,11 @@
 {
   "general": {
+    "pagination": {
+      "label": "Pagination",
+      "page": "Page {{ number }}",
+      "next": "Next page",
+      "previous": "Previous page"
+    },
     "search": {
       "search": "Search",
       "submit": "Go",
@@ -88,8 +94,19 @@
   "customer": {
     "account_fallback": "Account",
     "log_in": "Log in",
+    "log_out": "Log out",
     "order": {
       "discount": "Discount"
+    },
+    "orders": {
+      "title": "Order history",
+      "order_number": "Order",
+      "order_number_link": "Order number {{ number }}",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
     },
     "recover_password": {
       "title": "Reset your password",
@@ -130,6 +147,12 @@
       "password_confirm": "Confirm password",
       "submit": "Activate account",
       "cancel": "Decline invitation"
+    },
+    "account": {
+      "title": "Account",
+      "details": "Account details",
+      "view_addresses": "View addresses",
+      "return": "Return to Account details"
     }
   },
   "localization": {
