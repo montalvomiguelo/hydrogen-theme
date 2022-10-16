@@ -58,12 +58,12 @@
 
         {%- if paginate.pages > 1 -%}
           {%- if paginate.parts.size > 0 -%}
-              <nav class="" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-                <ul role="list">
+              <nav class="mt-10 mb-10" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+                <ul role="list" class="flex justify-center items-center gap-6">
                 {%- if paginate.previous -%}
                   <li>
                     <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
-                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6" class="h-4 w-4 rotate-90">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
                       </svg>
                     </a>
@@ -87,7 +87,7 @@
                 {%- if paginate.next -%}
                   <li>
                     <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}" >
-                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6" class="w-4 h-4 -rotate-90">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
                       </svg>
                     </a>
