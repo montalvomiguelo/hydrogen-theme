@@ -6,47 +6,47 @@
     </a>
   </div>
 
-  <div class="w-full">
+  <div class="w-full lg:grid grid-cols-[1fr_auto] gap-8">
     <div>
       <h2 class="text-lead font-heading font-heading-weight pb-6">{{ 'customer.orders.title' | t }}</h2>
 
       {% paginate customer.orders by 20 %}
         {%- if customer.orders.size > 0 -%}
-          <table role="table" class="w-full table-auto border-collapse">
+          <table role="table" class="w-full table-auto border-collapse border-b border-primary border-spacing-0">
             <caption class="sr-only">{{ 'customer.orders.title' | t }}</caption>
-            <thead role="rowgroup" class="hidden">
+            <thead role="rowgroup" class="hidden md:table-header-group">
               <tr role="row">
-                <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
-                <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
-                <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
-                <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
-                <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+                <th id="ColumnOrder" scope="col" role="columnheader" class="text-left p-4 md:border md:border-primary">{{ 'customer.orders.order_number' | t }}</th>
+                <th id="ColumnDate" scope="col" role="columnheader" class="text-left p-4 md:border md:border-primary">{{ 'customer.orders.date' | t }}</th>
+                <th id="ColumnPayment" scope="col" role="columnheader" class="text-left p-4 md:border md:border-primary">{{ 'customer.orders.payment_status' | t }}</th>
+                <th id="ColumnFulfillment" scope="col" role="columnheader" class="text-left p-4 md:border md:border-primary">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th id="ColumnTotal" scope="col" role="columnheader" class="text-left p-4 md:border md:border-primary">{{ 'customer.orders.total' | t }}</th>
               </tr>
             </thead>
             <tbody role="rowgroup">
               {%- for order in customer.orders -%}
-                <tr role="row" class="flex flex-col justify-start w-full border-t border-primary">
+                <tr role="row" class="flex flex-col justify-start w-full border-t border-primary md:table-row">
                   <td
                     id="RowOrder"
                     role="cell"
                     headers="ColumnOrder"
                     data-label="{{ 'customer.orders.order_number' | t }}"
-                    class="before:content-[attr(data-label)] before:grow flex items-center pt-6 pb-2"
+                    class="before:content-[attr(data-label)] before:grow flex items-center pt-6 pb-2 md:before:content-none md:table-cell md:p-4 md:border md:border-primary"
                   >
                     <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
                       {{ order.name }}
                     </a>
                   </td>
-                  <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2">
+                  <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2 md:before:content-none md:table-cell md:p-4 md:border md:border-primary">
                     {{ order.created_at | time_tag: format: 'date' }}
                   </td>
-                  <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2">
+                  <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2 md:before:content-none md:table-cell md:p-4 md:border md:border-primary">
                     {{ order.financial_status_label }}
                   </td>
-                  <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2">
+                  <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2 md:before:content-none md:table-cell md:p-4 md:border md:border-primary">
                     {{ order.fulfillment_status_label }}
                   </td>
-                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center pb-6 pt-2">
+                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center pb-6 pt-2 md:before:content-none md:table-cell md:p-4 md:border md:border-primary">
                     {{ order.total_price | money_with_currency }}</td>
                 </tr>
               {%- endfor -%}
@@ -101,11 +101,11 @@
     </div>
 
     <div>
-      <h2>{{ 'customer.account.details' | t }}</h2>
+      <h2 class="text-lead font-heading font-heading-weight my-6 lg:mt-0">{{ 'customer.account.details' | t }}</h2>
 
       {{ customer.default_address | format_address }}
 
-      <a href="{{ routes.account_addresses_url }}">
+      <a class="block w-fit mt-6" href="{{ routes.account_addresses_url }}">
         {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
       </a>
     </div>
