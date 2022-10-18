@@ -20,7 +20,7 @@
                 <th id="ColumnDate" scope="col" role="columnheader" class="text-left p-4">{{ 'customer.orders.date' | t }}</th>
                 <th id="ColumnPayment" scope="col" role="columnheader" class="text-left p-4">{{ 'customer.orders.payment_status' | t }}</th>
                 <th id="ColumnFulfillment" scope="col" role="columnheader" class="text-left p-4">{{ 'customer.orders.fulfillment_status' | t }}</th>
-                <th id="ColumnTotal" scope="col" role="columnheader" class="text-left p-4">{{ 'customer.orders.total' | t }}</th>
+                <th id="ColumnTotal" scope="col" role="columnheader" class="text-right p-4">{{ 'customer.orders.total' | t }}</th>
               </tr>
             </thead>
             <tbody role="rowgroup">
@@ -46,7 +46,7 @@
                   <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center py-2 md:before:content-none md:table-cell md:p-4">
                     {{ order.fulfillment_status_label }}
                   </td>
-                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center pb-6 pt-2 md:before:content-none md:table-cell md:p-4">
+                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center pb-6 pt-2 md:before:content-none md:table-cell md:p-4 text-right">
                     {{ order.total_price | money_with_currency }}</td>
                 </tr>
               {%- endfor -%}

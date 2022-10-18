@@ -258,9 +258,9 @@
               <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center w-full py-2 md:table-cell md:before:content-none md:p-4 md:text-right">{{ order.total_duties | money }}</td>
             </tr>
           {%- endif -%}
-          <tr role="row" class="flex flex-col w-full md:table-row">
-            <td id="RowTotal" role="rowheader" scope="row" colspan="3" class="hidden md:table-cell md:p-4">{{ 'customer.order.total' | t }}</td>
-            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center w-full py-2 pb-6 md:table-cell md:before:content-none md:p-4 md:text-right">{{ order.total_price | money_with_currency }}</td>
+          <tr role="row" class="flex flex-col w-full md:table-row text-lead font-body-weight-bold">
+            <td id="RowTotal" role="rowheader" scope="row" colspan="3" class="hidden md:table-cell md:p-4 md:pt-0">{{ 'customer.order.total' | t }}</td>
+            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}" class="before:content-[attr(data-label)] before:grow flex items-center w-full py-2 pb-6 md:table-cell md:before:content-none md:p-4 md:pt-0 md:text-right">{{ order.total_price | money_with_currency }}</td>
           </tr>
         </tfoot>
       </table>
