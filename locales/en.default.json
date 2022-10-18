@@ -16,6 +16,7 @@
   "accessibility": {
     "skip_to_text": "Skip to content",
     "close": "Close",
+    "unit_price_separator": "per",
     "link_messages": {
       "new_window": "Opens in a new window."
     },
@@ -66,7 +67,8 @@
       "price": {
         "regular_price": "Regular price",
         "sale_price": "Sale price",
-        "from_price_html": "From {{ min_price }}"
+        "from_price_html": "From {{ min_price }}",
+        "unit_price": "Unit price"
       },
       "add_to_cart": "Add to cart",
       "sold_out": "Sold out",
@@ -97,6 +99,31 @@
     "log_out": "Log out",
     "order": {
       "discount": "Discount"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date_html": "Placed on {{ date }}",
+      "cancelled_html": "Order Cancelled on {{ date }}",
+      "cancelled_reason": "Reason: {{ reason }}",
+      "billing_address": "Billing Address",
+      "payment_status": "Payment Status",
+      "shipping_address": "Shipping Address",
+      "fulfillment_status": "Fulfillment Status",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "fulfilled_at_html": "Fulfilled {{ date }}",
+      "track_shipment": "Track shipment",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Carrier",
+      "tracking_number": "Tracking number",
+      "subtotal": "Subtotal",
+      "total_duties": "Duties"
     },
     "orders": {
       "title": "Order history",
