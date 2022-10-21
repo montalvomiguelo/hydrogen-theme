@@ -1,7 +1,7 @@
 {%- paginate customer.addresses by 5 -%}
   <div class="w-full max-w-xl mx-auto p-6 py-8 md:p-8 lg:p-12" data-customer-addresses>
     <h1 class="font-heading font-heading-weight text-heading text-center">{{ 'customer.addresses.title' | t }}</h1>
-    <a class="block w-fit mx-auto mt-10" href="{{ routes.account_url }}">
+    <a class="block w-fit mx-auto mt-4" href="{{ routes.account_url }}">
       {{ 'customer.account.return' | t }}
     </a>
 
