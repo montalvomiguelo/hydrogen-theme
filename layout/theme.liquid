@@ -71,6 +71,8 @@
       render 'vite-tag' with 'product.js'
     elsif request.page_type == 'cart'
       render 'vite-tag' with 'cart.js'
+    elsif request.page_type == 'customers/addresses'
+      render 'vite-tag' with 'addresses.js'
     endif
   -%}
 
