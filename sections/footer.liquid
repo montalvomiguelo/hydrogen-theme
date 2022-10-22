@@ -74,7 +74,7 @@
                   {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                   {%- render 'icon-caret' -%}
                 </button>
-                <ul id="CountryList" role="list" class="border-t-contrast/30 border-contrast/30 bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
+                <ul id="CountryList" role="list" class="border-t-contrast/30 bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
                   {% for country in localization.available_countries %}
                     <li tabindex="-1">
                       <a class="text-primary bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
