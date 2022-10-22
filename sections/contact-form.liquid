@@ -1,0 +1,83 @@
+<div class="w-full gap-4 md:gap-8 grid px-6 md:px-8 lg:px-12 border-none mb-24">
+  <div class="max-w-prose mx-auto w-full">
+    <h2 class="sr-only">{{ 'templates.contact.form.title' | t }}</h2>
+    {%- form 'contact', id: 'ContactForm', class: '' -%}
+      {%- if form.posted_successfully? -%}
+        <h2 class="text-lead mb-12" tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</h2>
+      {%- elsif form.errors -%}
+        <div class="">
+          <h2 class="text-lead text-red-500" role="alert" tabindex="-1" autofocus>{{ 'templates.contact.form.error_heading' | t }}</h2>
+        </div>
+        <ul class="list-disc list-inside text-red-500 mb-12" role="list">
+          <li>
+            <a href="#ContactForm-email" class="">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+      <div class="md:flex md:items-start gap-8">
+        <div class="grid gap-2 md:flex-grow">
+          <label class="block pb-2 w-full font-body-weight-bold text-lead" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+          <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+        </div>
+        <div class="grid gap-2 mt-10 md:flex-grow md:mt-0">
+          <label class="block pb-2 w-full font-body-weight-bold text-lead" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+          >
+          {%- if form.errors contains 'email' -%}
+            <p class="text-red-500" id="ContactForm-email-error">
+              <span class="sr-only">{{ 'accessibility.error' | t }}</span>
+              <span class="">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="grid gap-2 mt-10">
+        <label class="block pb-2 w-full font-body-weight-bold text-lead" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+        <input type="tel" id="ContactForm-phone" class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+      </div>
+      <div class="grid gap-2 mt-10">
+        <label class="" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+        <textarea
+          id="ContactForm-body"
+          class="rounded border border-white text-primary bg-primary bg-transparent bg-none appearance-none min-h-[100px]"
+          name="contact[{{ 'templates.contact.form.comment' | t }}]"
+        >
+          {{- form.body -}}
+        </textarea>
+      </div>
+      <div class="">
+        <button type="submit" class="mt-10 button bg-primary text-contrast w-full">
+          {{ 'templates.contact.form.send' | t }}
+        </button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
+}
+{% endschema %}
+
