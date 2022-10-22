@@ -47,10 +47,10 @@ window.Shopify.postLink = function (path, options) {
   document.body.removeChild(form)
 }
 
-window.Shopify.CountryProvinceSelector = function (country_domid, province_domid, options) {
-  this.countryEl = document.getElementById(country_domid)
-  this.provinceEl = document.getElementById(province_domid)
-  this.provinceContainer = document.getElementById(options.hideElement || province_domid)
+window.Shopify.CountryProvinceSelector = function (countryDomid, provinceDomid, options) {
+  this.countryEl = document.getElementById(countryDomid)
+  this.provinceEl = document.getElementById(provinceDomid)
+  this.provinceContainer = document.getElementById(options.hideElement || provinceDomid)
 
   window.Shopify.addListener(this.countryEl, 'change', window.Shopify.bind(this.countryHandler, this))
 
@@ -73,7 +73,7 @@ window.Shopify.CountryProvinceSelector.prototype = {
   },
 
   countryHandler: function (e) {
-    var opt = this.countryEl.options[this.countryEl.selectedIndex]
+    const opt = this.countryEl.options[this.countryEl.selectedIndex]
     const raw = opt.getAttribute('data-provinces')
     const provinces = JSON.parse(raw)
 
@@ -82,7 +82,7 @@ window.Shopify.CountryProvinceSelector.prototype = {
       this.provinceContainer.style.display = 'none'
     } else {
       for (let i = 0; i < provinces.length; i++) {
-        var opt = document.createElement('option')
+        const opt = document.createElement('option')
         opt.value = provinces[i][0]
         opt.innerHTML = provinces[i][1]
         this.provinceEl.appendChild(opt)
@@ -99,7 +99,7 @@ window.Shopify.CountryProvinceSelector.prototype = {
   },
 
   setOptions: function (selector, values) {
-    for (let i = 0, count = values.length; i < values.length; i++) {
+    for (let i = 0, count = values.length; i < count; i++) {
       const opt = document.createElement('option')
       opt.value = values[i]
       opt.innerHTML = values[i]

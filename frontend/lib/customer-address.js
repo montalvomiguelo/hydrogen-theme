@@ -12,7 +12,7 @@ const attributes = {
   confirmMessage: 'data-confirm-message'
 }
 
-export default class CustomerAddresses {
+class CustomerAddresses {
   constructor () {
     this.elements = this._getElements()
     if (Object.keys(this.elements).length === 0) return
@@ -90,3 +90,5 @@ export default class CustomerAddresses {
     }
   }
 }
+
+export default new CustomerAddresses()
