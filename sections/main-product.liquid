@@ -206,7 +206,7 @@
                 </noscript>
               {%- when 'buy_buttons' -%}
                 <div {{ block.shopify_attributes }}>
-                  <product-form class="mb-10" client:iddle>
+                  <product-form client:iddle>
                     <p class="text-red-500" role="alert" data-error-message hidden></p>
                     {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                       <input
@@ -215,7 +215,7 @@
                         value="{{ product.selected_or_first_available_variant.id }}"
                         disabled
                       >
-                      <div class="grid items-stretch gap-4">
+                      <div class="grid items-stretch [&_[aria-hidden]]:hidden [&_button[aria-disabled]]:background-red-500 mb-12 [&_.shopify-payment-button_>_div]:mt-4">
                         <button
                           type="submit"
                           name="add"
