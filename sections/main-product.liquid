@@ -96,6 +96,7 @@
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
+                      client:iddle
                     >
                       {%- for option in product.options_with_values -%}
                         <fieldset class="flex flex-wrap mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
@@ -130,6 +131,7 @@
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
+                      client:iddle
                     >
                       {%- for option in product.options_with_values -%}
                         <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
@@ -204,7 +206,7 @@
                 </noscript>
               {%- when 'buy_buttons' -%}
                 <div {{ block.shopify_attributes }}>
-                  <product-form class="mb-10">
+                  <product-form class="mb-10" client:iddle>
                     <p class="text-red-500" role="alert" data-error-message hidden></p>
                     {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                       <input
