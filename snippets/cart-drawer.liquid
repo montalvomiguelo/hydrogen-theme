@@ -138,7 +138,7 @@
             {%- endfor -%}
             <div class="empty:hidden" id="CartDrawer-CartErrors" role="alert"></div>
             {% if settings.show_cart_note %}
-              <cart-note>
+              <cart-note client:iddle>
                 <div class="grid gap-2 [.is-empty_&]:hidden">
                   <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
                   <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>

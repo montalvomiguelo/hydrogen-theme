@@ -37,11 +37,20 @@ function iddle () {
 export default function revive (islands) {
   const knownJsSrcRE = /([^/\\]+)\.((j|t)sx?|m[jt]s|vue|marko|svelte|astro)($|\?)/
   const paths = Object.keys(islands)
+  const observer = new window.MutationObserver(mutations => {
+    for (let i = 0; i < mutations.length; i++) {
+      const { addedNodes } = mutations[i]
+      for (let i = 0; i < addedNodes.length; i++) {
+        const node = addedNodes[i]
+
+        if (node.nodeType === 1) walk(node)
+      }
+    }
+  })
 
   async function walk (node) {
-    const tagName = node.tagName
-
     const path = paths.find(path => {
+      const tagName = node.tagName
       const name = path.match(knownJsSrcRE)[1].toUpperCase()
       return name === tagName
     })
@@ -71,4 +80,9 @@ export default function revive (islands) {
   }
 
   walk(document.body)
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  })
 }
