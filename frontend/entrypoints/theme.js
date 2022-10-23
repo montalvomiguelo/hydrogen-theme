@@ -1,13 +1,10 @@
 import 'vite/modulepreload-polyfill'
-import '@/components/localization-form'
-import '@/components/sticky-header'
-import '@/components/header-drawer'
-import '@/components/cart-drawer'
-import '@/components/quantity-input'
-import '@/components/cart-drawer-items'
-import '@/components/cart-remove-button'
-import '@/components/cart-note'
 import { onKeyUpEscape } from '@/lib/a11y'
+import revive from '@/lib/revive.js'
+
+const islands = import.meta.glob('@/components/**.js')
+
+revive(islands)
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
   summary.setAttribute('role', 'button')
