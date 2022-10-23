@@ -80,3 +80,20 @@ export function onKeyUpEscape (event) {
   summaryElement.setAttribute('aria-expanded', false)
   summaryElement.focus()
 }
+
+export function initDetails (summaries) {
+  summaries.forEach((summary) => {
+    summary.setAttribute('role', 'button')
+    summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'))
+
+    if (summary.nextElementSibling.getAttribute('id')) {
+      summary.setAttribute('aria-controls', summary.nextElementSibling.id)
+    }
+
+    summary.addEventListener('click', (event) => {
+      event.currentTarget.setAttribute('aria-expanded', !event.currentTarget.closest('details').hasAttribute('open'))
+    })
+
+    summary.parentElement.addEventListener('keyup', onKeyUpEscape)
+  })
+}

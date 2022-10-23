@@ -1,22 +1,9 @@
 import 'vite/modulepreload-polyfill'
-import { onKeyUpEscape } from '@/lib/a11y'
+import { initDetails } from '@/lib/a11y'
 import revive from '@/lib/revive.js'
 
 const islands = import.meta.glob('@/components/**.js')
+const summaries = document.querySelectorAll('[id^="Details-"] summary')
 
 revive(islands)
-
-document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
-  summary.setAttribute('role', 'button')
-  summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'))
-
-  if (summary.nextElementSibling.getAttribute('id')) {
-    summary.setAttribute('aria-controls', summary.nextElementSibling.id)
-  }
-
-  summary.addEventListener('click', (event) => {
-    event.currentTarget.setAttribute('aria-expanded', !event.currentTarget.closest('details').hasAttribute('open'))
-  })
-
-  summary.parentElement.addEventListener('keyup', onKeyUpEscape)
-})
+initDetails(summaries)
