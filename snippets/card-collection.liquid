@@ -22,7 +22,7 @@
             {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
             {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w"
           src="{{ card_collection.featured_image | image_url: width: 1500 }}"
-          sizes="(max-width: 32em) 100vw, 33vw"
+          sizes="(max-width: 32em) 70vw, 33vw"
           alt="{{ card_collection.title | escape }}"
           height="{{ card_collection.featured_image.height }}"
           width="{{ card_collection.featured_image.width }}"
