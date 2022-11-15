@@ -65,7 +65,7 @@
 
   {%- liquid
     render 'vite-client'
-    render 'vite-tag' with 'theme.css'
+    render 'vite-tag' with 'theme.css', preload_stylesheet: true
     render 'vite-tag' with 'theme.js'
   -%}
 
