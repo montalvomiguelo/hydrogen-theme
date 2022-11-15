@@ -6,7 +6,7 @@ Hydrogen Shopify Theme is a theme framework that you can use to build Shopify th
 
 * [Node.js (latest LTS version)](https://nodejs.org/en/)
 * [pnpm](https://pnpm.io/)
-* [Shopify CLI 2.x](https://shopify.dev/themes/tools/cli)
+* [Shopify CLI](https://shopify.dev/themes/tools/cli)
 
 ## Directory Structure
 
@@ -41,11 +41,11 @@ pnpm install
 pnpm dev
 ```
 
-> **Note**: This server is not your theme server. It is the server that vite uses to process your assets, such as scripts or stylesheets. You still need to serve your theme using the Shopify CLI 2.x.
+> **Note**: This server is not your theme server. It is the server that vite uses to process your assets, such as scripts or stylesheets. You still need to serve your theme using the Shopify CLI.
 
 ```bash
 # Serve your theme
-shopify theme serve
+shopify theme dev
 ```
 
 ## Production
