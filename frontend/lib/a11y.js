@@ -81,7 +81,7 @@ export function onKeyUpEscape (event) {
   summaryElement.focus()
 }
 
-export function initDetails (summaries) {
+export function initDisclosureWidgets (summaries) {
   summaries.forEach((summary) => {
     summary.setAttribute('role', 'button')
     summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'))
