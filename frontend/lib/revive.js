@@ -72,8 +72,8 @@ export default function revive (islands) {
       islands[path]()
     }
 
-    const nextSibling = node.nextSibling
-    const firstChild = node.firstChild
+    const nextSibling = node.nextElementSibling
+    const firstChild = node.firstElementChild
 
     if (nextSibling) walk(nextSibling)
     if (firstChild) walk(firstChild)
