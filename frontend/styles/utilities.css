@@ -17,3 +17,10 @@
     box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast));
   }
 }
+
+.hidden-scroll {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
