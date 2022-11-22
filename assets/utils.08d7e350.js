@@ -1,0 +1,1 @@
+function i(t="json"){return{method:"POST",headers:{"Content-Type":"application/json",Accept:`application/${t}`}}}function a(t,n){let e;return(...o)=>{clearTimeout(e),e=setTimeout(()=>t.apply(this,o),n)}}export{a as d,i as f};

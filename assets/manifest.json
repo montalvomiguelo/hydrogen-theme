@@ -1,0 +1,135 @@
+{
+  "frontend/entrypoints/theme.js": {
+    "file": "theme.7e7f7c29.js",
+    "src": "frontend/entrypoints/theme.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "frontend/islands/cart-drawer-items.js",
+      "frontend/islands/cart-drawer.js",
+      "frontend/islands/cart-items.js",
+      "frontend/islands/cart-note.js",
+      "frontend/islands/cart-remove-button.js",
+      "frontend/islands/details-disclosure.js",
+      "frontend/islands/details-modal.js",
+      "frontend/islands/header-drawer.js",
+      "frontend/islands/localization-form.js",
+      "frontend/islands/product-form.js",
+      "frontend/islands/product-recommendations.js",
+      "frontend/islands/quantity-input.js",
+      "frontend/islands/sticky-header.js",
+      "frontend/islands/variant-radios.js",
+      "frontend/islands/variant-selects.js"
+    ]
+  },
+  "frontend/islands/cart-drawer-items.js": {
+    "file": "cart-drawer-items.bada4b9f.js",
+    "src": "frontend/islands/cart-drawer-items.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "frontend/islands/cart-items.js",
+      "_utils.08d7e350.js",
+      "frontend/entrypoints/theme.js"
+    ]
+  },
+  "frontend/islands/cart-items.js": {
+    "file": "cart-items.841ac537.js",
+    "src": "frontend/islands/cart-items.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils.08d7e350.js",
+      "frontend/entrypoints/theme.js"
+    ]
+  },
+  "_utils.08d7e350.js": {
+    "file": "utils.08d7e350.js"
+  },
+  "frontend/islands/cart-drawer.js": {
+    "file": "cart-drawer.d56b4e23.js",
+    "src": "frontend/islands/cart-drawer.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "frontend/entrypoints/theme.js"
+    ]
+  },
+  "frontend/islands/cart-note.js": {
+    "file": "cart-note.84ee80e4.js",
+    "src": "frontend/islands/cart-note.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils.08d7e350.js"
+    ]
+  },
+  "frontend/islands/cart-remove-button.js": {
+    "file": "cart-remove-button.026b711f.js",
+    "src": "frontend/islands/cart-remove-button.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/details-disclosure.js": {
+    "file": "details-disclosure.0f5e0452.js",
+    "src": "frontend/islands/details-disclosure.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/details-modal.js": {
+    "file": "details-modal.869c078c.js",
+    "src": "frontend/islands/details-modal.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "frontend/entrypoints/theme.js"
+    ]
+  },
+  "frontend/islands/header-drawer.js": {
+    "file": "header-drawer.52c8a38b.js",
+    "src": "frontend/islands/header-drawer.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "frontend/entrypoints/theme.js",
+      "frontend/islands/details-modal.js"
+    ]
+  },
+  "frontend/islands/localization-form.js": {
+    "file": "localization-form.8afaa82f.js",
+    "src": "frontend/islands/localization-form.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/product-form.js": {
+    "file": "product-form.6271c450.js",
+    "src": "frontend/islands/product-form.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils.08d7e350.js"
+    ]
+  },
+  "frontend/islands/product-recommendations.js": {
+    "file": "product-recommendations.59c2b40d.js",
+    "src": "frontend/islands/product-recommendations.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/quantity-input.js": {
+    "file": "quantity-input.c016a8a7.js",
+    "src": "frontend/islands/quantity-input.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/sticky-header.js": {
+    "file": "sticky-header.f66d012e.js",
+    "src": "frontend/islands/sticky-header.js",
+    "isDynamicEntry": true
+  },
+  "frontend/islands/variant-radios.js": {
+    "file": "variant-radios.9b760452.js",
+    "src": "frontend/islands/variant-radios.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "frontend/islands/variant-selects.js"
+    ]
+  },
+  "frontend/islands/variant-selects.js": {
+    "file": "variant-selects.000ea3b2.js",
+    "src": "frontend/islands/variant-selects.js",
+    "isDynamicEntry": true
+  },
+  "frontend/entrypoints/theme.css": {
+    "file": "theme.856128a9.css",
+    "src": "frontend/entrypoints/theme.css",
+    "isEntry": true
+  }
+}

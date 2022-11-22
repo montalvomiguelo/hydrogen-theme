@@ -1,0 +1,1 @@
+class o extends window.HTMLElement{connectedCallback(){fetch(this.dataset.url).then(e=>e.text()).then(e=>{const t=document.createElement("div");t.innerHTML=e;const n=t.querySelector("product-recommendations");n&&n.innerHTML.trim().length&&(this.innerHTML=n.innerHTML)}).catch(e=>{console.error(e)})}}window.customElements.define("product-recommendations",o);

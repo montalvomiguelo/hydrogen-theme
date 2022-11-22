@@ -1,0 +1,1 @@
+class e extends window.HTMLElement{constructor(){super(),this.addEventListener("click",t=>{t.preventDefault(),(this.closest("cart-items")||this.closest("cart-drawer-items")).updateQuantity(this.dataset.index,0)})}}window.customElements.define("cart-remove-button",e);
