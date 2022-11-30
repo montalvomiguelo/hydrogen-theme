@@ -1,0 +1,117 @@
+<div id="Banner-{{ section.id }}" class="flex relative flex-wrap w-full">
+  <div class="min-h-[34rem] flex relative justify-center items-center w-full">
+    <div class="h-fit text-center px-6 md:px-8 lg:px-12 flex flex-col items-center gap-4 w-full">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h2 class="font-heading font-heading-weight text-heading" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+          {%- when 'paragraph' -%}
+            <div class="text-lead" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- when 'email_form' -%}
+            <div class="w-full max-w-[335px]" {{ block.shopify_attributes }}>
+              {% form 'customer', class: '' %}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="w-full">
+                  <div class="relative flex w-full">
+                    <input
+                      id="NewsletterForm--{{ section.id }}"
+                      type="email"
+                      name="contact[email]"
+                      class="border rounded border-white py-3 px-4 pr-16 bg-transparent bg-none appearance-none placeholder:text-white w-full"
+                      value="{{ form.email }}"
+                      aria-required="true"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      {% if form.errors %}
+                        autofocus
+                        aria-invalid="true"
+                        aria-describedby="Newsletter-error--{{ section.id }}"
+                      {% elsif form.posted_successfully? %}
+                        aria-describedby="Newsletter-success--{{ section.id }}"
+                      {% endif %}
+                      placeholder="{{ 'newsletter.label' | t }}"
+                      required
+                    >
+                    <label class="sr-only" for="NewsletterForm--{{ section.id }}">
+                      {{ 'newsletter.label' | t }}
+                    </label>
+                    <button type="submit" class="absolute right-0 top-0 bottom-0 h-full pr-4 pl-4 flex items-center jutify-center" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                      {% render 'icon-arrow' %}
+                    </button>
+                  </div>
+                  {%- if form.errors -%}
+                    <small class="" id="Newsletter-error--{{ section.id }}">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                  {%- endif -%}
+                </div>
+                {%- if form.posted_successfully? -%}
+                  <h3 class="" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+                {%- endif -%}
+              {% endform %}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Email signup banner",
+  "tag": "section",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Opening soon",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Be the first to know when we launch.</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "email_form",
+      "name": "Email signup banner",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email signup banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "paragraph"
+        },
+        {
+          "type": "email_form"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    "password"
+  ]
+}
+{% endschema %}

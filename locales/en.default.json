@@ -1,5 +1,15 @@
 {
   "general": {
+    "password_page": {
+      "login_form_heading": "Enter store using password:",
+      "login_password_button": "Enter using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_error": "Wrong password!",
+      "login_form_submit": "Enter",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    },
     "pagination": {
       "label": "Pagination",
       "page": "Page {{ number }}",
@@ -12,6 +22,11 @@
       "no_results_html": "Your search for \"{{ terms }}\" did not yield any results."
     },
     "continue_shopping": "Continue shopping"
+  },
+  "newsletter": {
+    "label": "Email",
+    "success": "Thanks for subscribing",
+    "button_label": "Subscribe"
   },
   "accessibility": {
     "skip_to_text": "Skip to content",
