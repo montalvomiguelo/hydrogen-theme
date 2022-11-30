@@ -21,7 +21,7 @@ node_modules
 dist
 dist-ssr
 *.local
-assets
+assets/*
 !assets/.gitkeep
 vite-tag.liquid
 vite-client.liquid
