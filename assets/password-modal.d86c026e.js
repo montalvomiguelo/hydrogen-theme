@@ -1,0 +1,1 @@
+import e from"./details-modal.04d63a0f.js";import"./theme.757bf8cb.js";class t extends e{constructor(){super(),this.querySelector('input[aria-invalid="true"]')&&this.open({target:this.querySelector("details")})}}window.customElements.define("password-modal",t);
