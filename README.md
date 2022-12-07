@@ -2,6 +2,14 @@
 
 Hydrogen Shopify Theme is a theme framework that you can use to build Shopify themes with OS 2.0 features and performance in mind.
 
+## Features
+
+* ⚡️ Seamless integration with Vite
+* 💄 Tailwind CSS for styling
+* 🏝 Islands architecture
+* ✨ Web components
+* 🚀 Production-ready scores in Lighthouse and PageSpeed Insights reports
+
 ## Requirements
 
 * [Node.js (latest LTS version)](https://nodejs.org/en/)
@@ -10,22 +18,26 @@ Hydrogen Shopify Theme is a theme framework that you can use to build Shopify th
 
 ## Directory Structure
 
+This theme leverages the [default Shopify theme folder structure](https://shopify.dev/themes/tools/github#repository-structure) and adds 2 directories that have special behaviors.
+
 ```bash
 └── project
-    ├── assets
-    ├── config
-    ├── frontend
-    │   └── entrypoints
-    │       └── # only Vite entry files here
-    ├── layout
-    ├── locales
-    ├── sections
-    ├── snippets
-    └── templates
-        └── customers
+    └── frontend
+        ├── entrypoints
+        │   └── # oly Vite entry files here
+        └── islands
+            └── # all of the interactive islands in your project
 ```
 
 Look at [vite-plugin-shopify](https://github.com/barrel/barrel-shopify/tree/main/packages/vite-plugin-shopify) to learn more.
+
+## Hydration Directives
+
+The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
+
+* `client:iddle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
+* `client:visible` Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+* `client:media` Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
 
 ## Setup
 
