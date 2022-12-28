@@ -54,7 +54,7 @@
             <noscript>
               {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
                 <div class="relative">
-                  <select class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" name="country_code" aria-labelledby="CountryListLabel">
+                  <select class="block w-full text-field" name="country_code" aria-labelledby="CountryListLabel">
                     {%- for country in localization.available_countries -%}
                       <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
                         {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
