@@ -1,0 +1,1 @@
+import e from"./cart-items-558a4e4b.js";import"./utils-3b9fa9c2.js";import"./theme-09b1c8a8.js";class t extends e{getSectionsToRender(){return[{id:"CartDrawer",section:"cart-drawer",selector:'[tabindex="-1"]'},{id:"cart-icon-bubble",section:"cart-icon-bubble",selector:".shopify-section"}]}}window.customElements.define("cart-drawer-items",t);
