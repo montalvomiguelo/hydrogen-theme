@@ -57,7 +57,7 @@ pnpm dev
 
 ```bash
 # Serve your theme
-shopify theme dev
+shopify theme dev --live-reload full-page
 ```
 
 ## Production
