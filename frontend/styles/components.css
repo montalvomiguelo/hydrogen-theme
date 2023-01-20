@@ -40,3 +40,7 @@
 .text-field {
   @apply py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none;
 }
+
+.field-label {
+  @apply block pb-2 w-full font-body-weight-bold text-lead;
+}
