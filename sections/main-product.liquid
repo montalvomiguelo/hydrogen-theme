@@ -100,7 +100,7 @@
                     >
                       {%- for option in product.options_with_values -%}
                         <fieldset class="flex flex-wrap mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
-                          <legend class="block pb-2 w-full font-body-weight-bold text-lead">{{ option.name }}</legend>
+                          <legend class="field-label">{{ option.name }}</legend>
                           {%- for value in option.values -%}
                             <div>
                               <input
@@ -135,13 +135,13 @@
                     >
                       {%- for option in product.options_with_values -%}
                         <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
-                          <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                          <label class="field-label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
                             {{ option.name }}
                           </label>
                           <div class="relative">
                             <select
                               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                              class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                              class="block w-full text-field"
                               name="options[{{ option.name | escape }}]"
                               form="{{ product_form_id }}"
                             >
@@ -172,14 +172,14 @@
 
                 <noscript class="mb-10">
                   <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
-                    <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Variants-{{ section.id }}">
+                    <label class="field-label" for="Variants-{{ section.id }}">
                       {{- 'products.product.product_variants' | t -}}
                     </label>
                     <div class="relative">
                       <select
                         name="id"
                         id="Variants-{{ section.id }}"
-                        class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                        class="block w-full text-field"
                         form="{{ product_form_id }}"
                       >
                         {%- for variant in product.variants -%}

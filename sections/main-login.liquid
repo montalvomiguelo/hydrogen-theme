@@ -10,14 +10,14 @@
     {%- form 'recover_customer_password' -%}
       {% assign recover_success = form.posted_successfully? %}
       <div class="grid gap-2 mt-10">
-        <label for="RecoverEmail" class="block pb-2 w-full font-body-weight-bold text-lead">
+        <label for="RecoverEmail" class="field-label">
           {{ 'customer.login_page.email' | t }}
         </label>
         <input type="email"
           value=""
           name="email"
           id="RecoverEmail"
-          class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+          class="text-field"
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
@@ -71,14 +71,14 @@
       {%- endif -%}
 
       <div class="grid gap-2">
-        <label for="CustomerEmail" class="block pb-2 w-full font-body-weight-bold text-lead">
+        <label for="CustomerEmail" class="field-label">
           {{ 'customer.login_page.email' | t }}
         </label>
         <input
           type="email"
           name="customer[email]"
           id="CustomerEmail"
-          class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+          class="text-field"
           autocomplete="email"
           autocorrect="off"
           autocapitalize="off"
@@ -90,7 +90,7 @@
 
       {%- if form.password_needed -%}
         <div class="grid gap-2 mt-8">
-          <label for="CustomerPassword" class="block pb-2 w-full font-body-weight-bold text-lead">
+          <label for="CustomerPassword" class="field-label">
             {{ 'customer.login_page.password' | t }}
           </label>
           <input
@@ -98,7 +98,7 @@
             value=""
             name="customer[password]"
             id="CustomerPassword"
-            class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+            class="text-field"
             autocomplete="current-password"
             {% if form.errors contains 'form' %}
               aria-invalid="true"
