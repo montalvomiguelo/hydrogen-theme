@@ -9,7 +9,7 @@ specifiers:
   standard: ^17.0.0
   tailwindcss: ^3.1.8
   vite: ^4.0.0
-  vite-plugin-shopify: ^0.0.11
+  vite-plugin-shopify: ^0.0.12
 
 devDependencies:
   '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.8
@@ -20,7 +20,7 @@ devDependencies:
   standard: 17.0.0
   tailwindcss: 3.1.8_postcss@8.4.16
   vite: 4.0.4
-  vite-plugin-shopify: 0.0.11_vite@4.0.4
+  vite-plugin-shopify: 0.0.12_vite@4.0.4
 
 packages:
 
@@ -2120,8 +2120,8 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /vite-plugin-shopify/0.0.11_vite@4.0.4:
-    resolution: {integrity: sha512-xi46KKQzrIQkzJ07HWko18wkG5YDj9IbqAKamd8t7tYPfwsEACqhcDGYrFzMR9rdUivvaeHAm0nns14AqAXTVA==}
+  /vite-plugin-shopify/0.0.12_vite@4.0.4:
+    resolution: {integrity: sha512-/RujlhPJPkcDqg4PgEmQ0peU5sGQmN/cdmcusySRlCYxHrlRWtFDn8cRDzS3UxvdWqJFYwOCW9es9FbcfK8vkQ==}
     peerDependencies:
       vite: ^4.0.4
     dependencies:
