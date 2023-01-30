@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) Miguel Montalvo <https://github.com/montalvomiguelo>
+Copyright (c) Miguel Montalvo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
