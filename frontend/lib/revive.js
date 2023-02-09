@@ -24,7 +24,7 @@ function visible ({ element }) {
   })
 }
 
-function iddle () {
+function idle () {
   return new Promise(function (resolve) {
     if ('requestIdleCallback' in window) {
       window.requestIdleCallback(resolve)
@@ -65,8 +65,8 @@ export default function revive (islands) {
         await media({ query: clientMedia })
       }
 
-      if (node.hasAttribute('client:iddle')) {
-        await iddle()
+      if (node.hasAttribute('client:idle')) {
+        await idle()
       }
 
       islands[path]()

@@ -5,7 +5,7 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-<cart-drawer class="absolute invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}" client:iddle>
+<cart-drawer class="absolute invisible [.active&]:visible transition-[visibility] duration-300{% if cart == empty %} is-empty{% endif %}" client:idle>
   <div id="CartDrawer" class="fixed inset-0 h-full w-screen z-20 flex justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 bg-black/25 hidden [.active_&]:block"></div>
     <div class="relative max-w-lg w-full bg-contrast h-full overflow-y-auto flex flex-col transition-transform duration-300 translate-x-full [.active_&]:translate-x-0" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
@@ -20,7 +20,7 @@
           <p class="text-copy">{{ 'sections.cart.empty' | t }}</p>
         </div>
       {%- endif -%}
-      <cart-drawer-items{% if cart == empty %} class="is-empty"{% endif %} client:iddle>
+      <cart-drawer-items{% if cart == empty %} class="is-empty"{% endif %} client:idle>
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" method="post">
           <div id="CartDrawer-CartItems" class="px-6 pb-6 sm-max:pt-2 md:px-12 grid gap-6 md:gap-10 [.loading&]:pointer-events-none">
             {%- for item in cart.items -%}
@@ -86,7 +86,7 @@
                     {%- endif -%}
 
                     <div class="flex items-center gap-2">
-                      <quantity-input class="max-w-[107px] flex border rounded min-h-[theme(spacing.10)]" client:iddle>
+                      <quantity-input class="max-w-[107px] flex border rounded min-h-[theme(spacing.10)]" client:idle>
                         <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0" type="button" name="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}">
                           &#8722;
                         </button>
@@ -138,7 +138,7 @@
             {%- endfor -%}
             <div class="empty:hidden" id="CartDrawer-CartErrors" role="alert"></div>
             {% if settings.show_cart_note %}
-              <cart-note client:iddle>
+              <cart-note client:idle>
                 <div class="grid gap-2 [.is-empty_&]:hidden">
                   <label class="text-primary text-copy" for="Note">{{ 'sections.cart.note' | t }}</label>
                   <textarea class="rounded border text-contrast bg-primary min-h-[100px]" name="note" id="Note" data-cart-note>{{ cart.note }}</textarea>

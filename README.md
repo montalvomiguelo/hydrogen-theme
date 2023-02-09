@@ -24,7 +24,7 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
 └── project
     └── frontend
         ├── entrypoints
-        │   └── # oly Vite entry files here
+        │   └── # only Vite entry files here
         └── islands
             └── # all of the interactive islands in your project
 ```
@@ -35,7 +35,7 @@ Look at [vite-plugin-shopify](https://github.com/barrel/barrel-shopify/tree/main
 
 The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
 
-* `client:iddle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
+* `client:idle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
 * `client:visible` Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 * `client:media` Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
 
