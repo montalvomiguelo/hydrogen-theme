@@ -34,9 +34,9 @@ function idle () {
   })
 }
 
-export default function revive (islands) {
-  const knownJsSrcRE = /([^/\\]+)\.((j|t)sx?|m[jt]s|vue|marko|svelte|astro)($|\?)/
-  const paths = Object.keys(islands)
+export const islands = import.meta.glob('@/islands/*.js')
+
+export function revive (islands) {
   const observer = new window.MutationObserver(mutations => {
     for (let i = 0; i < mutations.length; i++) {
       const { addedNodes } = mutations[i]
@@ -49,13 +49,11 @@ export default function revive (islands) {
   })
 
   async function walk (node) {
-    const path = paths.find(path => {
-      const tagName = node.tagName
-      const name = path.match(knownJsSrcRE)[1].toUpperCase()
-      return name === tagName
-    })
+    const tagName = node.tagName.toLowerCase()
+    const potentialJsPath = `/frontend/islands/${tagName}.js`
+    const isPotentialCustomElementName = /-/.test(tagName)
 
-    if (path) {
+    if (isPotentialCustomElementName && islands[potentialJsPath]) {
       if (node.hasAttribute('client:visible')) {
         await visible({ element: node })
       }
@@ -69,13 +67,13 @@ export default function revive (islands) {
         await idle()
       }
 
-      islands[path]()
+      islands[potentialJsPath]()
     }
 
-    const nextSibling = node.nextElementSibling
+    const sibling = node.nextElementSibling
     const firstChild = node.firstElementChild
 
-    if (nextSibling) walk(nextSibling)
+    if (sibling) walk(sibling)
     if (firstChild) walk(firstChild)
   }
 
