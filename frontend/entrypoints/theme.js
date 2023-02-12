@@ -6,8 +6,3 @@ const summaries = document.querySelectorAll('[id^="Details-"] summary')
 
 revive(islands)
 initDisclosureWidgets(summaries)
-
-if (window.decodeURI(window.location.pathname) === '/account/addresses') {
-  import('@/lib/shopify_common')
-  import('@/lib/customer-address')
-}

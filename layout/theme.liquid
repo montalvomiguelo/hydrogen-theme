@@ -66,6 +66,9 @@
   {%- liquid
     render 'vite-tag' with 'theme.css', preload_stylesheet: true
     render 'vite-tag' with 'theme.js'
+    if request.page_type contains 'customers/'
+      render 'vite-tag' with 'customers.js'
+    endif
   -%}
 
   {{ content_for_header }}
