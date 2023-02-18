@@ -8,7 +8,7 @@ specifiers:
   postcss-import: ^14.1.0
   standard: ^17.0.0
   tailwindcss: ^3.1.8
-  vite: ^4.1.1
+  vite: ^4.1.2
   vite-plugin-shopify: ^0.0.13
 
 devDependencies:
@@ -19,8 +19,8 @@ devDependencies:
   postcss-import: 14.1.0_postcss@8.4.16
   standard: 17.0.0
   tailwindcss: 3.1.8_postcss@8.4.16
-  vite: 4.1.1
-  vite-plugin-shopify: 0.0.13_vite@4.1.1
+  vite: 4.1.2
+  vite-plugin-shopify: 0.0.13_vite@4.1.2
 
 packages:
 
@@ -2120,20 +2120,20 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /vite-plugin-shopify/0.0.13_vite@4.1.1:
+  /vite-plugin-shopify/0.0.13_vite@4.1.2:
     resolution: {integrity: sha512-noFVXP7T9gvnBBNnS1wA8dvjruogWRf4mYsKytUR1QTXDcVuk9O0ObZzGZ7ZBhU1QRBhFVOmUlFzCmU6+QeoGw==}
     peerDependencies:
       vite: ^4.0.4
     dependencies:
       debug: 4.3.4
       fast-glob: 3.2.11
-      vite: 4.1.1
+      vite: 4.1.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/4.1.1:
-    resolution: {integrity: sha512-LM9WWea8vsxhr782r9ntg+bhSFS06FJgCvvB0+8hf8UWtvaiDagKYWXndjfX6kGl74keHJUcpzrQliDXZlF5yg==}
+  /vite/4.1.2:
+    resolution: {integrity: sha512-MWDb9Rfy3DI8omDQySbMK93nQqStwbsQWejXRY2EBzEWKmLAXWb1mkI9Yw2IJrc+oCvPCI1Os5xSSIBYY6DEAw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
