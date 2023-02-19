@@ -96,6 +96,6 @@ We would like to specifically thank the following projects for the inspiration a
 
 ## License
 
-[MIT](https://github.com/montalvomiguelo/hydrogen-theme/blob/main/LICENSE.md).
+This project is licensed under the [MIT License](https://github.com/montalvomiguelo/hydrogen-theme/blob/main/LICENSE.md).
 
 
