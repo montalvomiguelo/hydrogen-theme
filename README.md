@@ -23,14 +23,19 @@ Hydrogen Theme is a framework for building unparalleled performant storefronts o
 
 ## Directory Structure
 
-This theme leverages the [default Shopify theme folder structure](https://shopify.dev/themes/tools/github#repository-structure) and adds two directories containing your theme entry points and islands.
+This theme leverages the [default Shopify theme folder structure](https://shopify.dev/themes/tools/github#repository-structure) and introduces the following directories, some of which have special behaviors.
 ```bash
-└── project
+└── hydrogen-theme
     └── frontend
         ├── entrypoints
         │   └── # only Vite entry files here
-        └── islands
-            └── # all of the interactive islands in your project
+        ├── islands
+        │   └── # the interactive islands in your theme
+        │       # filenames should match custom element names defined in them
+        ├── lib
+        │   └── # theme specific libraries
+        └── styles
+            └── # the styles of your theme
 ```
 
 ## Setup
