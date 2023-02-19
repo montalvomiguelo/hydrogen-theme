@@ -1,14 +1,19 @@
-# Hydrogen Shopify Theme
+# ⚡️ Hydrogen Shopify Theme
 
-Hydrogen Shopify Theme is a theme framework that you can use to build Shopify themes with OS 2.0 features and performance in mind.
+[![Build status](https://github.com/montalvomiguelo/hydrogen-theme/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/montalvomiguelo/hydrogen-theme/actions/workflows/ci.yml?query=branch%3Amain)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/montalvomiguelo/hydrogen-theme/blob/main/LICENSE.md)
+
+Hydrogen Shopify Theme is a framework for building unparalleled performant storefronts on Shopify and Online Store 2.0. 
 
 ## Features
 
-* ⚡️ Seamless integration with Vite
-* 💄 Tailwind CSS for styling
-* 🏝 Islands architecture
-* ✨ Web components
-* 🚀 Production-ready scores in Lighthouse and PageSpeed Insights reports
+* 👨‍💻 __Best-in-class DX__ - instant reloading powered by [vite-plugin-shopify](https://github.com/barrel/barrel-shopify/tree/main/packages/vite-plugin-shopify)
+* 🔋 __Batteries included__ - quality theme files ported over from [Dawn](https://github.com/Shopify/dawn)
+* ✨ __Web-native in its purest form__ - [it focuses on evergreen browsers](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#web-native-in-its-purest-form)
+* 🏝 __Islands architecture__ - zero JS by default, [hydrates the interactive bits](https://www.patterns.dev/posts/islands-architecture/)
+* 💄 __Integration with Tailwind CSS__ - for styling
+* 🚀 __Production-ready scores__ - as measured in Lighthouse and [PageSpeed Insights](https://pagespeed.web.dev/report?url=https%3A%2F%2Fmontalvomiguelo.myshopify.com%2F)
+
 
 ## Requirements
 
@@ -18,8 +23,7 @@ Hydrogen Shopify Theme is a theme framework that you can use to build Shopify th
 
 ## Directory Structure
 
-This theme leverages the [default Shopify theme folder structure](https://shopify.dev/themes/tools/github#repository-structure) and adds 2 directories that have special behaviors.
-
+This theme leverages the [default Shopify theme folder structure](https://shopify.dev/themes/tools/github#repository-structure) and adds two directories containing your theme entry points and islands.
 ```bash
 └── project
     └── frontend
@@ -28,16 +32,6 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
         └── islands
             └── # all of the interactive islands in your project
 ```
-
-Look at [vite-plugin-shopify](https://github.com/barrel/barrel-shopify/tree/main/packages/vite-plugin-shopify) to learn more.
-
-## Hydration Directives
-
-The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
-
-* `client:idle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
-* `client:visible` Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
-* `client:media` Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
 
 ## Setup
 
@@ -52,11 +46,8 @@ pnpm install
 # Start the vite server on http://localhost:5173
 pnpm dev
 ```
-
-> **Note**: This server is not your theme server. It is the server that vite uses to process your assets, such as scripts or stylesheets. You still need to serve your theme using the Shopify CLI.
-
 ```bash
-# Serve your theme
+# Serve your theme using the Shopify CLI
 shopify theme dev --live-reload full-page
 ```
 
@@ -73,4 +64,33 @@ shopify theme push
 ```
 
 Checkout [Build Shopify themes](https://shopify.dev/themes) for more information.
+
+
+## Hydration Directives
+
+The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
+
+* `client:idle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
+* `client:visible` Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+* `client:media` Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
+
+
+```html
+<is-land client:visible>This is an island.</is-land>
+```
+
+## Thanks
+
+We would like to specifically thank the following projects for the inspiration and help regarding the creation of hydrogen-theme:
+
+* [hydrogen](https://github.com/Shopify/hydrogen)
+* [Dawn](https://github.com/Shopify/dawn)
+* [astro](https://github.com/withastro/astro)
+* [iles](https://github.com/ElMassimo/iles)
+* [fresh](https://github.com/denoland/fresh)
+
+## License
+
+[MIT](https://github.com/montalvomiguelo/hydrogen-theme/blob/main/LICENSE.md).
+
 
