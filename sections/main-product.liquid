@@ -68,7 +68,7 @@
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'price' -%}
-                <div class="[.no-js]:hidden [.product-header_+_&]:-mt-6" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                <div class="no-js:hidden [.product-header_+_&]:-mt-6" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price', product: product, use_variant: true, price_class: 'mb-10' -%}
                 </div>
               {%- when 'tab' -%}
@@ -92,7 +92,7 @@
                 {%- unless product.has_only_default_variant -%}
                   {%- if block.settings.picker_type == 'button' -%}
                     <variant-radios
-                      class="[.no-js_&]:hidden grid gap-4 mb-10"
+                      class="no-js:hidden grid gap-4 mb-10"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
@@ -127,7 +127,7 @@
                     </variant-radios>
                   {%- else -%}
                     <variant-selects
-                      class="[.no-js_&]:hidden grid gap-4 mb-10"
+                      class="no-js:hidden grid gap-4 mb-10"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}

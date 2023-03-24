@@ -81,7 +81,7 @@
 
                       <div class="flex items-center gap-2">
                         <quantity-input class="max-w-[107px] flex border rounded min-h-[theme(spacing.10)]">
-                          <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0 [.no-js_&]:hidden" type="button" name="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}">
+                          <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0 no-js:hidden" type="button" name="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}">
                             &#8722;
                           </button>
                           <input class="p-0 w-full flex-grow bg-transparent border-0 text-center"
@@ -93,7 +93,7 @@
                             id="Quantity-{{ item.index | plus: 1 }}"
                             data-index="{{ item.index | plus: 1 }}"
                           >
-                          <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0 [.no-js_&]:hidden" type="button" name="plus" aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}">
+                          <button class="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait shrink-0 no-js:hidden" type="button" name="plus" aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}">
                             &#43;
                           </button>
                         </quantity-input>
