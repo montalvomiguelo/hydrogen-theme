@@ -8,7 +8,7 @@ Hydrogen Theme is a framework for building unparalleled performant storefronts o
 ## Features
 
 * 👨‍💻 __Best-in-class DX__ - instant reloading powered by [vite-plugin-shopify](https://github.com/barrel/barrel-shopify/tree/main/packages/vite-plugin-shopify)
-* 🔋 __Batteries included__ - quality theme files ported over from [Dawn](https://github.com/Shopify/dawn)
+* 🔋 __Batteries included__ - theme files ported over from [Dawn](https://github.com/Shopify/dawn)
 * ✨ __Web-native in its purest form__ - [it focuses on evergreen browsers](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#web-native-in-its-purest-form)
 * 🏝 __Islands architecture__ - zero JS by default, [hydrates the interactive bits](https://www.patterns.dev/posts/islands-architecture/)
 * 💄 __Integration with Tailwind CSS__ - for styling
@@ -31,7 +31,6 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
         │   └── # only Vite entry files here
         ├── islands
         │   └── # the interactive islands in your theme
-        │       # filenames should match custom element names defined in them
         ├── lib
         │   └── # theme specific libraries
         └── styles
