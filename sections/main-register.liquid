@@ -39,7 +39,7 @@
         name="customer[first_name]"
         id="RegisterForm-FirstName"
         {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
-        class="text-field"
+        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
         autocomplete="given-name"
       >
     </div>
@@ -51,7 +51,7 @@
         type="text"
         name="customer[last_name]"
         id="RegisterForm-LastName"
-        class="text-field"
+        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
         {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
         autocomplete="family-name"
       >
@@ -64,7 +64,7 @@
         type="email"
         name="customer[email]"
         id="RegisterForm-email"
-        class="text-field [&[aria-invalid]]:border-red-500"
+        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none [&[aria-invalid]]:border-red-500"
         {% if form.email %} value="{{ form.email }}"{% endif %}
         spellcheck="false"
         autocapitalize="off"
@@ -92,7 +92,7 @@
         type="password"
         name="customer[password]"
         id="RegisterForm-password"
-        class="text-field [&[aria-invalid]]:border-red-500"
+        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none [&[aria-invalid]]:border-red-500"
         aria-required="true"
         {% if form.errors contains 'password' %}
           aria-invalid="true"
