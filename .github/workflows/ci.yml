@@ -17,6 +17,8 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
+        with:
+          version: 7
 
       - name: Set node
         uses: actions/setup-node@v3
@@ -24,14 +26,11 @@ jobs:
           node-version: 16.x
           cache: pnpm
 
-      - name: Setup
-        run: npm i -g @antfu/ni
-
       - name: Install
-        run: nci
+        run: pnpm install
 
       - name: Lint
-        run: nr lint
+        run: pnpm lint
 
   lhci:
     name: Lighthouse
