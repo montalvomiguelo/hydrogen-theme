@@ -7,6 +7,11 @@ class CartDrawer extends window.HTMLElement {
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close())
     this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this))
     this.setHeaderCartIconAccessibility()
+    this.hi()
+  }
+
+  hi () {
+    console.log('hi')
   }
 
   setHeaderCartIconAccessibility () {

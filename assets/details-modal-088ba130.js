@@ -1,4 +1,4 @@
-import { t as trapFocus, r as removeTrapFocus } from "./theme-09a6ee05.js";
+import { t as trapFocus, r as removeTrapFocus } from "./theme-78325941.js";
 import "./modulepreload-polyfill-fef78a14.js";
 class DetailsModal extends window.HTMLElement {
   constructor() {

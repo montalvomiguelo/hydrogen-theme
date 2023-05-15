@@ -1,4 +1,4 @@
-import { t as trapFocus, r as removeTrapFocus } from "./theme-09a6ee05.js";
+import { t as trapFocus, r as removeTrapFocus } from "./theme-78325941.js";
 import "./modulepreload-polyfill-fef78a14.js";
 class CartDrawer extends window.HTMLElement {
   constructor() {
@@ -6,6 +6,10 @@ class CartDrawer extends window.HTMLElement {
     this.addEventListener("keyup", (evt) => evt.code === "Escape" && this.close());
     this.querySelector("#CartDrawer-Overlay").addEventListener("click", this.close.bind(this));
     this.setHeaderCartIconAccessibility();
+    this.hi();
+  }
+  hi() {
+    console.log("hi");
   }
   setHeaderCartIconAccessibility() {
     const cartLink = document.querySelector("#cart-icon-bubble");

@@ -1,5 +1,5 @@
 import { d as debounce, f as fetchConfig } from "./utils-df16e8d7.js";
-import { t as trapFocus } from "./theme-09a6ee05.js";
+import { t as trapFocus } from "./theme-78325941.js";
 import "./modulepreload-polyfill-fef78a14.js";
 class CartItems extends window.HTMLElement {
   constructor() {

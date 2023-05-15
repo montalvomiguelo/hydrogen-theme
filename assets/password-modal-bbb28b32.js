@@ -1,5 +1,5 @@
-import DetailsModal from "./details-modal-11938db0.js";
-import "./theme-09a6ee05.js";
+import DetailsModal from "./details-modal-088ba130.js";
+import "./theme-78325941.js";
 import "./modulepreload-polyfill-fef78a14.js";
 class PasswordModal extends DetailsModal {
   constructor() {
