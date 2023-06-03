@@ -1,10 +1,12 @@
-<div id="Banner-{{ section.id }}" class="flex relative flex-wrap w-full">
-  <div class="min-h-[34rem] flex relative justify-center items-center w-full">
-    <div class="h-fit text-center px-6 md:px-8 lg:px-12 flex flex-col items-center gap-4 w-full">
+<div id="Banner-{{ section.id }}" class="relative flex w-full flex-wrap">
+  <div class="relative flex min-h-[34rem] w-full items-center justify-center">
+    <div class="flex h-fit w-full flex-col items-center gap-4 px-6 text-center md:px-8 lg:px-12">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
-            <h2 class="font-heading font-heading-weight text-heading" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+            <h2 class="font-heading text-heading font-heading-weight" {{ block.shopify_attributes }}>
+              {{ block.settings.heading | escape }}
+            </h2>
           {%- when 'paragraph' -%}
             <div class="text-lead" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           {%- when 'email_form' -%}
@@ -17,7 +19,7 @@
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="border rounded border-white py-3 px-4 pr-16 bg-transparent bg-none appearance-none placeholder:text-white w-full"
+                      class="w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4 pr-16 placeholder:text-white"
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
@@ -36,16 +38,29 @@
                     <label class="sr-only" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
-                    <button type="submit" class="absolute right-0 top-0 bottom-0 h-full pr-4 pl-4 flex items-center jutify-center" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                    <button
+                      type="submit"
+                      class="jutify-center absolute right-0 top-0 bottom-0 flex h-full items-center pr-4 pl-4"
+                      name="commit"
+                      id="Subscribe"
+                      aria-label="{{ 'newsletter.button_label' | t }}"
+                    >
                       {% render 'icon-arrow' %}
                     </button>
                   </div>
                   {%- if form.errors -%}
-                    <small class="" id="Newsletter-error--{{ section.id }}">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                    <small class="" id="Newsletter-error--{{ section.id }}">
+                      {%- render 'icon-error' -%}
+                      {{- form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email -}}
+                    </small>
                   {%- endif -%}
                 </div>
                 {%- if form.posted_successfully? -%}
-                  <h3 class="" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+                  <h3 class="" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
+                    {% render 'icon-success' -%}
+                    {{- 'newsletter.success' | t }}
+                  </h3>
                 {%- endif -%}
               {% endform %}
             </div>
@@ -108,8 +123,6 @@
       ]
     }
   ],
-  "templates": [
-    "password"
-  ]
+  "templates": ["password"]
 }
 {% endschema %}

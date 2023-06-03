@@ -18,13 +18,13 @@
     elsif card_product.featured_media and media_aspect_ratio == 'adapt'
       assign ratio = card_product.featured_media.aspect_ratio
     endif
-    if ratio == 0 or ratio == nil
+    if ratio == 0 or ratio == null
       assign ratio = 1
     endif
   -%}
   <div class="relative">
-    <div class="grid gap-6 snap-start {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
-      <div class="rounded overflow-hidden aspect-[4/5] bg-primary/5">
+    <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
+      <div class="aspect-[4/5] overflow-hidden rounded bg-primary/5">
         {%- if card_product.featured_media -%}
           {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
           <img
@@ -40,7 +40,7 @@
             src="{{ card_product.featured_media | image_url: width: 533 }}"
             sizes="320px"
             alt="{{ card_product.featured_media.alt | escape }}"
-            class="w-full h-full aspect-[inherit] object-cover object-center"
+            class="aspect-[inherit] h-full w-full object-cover object-center"
             {% unless lazy_load == false %}
               loading="lazy"
             {% endunless %}
@@ -60,7 +60,7 @@
           <a
             href="{{ card_product.url }}"
             id="CardLink-{{ section_id }}-{{ card_product.id }}"
-            class="after:content-[''] after:inset-0 after:absolute after:z-10"
+            class="after:absolute after:inset-0 after:z-10 after:content-['']"
           >
             {{ card_product.title | escape }}
           </a>
@@ -72,15 +72,15 @@
   </div>
 {%- else -%}
   <div class="relative">
-    <div class="grid gap-6 snap-start w-80">
-      <div class="rounded overflow-hidden aspect-[4/5] bg-primary/5"></div>
+    <div class="grid w-80 snap-start gap-6">
+      <div class="aspect-[4/5] overflow-hidden rounded bg-primary/5"></div>
       <div class="grid gap-1">
         <h3 class="text-copy">
           <a role="link" aria-disabled="true">
             {{ 'onboarding.product_title' | t }}
           </a>
         </h3>
-        <div class="flex gap-4 text-copy relative z-0">
+        <div class="relative z-0 flex gap-4 text-copy">
           <span>{{ 1999 | money_without_trailing_zeros }}</span>
         </div>
       </div>

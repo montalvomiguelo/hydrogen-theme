@@ -23,21 +23,12 @@
           "type": "tab"
         }
       },
-      "block_order": [
-        "price",
-        "variant_picker",
-        "buy_buttons",
-        "tab"
-      ]
+      "block_order": ["price", "variant_picker", "buy_buttons", "tab"]
     },
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {}
     }
   },
-  "order": [
-    "main",
-    "product-recommendations"
-  ]
+  "order": ["main", "product-recommendations"]
 }
-

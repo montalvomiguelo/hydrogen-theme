@@ -1,11 +1,14 @@
-<div class="grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
-  <h1 class="max-w-prose-narrow font-heading font-heading-weight text-heading inline-block">
+<div class="grid w-full justify-items-start gap-8 p-6 py-8 md:p-8 lg:p-12">
+  <h1 class="inline-block max-w-prose-narrow font-heading text-heading font-heading-weight">
     {{ 'templates.404.title' | t }}
   </h1>
   <p class="max-w-prose-narrow text-copy">
     {{ 'templates.404.subtext' | t }}
   </p>
-  <a href="{{ routes.all_products_collection_url }}" class="button border border-primary/10 bg-contrast text-primary w-auto">
+  <a
+    href="{{ routes.all_products_collection_url }}"
+    class="button w-auto border border-primary/10 bg-contrast text-primary"
+  >
     {{ 'general.continue_shopping' | t }}
   </a>
 </div>

@@ -1,23 +1,24 @@
-<div class="flex flex-col items-center my-24 px-4">
-  <h1 id="recover" class="max-w-md w-full text-4xl hidden target:block" tabindex="-1">
+<div class="my-24 flex flex-col items-center px-4">
+  <h1 id="recover" class="hidden w-full max-w-md text-4xl target:block" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
   </h1>
-  <div class="max-w-md w-full pt-6 pb-8 mt-4 mb-4 [#recover_+_&]:hidden [#recover:target_+_&]:block">
+  <div class="mt-4 mb-4 w-full max-w-md pt-6 pb-8 [#recover_+_&]:hidden [#recover:target_+_&]:block">
     <p>
       {{ 'customer.recover_password.subtext' | t }}
     </p>
 
     {%- form 'recover_customer_password' -%}
       {% assign recover_success = form.posted_successfully? %}
-      <div class="grid gap-2 mt-10">
-        <label for="RecoverEmail" class="block pb-2 w-full font-body-weight-bold text-lead">
+      <div class="mt-10 grid gap-2">
+        <label for="RecoverEmail" class="block w-full pb-2 text-lead font-body-weight-bold">
           {{ 'customer.login_page.email' | t }}
         </label>
-        <input type="email"
+        <input
+          type="email"
           value=""
           name="email"
           id="RecoverEmail"
-          class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+          class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
@@ -30,30 +31,30 @@
       </div>
       {%- if form.errors -%}
         <p id="RecoverEmail-email-error" class="mt-2 flex items-center gap-2 text-red-500">
-          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13" class="w-4 h-4">
+          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13" class="h-4 w-4">
             <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
             <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
             <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
             <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
           </svg>
-          {{ form.errors.messages['form'] }}
+          {{ form.errors.messages.form }}
         </p>
       {%- endif -%}
 
-      <button class="mt-10 button bg-primary text-contrast w-full">
+      <button class="button mt-10 w-full bg-primary text-contrast">
         {{ 'customer.login_page.submit' | t }}
       </button>
 
-      <a href="#login" class="block fit-auto mt-4">
+      <a href="#login" class="fit-auto mt-4 block">
         {{ 'customer.login_page.cancel' | t }}
       </a>
     {%- endform -%}
   </div>
 
-  <h1 id="login" class="max-w-md w-full text-4xl [#recover:target_~_&]:hidden" tabindex="-1">
+  <h1 id="login" class="w-full max-w-md text-4xl [#recover:target_~_&]:hidden" tabindex="-1">
     {{ 'customer.login_page.title' | t }}
   </h1>
-  <div class="max-w-md w-full pt-6 pb-8 mt-4 mb-4 [#recover:target_~_#login_+_&]:hidden">
+  <div class="mt-4 mb-4 w-full max-w-md pt-6 pb-8 [#recover:target_~_#login_+_&]:hidden">
     {%- if recover_success == true -%}
       <h3 class="mb-10" tabindex="-1" autofocus>
         {{ 'customer.recover_password.success' | t }}
@@ -65,20 +66,20 @@
           <span class="sr-only">{{ 'accessibility.error' | t }} </span>
           {{ 'templates.contact.form.error_heading' | t }}
         </h2>
-        <div class="[&_ul]:list-disc [&_ul]:list-inside [&_ul]:text-red-500 mb-10">
+        <div class="mb-10 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:text-red-500">
           {{ form.errors | default_errors }}
         </div>
       {%- endif -%}
 
       <div class="grid gap-2">
-        <label for="CustomerEmail" class="block pb-2 w-full font-body-weight-bold text-lead">
+        <label for="CustomerEmail" class="block w-full pb-2 text-lead font-body-weight-bold">
           {{ 'customer.login_page.email' | t }}
         </label>
         <input
           type="email"
           name="customer[email]"
           id="CustomerEmail"
-          class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+          class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
           autocomplete="email"
           autocorrect="off"
           autocapitalize="off"
@@ -89,8 +90,8 @@
       </div>
 
       {%- if form.password_needed -%}
-        <div class="grid gap-2 mt-8">
-          <label for="CustomerPassword" class="block pb-2 w-full font-body-weight-bold text-lead">
+        <div class="mt-8 grid gap-2">
+          <label for="CustomerPassword" class="block w-full pb-2 text-lead font-body-weight-bold">
             {{ 'customer.login_page.password' | t }}
           </label>
           <input
@@ -98,7 +99,7 @@
             value=""
             name="customer[password]"
             id="CustomerPassword"
-            class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+            class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
             autocomplete="current-password"
             {% if form.errors contains 'form' %}
               aria-invalid="true"
@@ -106,29 +107,28 @@
           >
         </div>
 
-        <a href="#recover" class="block fit-auto mt-4">
+        <a href="#recover" class="fit-auto mt-4 block">
           {{ 'customer.login_page.forgot_password' | t }}
         </a>
       {%- endif -%}
 
-      <button class="mt-10 button bg-primary text-contrast w-full">
+      <button class="button mt-10 w-full bg-primary text-contrast">
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
-      <a href="{{ routes.account_register_url }}" class="block fit-auto mt-4">
+      <a href="{{ routes.account_register_url }}" class="fit-auto mt-4 block">
         {{ 'customer.login_page.create_account' | t }}
       </a>
-
     {%- endform -%}
   </div>
 
   {%- if shop.checkout.guest_login -%}
-    <div class="max-w-md w-full pb-8 mb-4">
+    <div class="mb-4 w-full max-w-md pb-8">
       <hr>
-      <h2 class="max-w-md w-full text-4xl mt-10">{{ 'customer.login_page.guest_title' | t }}</h2>
+      <h2 class="mt-10 w-full max-w-md text-4xl">{{ 'customer.login_page.guest_title' | t }}</h2>
 
       {%- form 'guest_login' -%}
-        <button class="mt-10 button bg-primary text-contrast w-full">
+        <button class="button mt-10 w-full bg-primary text-contrast">
           {{ 'customer.login_page.guest_continue' | t }}
         </button>
       {%- endform -%}
@@ -141,4 +141,3 @@
   "name": "Login"
 }
 {% endschema %}
-

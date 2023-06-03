@@ -23,11 +23,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["heading", "text", "button"],
       "settings": {
         "full_page_height_enable": true,
         "lazy_load_enable": false,
@@ -53,19 +49,10 @@
         },
         "featured-collection-2": {
           "type": "featured_collection"
-       }
+        }
       },
-      "block_order": [
-        "featured-collection-0",
-        "featured-collection-1",
-        "featured-collection-2"
-      ]
+      "block_order": ["featured-collection-0", "featured-collection-1", "featured-collection-2"]
     }
   },
-  "order": [
-    "image_banner",
-    "featured_collection",
-    "collection_list"
-  ]
+  "order": ["image_banner", "featured_collection", "collection_list"]
 }
-

@@ -10,27 +10,31 @@
   endunless
 -%}
 
-<div id="Banner-{{ section.id }}" class="relative justify-end flex flex-col w-full {{ banner_class }}">
-  <div class="absolute inset-0 grid flex-grow grid-flow-col pointer-events-none auto-cols-fr -z-10 content-stretch overflow-clip">
+<div id="Banner-{{ section.id }}" class="relative flex w-full flex-col justify-end {{ banner_class }}">
+  <div class="content-stretch pointer-events-none absolute inset-0 -z-10 grid flex-grow auto-cols-fr grid-flow-col overflow-clip">
     {%- if section.settings.image != blank -%}
       <div>
-        {%-liquid
+        {%- liquid
           assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
           if section.settings.image_2 != blank
-            assign sizes = "50vw"
+            assign sizes = '50vw'
           else
-            assign sizes = "100vw"
+            assign sizes = '100vw'
           endif
         -%}
-        {{ section.settings.image | image_url: width: 1500 | image_tag:
-          loading: loading,
-          preload: section.settings.preload_first_image_enable,
-          width: section.settings.image.width,
-          height: image_height,
-          class: 'block object-cover w-full h-full',
-          sizes: sizes,
-          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
-          alt: section.settings.image.alt | escape
+        {{
+          section.settings.image
+          | image_url: width: 1500
+          | image_tag:
+            loading: loading,
+            preload: section.settings.preload_first_image_enable,
+            width: section.settings.image.width,
+            height: image_height,
+            class: 'block object-cover w-full h-full',
+            sizes: sizes,
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            alt: section.settings.image.alt
+          | escape
         }}
       </div>
     {%- elsif section.settings.image_2 == blank -%}
@@ -40,31 +44,35 @@
     {%- endif -%}
     {%- if section.settings.image_2 != blank -%}
       <div class="hidden md:block">
-        {%-liquid
+        {%- liquid
           assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
           if section.settings.image != blank
-            assign sizes = "50vw"
+            assign sizes = '50vw'
           else
-            assign sizes = "100vw"
+            assign sizes = '100vw'
           endif
         -%}
-        {{ section.settings.image_2 | image_url: width: 1500 | image_tag:
-          loading: loading,
-          width: section.settings.image_2.width,
-          height: image_height_2,
-          class: 'block object-cover w-full h-full',
-          sizes: sizes,
-          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
-          alt: section.settings.image_2.alt | escape
+        {{
+          section.settings.image_2
+          | image_url: width: 1500
+          | image_tag:
+            loading: loading,
+            width: section.settings.image_2.width,
+            height: image_height_2,
+            class: 'block object-cover w-full h-full',
+            sizes: sizes,
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            alt: section.settings.image_2.alt
+          | escape
         }}
       </div>
     {%- endif -%}
   </div>
-  <div class="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t from-contrast/60 text-primary">
+  <div class="flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t from-contrast/60 px-6 py-8 text-primary sm:px-8 md:px-12">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'heading' -%}
-          <h2 class="font-heading font-heading-weight text-display max-w-md" {{ block.shopify_attributes }}>
+          <h2 class="max-w-md font-heading text-display font-heading-weight" {{ block.shopify_attributes }}>
             <span>{{ block.settings.heading | escape }}</span>
           </h2>
         {%- when 'text' -%}
@@ -74,12 +82,18 @@
         {%- when 'buttons' -%}
           <div {{ block.shopify_attributes }}>
             {%- if block.settings.button_label_1 != blank -%}
-            <a{% if block.settings.button_link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_1 }}"{% endif %} class="max-w-prose text-lead font-body-weight-bold flex items-center gap-2">
-              {{ block.settings.button_label_1 | escape }}
-              {%- render 'icon-arrow' -%}
-            </a>
+              <a
+                {% if block.settings.button_link_1 == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ block.settings.button_link_1 }}"
+                {% endif %}
+                class="flex max-w-prose items-center gap-2 text-lead font-body-weight-bold"
+              >
+                {{ block.settings.button_label_1 | escape }}
+                {%- render 'icon-arrow' -%}
+              </a>
             {%- endif -%}
-
           </div>
       {%- endcase -%}
     {%- endfor -%}

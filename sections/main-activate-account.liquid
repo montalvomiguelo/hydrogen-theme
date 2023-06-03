@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center my-24 px-4">
+<div class="my-24 flex flex-col items-center px-4">
   <svg style="display: none">
     <symbol id="icon-error" viewBox="0 0 13 13">
       <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
@@ -7,10 +7,10 @@
       <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
     </symbol>
   </svg>
-  <h1 class="max-w-md w-full text-4xl">
+  <h1 class="w-full max-w-md text-4xl">
     {{ 'customer.activate_account.title' | t }}
   </h1>
-  <p class="mt-10 max-w-md w-full">
+  <p class="mt-10 w-full max-w-md">
     {{ 'customer.activate_account.subtext' | t }}
   </p>
   {%- form 'activate_customer_password', class: 'max-w-md w-full pt-6 pb-8 mt-4 mb-4' -%}
@@ -18,7 +18,7 @@
       <h2 class="text-lead text-red-500" tabindex="-1" autofocus>
         {{ 'templates.contact.form.error_heading' | t }}
       </h2>
-      <ul class="text-red-500 mb-10 list-disc list-inside">
+      <ul class="mb-10 list-inside list-disc text-red-500">
         {%- for field in form.errors -%}
           <li>
             {%- if field == 'form' -%}
@@ -35,14 +35,14 @@
     {%- endif -%}
 
     <div class="grid gap-2">
-      <label for="password" class="block pb-2 w-full font-body-weight-bold text-lead">
+      <label for="password" class="block w-full pb-2 text-lead font-body-weight-bold">
         {{ 'customer.activate_account.password' | t }}
       </label>
       <input
         type="password"
         name="customer[password]"
         id="password"
-        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+        class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
         autocomplete="new-password"
         {% if form.errors contains 'password' %}
           aria-invalid="true"
@@ -51,23 +51,24 @@
       >
       {%- if form.errors contains 'password' -%}
         <p id="password-error" class="mt-2 flex items-center gap-2 text-red-500">
-          <svg aria-hidden="true" focusable="false" role="presentation" class="w-4 h-4">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="h-4 w-4">
             <use href="#icon-error" />
           </svg>
-          {{ form.errors.translated_fields['password'] | capitalize }} {{ form.errors.messages['password'] }}
+          {{ form.errors.translated_fields.password | capitalize }}
+          {{ form.errors.messages.password }}
         </p>
       {%- endif -%}
     </div>
 
-    <div class="grid gap-2 mt-10">
-      <label for="password_confirmation" class="block pb-2 w-full font-body-weight-bold text-lead">
+    <div class="mt-10 grid gap-2">
+      <label for="password_confirmation" class="block w-full pb-2 text-lead font-body-weight-bold">
         {{ 'customer.activate_account.password_confirm' | t }}
       </label>
       <input
         type="password"
         name="customer[password_confirmation]"
         id="password_confirmation"
-        class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+        class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
         autocomplete="new-password"
         {% if form.errors contains 'password' %}
           aria-invalid="true"
@@ -76,18 +77,19 @@
       >
       {%- if form.errors contains 'password_confirmation' -%}
         <p id="password_confirmation-error" class="mt-2 flex items-center gap-2 text-red-500">
-          <svg aria-hidden="true" focusable="false" role="presentation" class="w-4 h-4">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="h-4 w-4">
             <use href="#icon-error" />
           </svg>
-          {{ form.errors.translated_fields['password_confirmation'] | capitalize }} {{ form.errors.messages['password_confirmation'] }}
+          {{ form.errors.translated_fields.password_confirmation | capitalize }}
+          {{ form.errors.messages.password_confirmation }}
         </p>
       {%- endif -%}
     </div>
 
-    <button class="mt-10 button bg-primary text-contrast w-full">
+    <button class="button mt-10 w-full bg-primary text-contrast">
       {{ 'customer.activate_account.submit' | t }}
     </button>
-    <button name="decline" class="button border border-primary/10 bg-contrast text-primary w-full mt-4">
+    <button name="decline" class="button mt-4 w-full border border-primary/10 bg-contrast text-primary">
       {{ 'customer.activate_account.cancel' | t }}
     </button>
   {%- endform -%}

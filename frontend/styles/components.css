@@ -1,9 +1,9 @@
 .icon {
-  @apply w-5 h-5;
+  @apply h-5 w-5;
 }
 
 .button {
-  @apply inline-block rounded font-body-weight-bold text-center py-3 px-6;
+  @apply inline-block rounded py-3 px-6 text-center font-body-weight-bold;
 }
 
 .article {
@@ -14,7 +14,7 @@
   h6 {
     @apply font-heading text-primary;
   }
-  @apply mb-12 font-body prose mx-auto grid justify-center text-primary;
+  @apply prose mx-auto mb-12 grid justify-center font-body text-primary;
   p,
   ul,
   li {
@@ -34,5 +34,5 @@
 }
 
 .swimlane {
-  @apply grid snap-mandatory grid-flow-col snap-x w-full gap-4 scroll-px-6 px-6 pb-4 overflow-x-scroll justify-start;
+  @apply grid w-full snap-x snap-mandatory scroll-px-6 grid-flow-col justify-start gap-4 overflow-x-scroll px-6 pb-4;
 }

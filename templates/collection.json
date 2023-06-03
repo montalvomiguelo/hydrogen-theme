@@ -8,13 +8,8 @@
     },
     "main-collection": {
       "type": "main-collection",
-      "settings": {
-      }
+      "settings": {}
     }
   },
-  "order": [
-    "collection-header",
-    "main-collection"
-  ]
+  "order": ["collection-header", "main-collection"]
 }
-

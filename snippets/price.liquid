@@ -1,13 +1,13 @@
 {% comment %}
-    Renders a list of product's price (regular, sale)
+  Renders a list of product's price (regular, sale)
 
-    Accepts:
-    - product: {Object} Product Liquid object (optional)
-    - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-    - price_class: {String} Adds a price class to the price element (optional)
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
 
-    Usage:
-    {% render 'price', product: product %}
+  Usage:
+  {% render 'price', product: product %}
 {% endcomment %}
 {%- liquid
   if use_variant
@@ -17,8 +17,12 @@
   endif
 -%}
 
-<div class="flex gap-4 text-copy relative z-0
-  {%- if price_class %} {{ price_class }}{% endif -%}">
+<div
+  class="
+    relative z-0 flex gap-4 text-copy
+    {%- if price_class %} {{ price_class }}{% endif -%}
+  "
+>
   {%- if target.compare_at_price > target.price -%}
     <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
     <span>{{ target.price | money_without_trailing_zeros }}</span>
@@ -28,7 +32,12 @@
     {%- capture formatted_min_price -%}<span>{{ target.price_min | money_without_trailing_zeros }}</span>{%- endcapture -%}
     {%- capture formatted_max_price -%}<span>{{ target.price_max | money_without_trailing_zeros }}</span>{%- endcapture -%}
     <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
-    <span>{{ 'products.product.price.from_price_html' | t: min_price: formatted_min_price, max_price: formatted_max_price }}</span>
+    <span>
+      {{-
+        'products.product.price.from_price_html'
+        | t: min_price: formatted_min_price, max_price: formatted_max_price
+      -}}
+    </span>
   {%- else -%}
     <span class="sr-only">{{ 'products.product.price.regular_price' | t }}</span>
     <span>{{ target.price | money_without_trailing_zeros }}</span>

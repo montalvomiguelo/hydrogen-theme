@@ -1,120 +1,123 @@
 <!doctype html>
 <html class="no-js h-full" lang="{{ request.locale.iso_code }}">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="">
-  <link rel="canonical" href="{{ canonical_url }}">
-  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
-  {%- if settings.favicon != blank -%}
-    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-  {%- endif -%}
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
 
-  {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-  {%- endunless -%}
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
 
-  {%- unless settings.type_body_font.system? -%}
-    <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-  {%- endunless -%}
-  {%- unless settings.type_header_font.system? -%}
-    <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-  {%- endunless -%}
+    {%- unless settings.type_body_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+    {%- unless settings.type_header_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
 
-  <title>
-    {{ page_title }}
-    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-  </title>
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
 
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}">
-  {% endif %}
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
 
-  {% render 'meta-tags' %}
+    {% render 'meta-tags' %}
 
-  {%- liquid
-    assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
-    assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
-    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
-  %}
+    {%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
 
-  {% style %}
-    {{ settings.type_body_font | font_face: font_display: 'swap' }}
-    {{ body_font_bold | font_face: font_display: 'swap' }}
-    {{ body_font_italic | font_face: font_display: 'swap' }}
-    {{ body_font_bold_italic | font_face: font_display: 'swap' }}
-    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+    {% style %}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
-    :root {
-      --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-      --font-body-weight: {{ settings.type_body_font.weight }};
-      --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
+      :root {
+        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+        --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
 
-      --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-      --font-heading-weight: {{ settings.type_header_font.weight }};
+        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-weight: {{ settings.type_header_font.weight }};
 
-      --color-primary: {{ settings.colors_primary.red }} {{ settings.colors_primary.green }} {{ settings.colors_primary.blue }};
-      --color-contrast: {{ settings.colors_contrast.red }} {{ settings.colors_contrast.green }} {{ settings.colors_contrast.blue }};
-      --color-accent: {{ settings.colors_accent.red }} {{ settings.colors_accent.green }} {{ settings.colors_accent.blue }};
-    }
-  {% endstyle %}
+        --color-primary: {{ settings.colors_primary.red }} {{ settings.colors_primary.green }} {{ settings.colors_primary.blue }};
+        --color-contrast: {{ settings.colors_contrast.red }} {{ settings.colors_contrast.green }} {{ settings.colors_contrast.blue }};
+        --color-accent: {{ settings.colors_accent.red }} {{ settings.colors_accent.green }} {{ settings.colors_accent.blue }};
+      }
+    {% endstyle %}
 
-  {%- liquid
-    render 'vite-tag' with 'theme.css', preload_stylesheet: true
-    render 'vite-tag' with 'theme.js'
-    if request.page_type contains 'customers/'
-      render 'vite-tag' with 'customers.js'
-    endif
-  -%}
+    {%- liquid
+      render 'vite-tag' with 'theme.css', preload_stylesheet: true
+      render 'vite-tag' with 'theme.js'
+      if request.page_type contains 'customers/'
+        render 'vite-tag' with 'customers.js'
+      endif
+    -%}
 
-  {{ content_for_header }}
+    {{ content_for_header }}
 
-  <script>
-    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-  </script>
-</head>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+  </head>
 
-<body class="min-h-full grid grid-rows-[auto_1fr_auto] grid-cols-[100%] font-body font-body-weight">
-  <a href="#MainContent" class="button bg-primary text-contrast sr-only focus:not-sr-only focus:absolute focus:z-50 focus:py-3 focus:px-6">
-    {{ 'accessibility.skip_to_text' | t }}
-  </a>
+  <body class="grid min-h-full grid-cols-[100%] grid-rows-[auto_1fr_auto] font-body font-body-weight">
+    <a
+      href="#MainContent"
+      class="button sr-only bg-primary text-contrast focus:not-sr-only focus:absolute focus:z-50 focus:py-3 focus:px-6"
+    >
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
 
-  {%- if settings.cart_type == 'drawer' -%}
-    {%- render 'cart-drawer' -%}
-  {%- endif -%}
+    {%- if settings.cart_type == 'drawer' -%}
+      {%- render 'cart-drawer' -%}
+    {%- endif -%}
 
-  {% section 'header' %}
-  <main role="main" id="MainContent" tabindex="-1">
-    {{ content_for_layout }}
-  </main>
+    {% section 'header' %}
+    <main role="main" id="MainContent" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
 
-  {% section 'footer' %}
+    {% section 'footer' %}
 
-  <ul hidden>
-    <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
-  </ul>
+    <ul hidden>
+      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
 
-  <script>
-    window.routes = {
-      cart_add_url: '{{ routes.cart_add_url }}',
-      cart_change_url: '{{ routes.cart_change_url }}',
-      cart_update_url: '{{ routes.cart_update_url }}'
-    };
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+      };
 
-    window.cartStrings = {
-      error: `{{ 'sections.cart.cart_error' | t }}`,
-      quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
-    };
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
 
-    window.variantStrings = {
-      addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-      soldOut: `{{ 'products.product.sold_out' | t }}`,
-      unavailable: `{{ 'products.product.unavailable' | t }}`
-    };
-  </script>
-</body>
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      };
+    </script>
+  </body>
 </html>

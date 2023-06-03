@@ -36,15 +36,15 @@ jobs:
     name: Lighthouse
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Lighthouse
-      uses: shopify/lighthouse-ci-action@v1
-      with:
-        access_token: ${{ secrets.SHOP_ACCESS_TOKEN }}
-        store: ${{ secrets.SHOP_STORE }}
-        password: ${{ secrets.SHOP_PASSWORD }}
-        lhci_github_app_token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+      - name: Lighthouse
+        uses: shopify/lighthouse-ci-action@v1
+        with:
+          access_token: ${{ secrets.SHOP_ACCESS_TOKEN }}
+          store: ${{ secrets.SHOP_STORE }}
+          password: ${{ secrets.SHOP_PASSWORD }}
+          lhci_github_app_token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
   theme-check:
     name: Theme Check

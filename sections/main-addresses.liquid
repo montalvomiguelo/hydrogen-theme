@@ -1,13 +1,13 @@
 {%- paginate customer.addresses by 5 -%}
-  <div class="w-full max-w-xl mx-auto p-6 py-8 md:p-8 lg:p-12" data-customer-addresses>
-    <h1 class="font-heading font-heading-weight text-heading text-center">{{ 'customer.addresses.title' | t }}</h1>
-    <a class="block w-fit mx-auto mt-4" href="{{ routes.account_url }}">
+  <div class="mx-auto w-full max-w-xl p-6 py-8 md:p-8 lg:p-12" data-customer-addresses>
+    <h1 class="text-center font-heading text-heading font-heading-weight">{{ 'customer.addresses.title' | t }}</h1>
+    <a class="mx-auto mt-4 block w-fit" href="{{ routes.account_url }}">
       {{ 'customer.account.return' | t }}
     </a>
 
     <div class="text-center" data-address>
       <button
-        class="mt-10 button bg-primary text-contrast"
+        class="button mt-10 bg-primary text-contrast"
         type="button"
         aria-expanded="false"
         aria-controls="AddAddress"
@@ -15,37 +15,85 @@
         {{ 'customer.addresses.add_new' | t }}
       </button>
       <div id="AddAddress" class="hidden [[aria-expanded='true']_~_&]:block">
-        <h2 class="text-lead font-heading font-heading-weight mt-10 text-left" id="AddressNewHeading">{{ 'customer.addresses.add_new' | t }}</h2>
-        {%- form 'customer_address', customer.new_address, aria-labelledBy: 'AddressNewHeading', class: 'flex [flex-flow:row_wrap]' -%}
-          <div class="grid gap-2 mt-8 w-full text-left md:w-[calc(50%_-_theme(spacing.4))] md:mr-8">
+        <h2 class="mt-10 text-left font-heading text-lead font-heading-weight" id="AddressNewHeading">
+          {{ 'customer.addresses.add_new' | t }}
+        </h2>
+        {%- form 'customer_address',
+          customer.new_address,
+          aria-labelledBy: 'AddressNewHeading',
+          class: 'flex [flex-flow:row_wrap]'
+        -%}
+          <div class="mt-8 grid w-full gap-2 text-left md:mr-8 md:w-[calc(50%_-_theme(spacing.4))]">
             <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressFirstNameNew"
+              name="address[first_name]"
+              value="{{ form.first_name }}"
+              autocomplete="given-name"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left md:w-[calc(50%_-_theme(spacing.4))]">
+          <div class="mt-8 grid w-full gap-2 text-left md:w-[calc(50%_-_theme(spacing.4))]">
             <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressLastNameNew"
+              name="address[last_name]"
+              value="{{ form.last_name }}"
+              autocomplete="family-name"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressCompanyNew" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressCompanyNew"
+              name="address[company]"
+              value="{{ form.company }}"
+              autocomplete="organization"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressAddress1New"
+              name="address[address1]"
+              value="{{ form.address1 }}"
+              autocomplete="address-line1"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressAddress2New"
+              name="address[address2]"
+              value="{{ form.address2 }}"
+              autocomplete="address-line2"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressCityNew"
+              name="address[city]"
+              value="{{ form.city }}"
+              autocomplete="address-level2"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
-            <div class="relative w-full mt-2">
+            <div class="relative mt-2 w-full">
               <select
-                class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                 id="AddressCountryNew"
                 name="address[country]"
                 data-default="{{ form.country }}"
@@ -53,42 +101,58 @@
               >
                 {{ all_country_option_tags }}
               </select>
-              <span class="absolute top-1/2 -translate-y-1/2 right-4">
+              <span class="absolute top-1/2 right-4 -translate-y-1/2">
                 {%- render 'icon-caret' -%}
               </span>
             </div>
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left" id="AddressProvinceContainerNew" style="display: none">
+          <div class="mt-8 grid w-full gap-2 text-left" id="AddressProvinceContainerNew" style="display: none">
             <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
-            <div class="relative w-full mt-2">
+            <div class="relative mt-2 w-full">
               <select
-                class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                 id="AddressProvinceNew"
                 name="address[province]"
                 data-default="{{ form.province }}"
                 autocomplete="address-level1"
-              >
-              </select>
-              <span class="absolute top-1/2 -translate-y-1/2 right-4">
+              ></select>
+              <span class="absolute top-1/2 right-4 -translate-y-1/2">
                 {%- render 'icon-caret' -%}
               </span>
             </div>
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="text"
+              id="AddressZipNew"
+              name="address[zip]"
+              value="{{ form.zip }}"
+              autocapitalize="characters"
+              autocomplete="postal-code"
+            >
           </div>
-          <div class="grid gap-2 mt-8 w-full text-left">
+          <div class="mt-8 grid w-full gap-2 text-left">
             <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
-            <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+            <input
+              class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+              type="tel"
+              id="AddressPhoneNew"
+              name="address[phone]"
+              value="{{ form.phone }}"
+              autocomplete="tel"
+            >
           </div>
           <div class="mt-2 flex items-center gap-2">
             {{ form.set_as_default_checkbox }}
             <label for="address_default_address_new">{{ 'customer.addresses.set_default' | t }}</label>
           </div>
           <div class="mt-8 w-full text-left">
-            <button class="button bg-primary text-contrast mr-2">{{ 'customer.addresses.add' | t }}</button>
-            <button class="button border border-primary/10 bg-contrast text-primary" type="reset">{{ 'customer.addresses.cancel' | t }}</button>
+            <button class="button mr-2 bg-primary text-contrast">{{ 'customer.addresses.add' | t }}</button>
+            <button class="button border border-primary/10 bg-contrast text-primary" type="reset">
+              {{ 'customer.addresses.cancel' | t }}
+            </button>
           </div>
         {%- endform -%}
       </div>
@@ -98,11 +162,11 @@
       {%- for address in customer.addresses -%}
         <li class="mb-10" data-address>
           {%- if address == customer.default_address -%}
-            <h2 class="text-lead font-heading font-heading-weight my-8">{{ 'customer.addresses.default' | t }}</h2>
+            <h2 class="my-8 font-heading text-lead font-heading-weight">{{ 'customer.addresses.default' | t }}</h2>
           {%- endif -%}
           {{ address | format_address }}
           <button
-            class="button border border-primary/10 bg-contrast text-primary mr-2 mt-8"
+            class="button mr-2 mt-8 border border-primary/10 bg-contrast text-primary"
             type="button"
             id="EditFormButton_{{ address.id }}"
             aria-label="{{ 'customer.addresses.edit_address' | t }} {{ forloop.index }}"
@@ -122,39 +186,83 @@
             {{ 'customer.addresses.delete' | t }}
           </button>
           <div id="EditAddress_{{ address.id }}" class="hidden [[aria-expanded='true']_~_&]:block">
-            <h2 class="text-lead font-heading font-heading-weight mt-10">{{ 'customer.addresses.edit_address' | t }}</h2>
+            <h2 class="mt-10 font-heading text-lead font-heading-weight">
+              {{ 'customer.addresses.edit_address' | t }}
+            </h2>
             {%- form 'customer_address', address, class: 'flex [flex-flow:row_wrap]' -%}
-              <div class="grid gap-2 mt-8 w-full text-left md:w-[calc(50%_-_theme(spacing.4))] md:mr-8">
+              <div class="mt-8 grid w-full gap-2 text-left md:mr-8 md:w-[calc(50%_-_theme(spacing.4))]">
                 <label for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressFirstName_{{ form.id }}"
+                  name="address[first_name]"
+                  value="{{ form.first_name }}"
+                  autocomplete="given-name"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left md:w-[calc(50%_-_theme(spacing.4))]">
+              <div class="mt-8 grid w-full gap-2 text-left md:w-[calc(50%_-_theme(spacing.4))]">
                 <label for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressLastName_{{ form.id }}"
+                  name="address[last_name]"
+                  value="{{ form.last_name }}"
+                  autocomplete="family-name"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressCompany_{{ form.id }}"
+                  name="address[company]"
+                  value="{{ form.company }}"
+                  autocomplete="organization"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressAddress1_{{ form.id }}"
+                  name="address[address1]"
+                  value="{{ form.address1 }}"
+                  autocomplete="address-line1"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressAddress2_{{ form.id }}"
+                  name="address[address2]"
+                  value="{{ form.address2 }}"
+                  autocomplete="address-line2"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressCity_{{ form.id }}"
+                  name="address[city]"
+                  value="{{ form.city }}"
+                  autocomplete="address-level2"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressCountry_{{ form.id }}">
                   {{ 'customer.addresses.country' | t }}
                 </label>
-                <div class="relative w-full mt-2">
+                <div class="relative mt-2 w-full">
                   <select
-                    class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                     id="AddressCountry_{{ form.id }}"
                     name="address[country]"
                     data-address-country-select
@@ -164,36 +272,54 @@
                   >
                     {{ all_country_option_tags }}
                   </select>
-                  <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                  <span class="absolute top-1/2 right-4 -translate-y-1/2">
                     {%- render 'icon-caret' -%}
                   </span>
                 </div>
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left" id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
+              <div
+                class="mt-8 grid w-full gap-2 text-left"
+                id="AddressProvinceContainer_{{ form.id }}"
+                style="display:none;"
+              >
                 <label for="AddressProvince_{{ form.id }}">
                   {{ 'customer.addresses.province' | t }}
                 </label>
-                <div class="relative w-full mt-2">
+                <div class="relative mt-2 w-full">
                   <select
-                    class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                     id="AddressProvince_{{ form.id }}"
                     name="address[province]"
                     data-default="{{ form.province }}"
                     autocomplete="address-level1"
-                  >
-                  </select>
-                  <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                  ></select>
+                  <span class="absolute top-1/2 right-4 -translate-y-1/2">
                     {%- render 'icon-caret' -%}
                   </span>
                 </div>
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="text"
+                  id="AddressZip_{{ form.id }}"
+                  name="address[zip]"
+                  value="{{ form.zip }}"
+                  autocapitalize="characters"
+                  autocomplete="postal-code"
+                >
               </div>
-              <div class="grid gap-2 mt-8 w-full text-left">
+              <div class="mt-8 grid w-full gap-2 text-left">
                 <label for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
-                <input class="py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" type="tel" id="AddressPhone_{{ form.id }}"  name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                <input
+                  class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                  type="tel"
+                  id="AddressPhone_{{ form.id }}"
+                  name="address[phone]"
+                  value="{{ form.phone }}"
+                  autocomplete="tel"
+                >
               </div>
               <div class="mt-2 flex items-center gap-2">
                 {{ form.set_as_default_checkbox }}
@@ -202,8 +328,10 @@
                 </label>
               </div>
               <div class="mt-8 w-full text-left">
-                <button class="button bg-primary text-contrast mr-2">{{ 'customer.addresses.update' | t }}</button>
-                <button class="button border border-primary/10 bg-contrast text-primary" type="reset">{{ 'customer.addresses.cancel' | t }}</button>
+                <button class="button mr-2 bg-primary text-contrast">{{ 'customer.addresses.update' | t }}</button>
+                <button class="button border border-primary/10 bg-contrast text-primary" type="reset">
+                  {{ 'customer.addresses.cancel' | t }}
+                </button>
               </div>
             {%- endform -%}
           </div>
@@ -213,8 +341,8 @@
 
     {%- if paginate.pages > 1 -%}
       {%- if paginate.parts.size > 0 -%}
-          <nav class="mt-10 mb-10" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-            <ul class="flex justify-center items-center gap-6" role="list">
+        <nav class="mt-10 mb-10" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+          <ul class="flex items-center justify-center gap-6" role="list">
             {%- if paginate.previous -%}
               <li>
                 <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
@@ -228,10 +356,14 @@
             {%- for part in paginate.parts -%}
               <li>
                 {%- if part.is_link -%}
-                  <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+                  <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                    {{- part.title -}}
+                  </a>
                 {%- else -%}
                   {%- if part.title == paginate.current_page -%}
-                    <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+                    <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                      {{- part.title -}}
+                    </span>
                   {%- else -%}
                     <span>{{ part.title }}</span>
                   {%- endif -%}
@@ -241,15 +373,15 @@
 
             {%- if paginate.next -%}
               <li>
-                <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}" >
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6" class="w-4 h-4 -rotate-90">
+                <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6" class="h-4 w-4 -rotate-90">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
                   </svg>
                 </a>
               </li>
             {%- endif -%}
-            </ul>
-          </nav>
+          </ul>
+        </nav>
       {%- endif -%}
     {%- endif -%}
   </div>
@@ -260,4 +392,3 @@
   "name": "Addresses"
 }
 {% endschema %}
-

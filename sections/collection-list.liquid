@@ -1,6 +1,6 @@
-<div class="w-full gap-4 md:gap-8 grid p-6 md:p-8 lg:p-12 border-none">
-  <h2 class="font-heading font-heading-weight text-lead">{{ section.settings.title | escape }}</h2>
-  <div class="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-1 sm:grid-cols-3">
+<div class="grid w-full gap-4 border-none p-6 md:gap-8 md:p-8 lg:p-12">
+  <h2 class="font-heading text-lead font-heading-weight">{{ section.settings.title | escape }}</h2>
+  <div class="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 sm:grid-cols-3 md:gap-4 lg:gap-6">
     {%- for block in section.blocks -%}
       {% render 'card-collection', card_collection: block.settings.collection %}
     {%- endfor -%}

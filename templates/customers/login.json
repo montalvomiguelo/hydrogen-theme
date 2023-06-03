@@ -4,8 +4,5 @@
       "type": "main-login"
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }
-

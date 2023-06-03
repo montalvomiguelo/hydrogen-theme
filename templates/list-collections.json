@@ -4,8 +4,5 @@
       "type": "main-list-collections"
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }
-

@@ -5,20 +5,20 @@
 <footer
   role="contentinfo"
   style="--blocks-count: {{ section.blocks.size }};"
-  class="{{ container_class }} md:grid min-h-[25rem] md:items-start md:grid-flow-row w-full py-8 px-6 md:px-8 lg:px-12 border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] bg-contrast text-primary"
+  class="{{ container_class }} min-h-[25rem] w-full grid-cols-1 border-b bg-contrast py-8 px-6 text-primary md:grid md:grid-flow-row md:grid-cols-2 md:items-start md:gap-8 md:px-8 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] lg:gap-12 lg:px-12"
 >
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'link_list' -%}
-        <section class="pt-10 first-of-type:-mt-10 first-of-type:md:mt-0 md:pt-0">
+        <section class="pt-10 first-of-type:-mt-10 md:pt-0 first-of-type:md:mt-0">
           <details id="Details-{{ block.id }}" class="md:hidden">
             <summary>
-              <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead flex justify-between overflow-hidden">
+              <h3 class="flex max-w-prose justify-between overflow-hidden whitespace-pre-wrap font-heading text-lead font-heading-weight">
                 <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
                 {%- render 'icon-caret' -%}
               </h3>
             </summary>
-            <div id="Panel-{{ block.id }}" class="pt-4 footer-panel">
+            <div id="Panel-{{ block.id }}" class="footer-panel pt-4">
               <nav class="grid gap-2 pb-2">
                 {%- for link in block.settings.menu.links -%}
                   <a href="{{ link.url }}">
@@ -28,8 +28,8 @@
               </nav>
             </div>
           </details>
-          <div class="hidden md:grid gap-4">
-            <h3 class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">
+          <div class="hidden gap-4 md:grid">
+            <h3 class="max-w-prose whitespace-pre-wrap font-heading text-lead font-heading-weight">
               {{- block.settings.heading | escape -}}
             </h3>
             <div>
@@ -46,39 +46,74 @@
           </div>
         </section>
       {%- when 'country_selector' -%}
-        <section class="grid gap-4 w-full md:max-w-[335px] pt-10 md:pt-0">
+        <section class="grid w-full gap-4 pt-10 md:max-w-[335px] md:pt-0">
           {%- if block.settings.heading != blank -%}
-            <h3 id="CountryListLabel" class="whitespace-pre-wrap max-w-prose font-heading font-heading-weight text-lead">{{- block.settings.heading | escape -}}</h3>
+            <h3
+              id="CountryListLabel"
+              class="max-w-prose whitespace-pre-wrap font-heading text-lead font-heading-weight"
+            >
+              {{- block.settings.heading | escape -}}
+            </h3>
           {%- endif -%}
           {%- if localization.available_countries.size > 1 -%}
             <noscript>
               {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
                 <div class="relative">
-                  <select class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none" name="country_code" aria-labelledby="CountryListLabel">
+                  <select
+                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                    name="country_code"
+                    aria-labelledby="CountryListLabel"
+                  >
                     {%- for country in localization.available_countries -%}
-                      <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      <option
+                        value="{{ country.iso_code }}"
+                        {%- if country.iso_code == localization.country.iso_code %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ country.name }} ({{ country.currency.iso_code }}
+                        {{ country.currency.symbol }})
                       </option>
                     {%- endfor -%}
                   </select>
-                  <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                  <span class="absolute top-1/2 right-4 -translate-y-1/2">
                     {% render 'icon-caret' %}
                   </span>
                 </div>
-                <button class="mt-4 text-center block w-full">{{ 'localization.update_country' | t }}</button>
+                <button class="mt-4 block w-full text-center">{{ 'localization.update_country' | t }}</button>
               {%- endform -%}
             </noscript>
             <localization-form class="no-js:hidden" client:visible>
               {% form 'localization', class: 'relative' %}
-                <button type="button" class="flex items-center justify-between w-full py-3 px-4 border rounded border-white" aria-expanded="false" aria-controls="CountryList" aria-describedby="CountryListLabel">
-                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between rounded border border-white py-3 px-4"
+                  aria-expanded="false"
+                  aria-controls="CountryList"
+                  aria-describedby="CountryListLabel"
+                >
+                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }}
+                  {{ localization.country.currency.symbol }})
                   {%- render 'icon-caret' -%}
                 </button>
-                <ul id="CountryList" role="list" class="border-t-contrast/30 bg-contrast absolute bottom-12 z-10 w-full overflow-y-auto rounded-t border border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b max-h-48" hidden>
+                <ul
+                  id="CountryList"
+                  role="list"
+                  class="absolute bottom-12 z-10 max-h-48 w-full overflow-y-auto rounded-t border border-white border-t-contrast/30 bg-contrast px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b"
+                  hidden
+                >
                   {% for country in localization.available_countries %}
                     <li tabindex="-1">
-                      <a class="text-primary bg-contrast w-full p-2 rounded flex justify-start items-center text-left cursor-pointer" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
-                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      <a
+                        class="flex w-full cursor-pointer items-center justify-start rounded bg-contrast p-2 text-left text-primary"
+                        href="#"
+                        {% if country.iso_code == localization.country.iso_code %}
+                          aria-current="true"
+                        {% endif %}
+                        data-value="{{ country.iso_code }}"
+                      >
+                        {{ country.name }} ({{ country.currency.iso_code }}
+                        {{ country.currency.symbol }})
                         {%- if country.iso_code == localization.country.iso_code -%}
                           <span class="ml-2">
                             {%- render 'icon-check' -%}
@@ -95,8 +130,8 @@
         </section>
     {%- endcase -%}
   {%- endfor -%}
-  <div class="self-end pt-14 md:pt-8 opacity-50 md:col-span-2 lg:col-[span_var(--blocks-count)]">
-    &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}
+  <div class="self-end pt-14 opacity-50 md:col-span-2 md:pt-8 lg:col-[span_var(--blocks-count)]">
+    &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}
     {{ powered_by_link }}
   </div>
 </footer>

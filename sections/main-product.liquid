@@ -2,9 +2,9 @@
   id="MainProduct-{{ section.id }}"
   data-section="{{ section.id }}"
 >
-  <div class="w-full gap-4 md:gap-8 grid px-0 md:px-8 lg:px-12 border-none">
-    <div class="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-      <div class="swimlane hidden-scroll md:grid-flow-row md:p-0 md:overflow-x-auto md:grid-cols-2 w-screen md:w-full lg:col-span-2">
+  <div class="grid w-full gap-4 border-none px-0 md:gap-8 md:px-8 lg:px-12">
+    <div class="grid items-start md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-20">
+      <div class="swimlane hidden-scroll w-screen md:w-full md:grid-flow-row md:grid-cols-2 md:overflow-x-auto md:p-0 lg:col-span-2">
         {%- for media in product.media -%}
           {%- liquid
             assign decimal = forloop.index0 | modulo: 3
@@ -35,16 +35,20 @@
               assign loading = 'eager'
             endif
           -%}
-          <div class="aspect-square rounded overflow-hidden snap-center bg-contrast/10 w-mobileGallery md:w-full {{ media_wrapper_class }}">
-            {{ media.preview_image | image_url: width: 1445 | image_tag:
-              loading: loading,
-              preload: forloop.first,
-              width: media.preview_image.width,
-              height: media.preview_image.height,
-              class: 'w-full h-full aspect-[inherit] object-cover object-center',
-              sizes: sizes,
-              widths: '550, 1100, 1445, 1680, 2048, 22200, 2890, 4096',
-              alt: media.preview_image.alt | escape
+          <div class="aspect-square w-mobileGallery snap-center overflow-hidden rounded bg-contrast/10 md:w-full {{ media_wrapper_class }}">
+            {{
+              media.preview_image
+              | image_url: width: 1445
+              | image_tag:
+                loading: loading,
+                preload: forloop.first,
+                width: media.preview_image.width,
+                height: media.preview_image.height,
+                class: 'w-full h-full aspect-[inherit] object-cover object-center',
+                sizes: sizes,
+                widths: '550, 1100, 1445, 1680, 2048, 22200, 2890, 4096',
+                alt: media.preview_image.alt
+              | escape
             }}
           </div>
         {%- endfor -%}
@@ -55,11 +59,11 @@
       >
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-        <div class="flex flex-col w-full max-w-xl p-6 md:mx-auto md:max-w-sm md:px-0">
-          <div class="product-header grid gap-2 mb-8">
-            <h1 class="font-heading-weight font-heading text-heading">{{ product.title | escape }}</h1>
+        <div class="flex w-full max-w-xl flex-col p-6 md:mx-auto md:max-w-sm md:px-0">
+          <div class="product-header mb-8 grid gap-2">
+            <h1 class="font-heading text-heading font-heading-weight">{{ product.title | escape }}</h1>
             {% if section.settings.show_vendor %}
-              <p class="text-copy opacity-50 font-body-weight-bold">{{ product.vendor }}</p>
+              <p class="text-copy font-body-weight-bold opacity-50">{{ product.vendor }}</p>
             {% endif %}
           </div>
 
@@ -68,16 +72,21 @@
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'price' -%}
-                <div class="no-js:hidden [.product-header_+_&]:-mt-6" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                <div
+                  class="no-js:hidden [.product-header_+_&]:-mt-6"
+                  id="price-{{ section.id }}"
+                  role="status"
+                  {{ block.shopify_attributes }}
+                >
                   {%- render 'price', product: product, use_variant: true, price_class: 'mb-10' -%}
                 </div>
               {%- when 'tab' -%}
-                <div class="mb-10 [.tab_+_&]:-mt-6 tab" {{ block.shopify_attributes }}>
+                <div class="tab mb-10 [.tab_+_&]:-mt-6" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
                       <h2 class="flex justify-between text-lead font-body-weight-bold">
                         {{ block.settings.title | default: block.settings.page.title }}
-                        <span class="[details[open]_&]:rotate-180 w-5 h-5">
+                        <span class="h-5 w-5 [details[open]_&]:rotate-180">
                           {% render 'icon-caret' %}
                         </span>
                       </h2>
@@ -92,19 +101,19 @@
                 {%- unless product.has_only_default_variant -%}
                   {%- if block.settings.picker_type == 'button' -%}
                     <variant-radios
-                      class="no-js:hidden grid gap-4 mb-10"
+                      class="mb-10 grid gap-4 no-js:hidden"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
                       client:idle
                     >
                       {%- for option in product.options_with_values -%}
-                        <fieldset class="flex flex-wrap mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
-                          <legend class="block pb-2 w-full font-body-weight-bold text-lead">{{ option.name }}</legend>
+                        <fieldset class="mb-4 flex flex-wrap gap-y-2 gap-x-4 last-of-type:mb-0">
+                          <legend class="block w-full pb-2 text-lead font-body-weight-bold">{{ option.name }}</legend>
                           {%- for value in option.values -%}
                             <div>
                               <input
-                                class="sr-only peer"
+                                class="peer sr-only"
                                 type="radio"
                                 id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
@@ -114,7 +123,10 @@
                                   checked
                                 {% endif %}
                               >
-                              <label class="leading-none py-1 peer-checked:border-b-[1.5px] cursor-pointer transition-all duration-200 peer-checked:border-primary/50" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                              <label
+                                class="cursor-pointer py-1 leading-none transition-all duration-200 peer-checked:border-b-[1.5px] peer-checked:border-primary/50"
+                                for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                              >
                                 {{ value }}
                               </label>
                             </div>
@@ -127,21 +139,24 @@
                     </variant-radios>
                   {%- else -%}
                     <variant-selects
-                      class="no-js:hidden grid gap-4 mb-10"
+                      class="mb-10 grid gap-4 no-js:hidden"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
                       client:idle
                     >
                       {%- for option in product.options_with_values -%}
-                        <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0">
-                          <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                        <div class="mb-4 flex flex-col gap-y-2 gap-x-4 last-of-type:mb-0">
+                          <label
+                            class="block w-full pb-2 text-lead font-body-weight-bold"
+                            for="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          >
                             {{ option.name }}
                           </label>
                           <div class="relative">
                             <select
                               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                              class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                              class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                               name="options[{{ option.name | escape }}]"
                               form="{{ product_form_id }}"
                             >
@@ -156,7 +171,7 @@
                                 </option>
                               {%- endfor -%}
                             </select>
-                            <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
                               {% render 'icon-caret' %}
                             </span>
                           </div>
@@ -171,15 +186,15 @@
                 {%- endunless -%}
 
                 <noscript class="mb-10">
-                  <div class="flex flex-col mb-4 gap-y-2 gap-x-4 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
-                    <label class="block pb-2 w-full font-body-weight-bold text-lead" for="Variants-{{ section.id }}">
+                  <div class="mb-4 flex flex-col gap-y-2 gap-x-4 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
+                    <label class="block w-full pb-2 text-lead font-body-weight-bold" for="Variants-{{ section.id }}">
                       {{- 'products.product.product_variants' | t -}}
                     </label>
                     <div class="relative">
                       <select
                         name="id"
                         id="Variants-{{ section.id }}"
-                        class="block w-full py-3 px-4 border rounded border-white bg-transparent bg-none appearance-none"
+                        class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
                         form="{{ product_form_id }}"
                       >
                         {%- for variant in product.variants -%}
@@ -198,7 +213,7 @@
                           </option>
                         {%- endfor -%}
                       </select>
-                      <span class="absolute top-1/2 -translate-y-1/2 right-4">
+                      <span class="absolute top-1/2 right-4 -translate-y-1/2">
                         {% render 'icon-caret' %}
                       </span>
                     </div>
@@ -208,18 +223,24 @@
                 <div {{ block.shopify_attributes }}>
                   <product-form client:idle>
                     <p class="text-red-500" role="alert" data-error-message hidden></p>
-                    {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    {%- form 'product',
+                      product,
+                      id: product_form_id,
+                      class: 'form',
+                      novalidate: 'novalidate',
+                      data-type: 'add-to-cart-form'
+                    -%}
                       <input
                         type="hidden"
                         name="id"
                         value="{{ product.selected_or_first_available_variant.id }}"
                         disabled
                       >
-                      <div class="grid items-stretch [&_[aria-hidden]]:hidden [&_button[aria-disabled]]:background-red-500 mb-12 [&_.shopify-payment-button_>_div]:mt-4">
+                      <div class="[&_button[aria-disabled]]:background-red-500 mb-12 grid items-stretch [&_[aria-hidden]]:hidden [&_.shopify-payment-button_>_div]:mt-4">
                         <button
                           type="submit"
                           name="add"
-                          class="button bg-primary text-contrast w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                          class="button w-full bg-primary text-contrast disabled:cursor-not-allowed disabled:opacity-50"
                           {% if product.selected_or_first_available_variant.available == false %}
                             disabled
                           {% endif %}
@@ -383,4 +404,3 @@
   ]
 }
 {% endschema %}
-

@@ -7,8 +7,5 @@
       "type": "contact-form"
     }
   },
-  "order": [
-    "main",
-    "form"
-  ]
+  "order": ["main", "form"]
 }
