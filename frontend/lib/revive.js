@@ -40,15 +40,14 @@ export function revive (islands) {
   const observer = new window.MutationObserver(mutations => {
     for (let i = 0; i < mutations.length; i++) {
       const { addedNodes } = mutations[i]
-      for (let i = 0; i < addedNodes.length; i++) {
-        const node = addedNodes[i]
-
-        if (node.nodeType === 1) walk(node)
+      for (let j = 0; j < addedNodes.length; j++) {
+        const node = addedNodes[j]
+        if (node.nodeType === 1) dfs(node)
       }
     }
   })
 
-  async function walk (node) {
+  async function dfs (node) {
     const tagName = node.tagName.toLowerCase()
     const potentialJsPath = `/frontend/islands/${tagName}.js`
     const isPotentialCustomElementName = /-/.test(tagName)
@@ -70,14 +69,15 @@ export function revive (islands) {
       islands[potentialJsPath]()
     }
 
-    const sibling = node.nextElementSibling
-    const firstChild = node.firstElementChild
+    let child = node.firstElementChild
 
-    if (sibling) walk(sibling)
-    if (firstChild) walk(firstChild)
+    while (child) {
+      dfs(child)
+      child = child.nextElementSibling
+    }
   }
 
-  walk(document.body)
+  dfs(document.body)
 
   observer.observe(document.body, {
     childList: true,
