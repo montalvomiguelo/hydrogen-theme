@@ -2,6 +2,6 @@ assets
 *.cjs
 *.js
 *.ts
-frontend/entrypoints/*
-!frontend/entrypoints/*.css
+*.jsx
+*.tsx
 vite-tag.liquid
