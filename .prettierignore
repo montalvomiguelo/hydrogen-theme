@@ -1,4 +1,5 @@
 assets
+pnpm-lock.yaml
 *.cjs
 *.js
 *.ts

@@ -47,13 +47,8 @@ pnpm install
 ## Development Server
 
 ```bash
-# Start the vite server on http://localhost:5173
+# Launch the Shopify and Vite servers in parallel
 pnpm dev
-```
-
-```bash
-# Serve your theme using the Shopify CLI
-shopify theme dev --live-reload full-page
 ```
 
 ## Production
