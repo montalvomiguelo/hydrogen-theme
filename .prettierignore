@@ -1,0 +1,7 @@
+assets
+*.cjs
+*.js
+*.ts
+frontend/entrypoints/*
+!frontend/entrypoints/*.css
+vite-tag.liquid
