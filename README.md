@@ -48,22 +48,17 @@ pnpm install
 
 ```bash
 # Launch the Shopify and Vite servers in parallel
-pnpm dev
+pnpm dev -- --store johns-apparel --live-reload full-page
 ```
 
 ## Production
 
 ```bash
-# Build your CSS and JavaScript assets for production
-pnpm build
+# Bundle your theme's assets and upload your local theme files to Shopify
+pnpm run deploy --store johns-apparel
 ```
 
-```bash
-# Upload your local theme files to Shopify
-shopify theme push
-```
-
-Checkout [Build Shopify themes](https://shopify.dev/themes) for more information.
+Checkout [Shopify CLI commands for themes](https://shopify.dev/docs/themes/tools/cli/commands) for more information.
 
 ## Hydration Directives
 

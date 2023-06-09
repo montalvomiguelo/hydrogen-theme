@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
-    "dev": "concurrently --raw --kill-others \"pnpm run dev:shopify\" \"pnpm run dev:vite\"",
-    "dev:shopify": "shopify theme dev --live-reload full-page --store $npm_package_config_store",
+    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run dev:shopify {@}\" \"pnpm run dev:vite\"",
+    "dev:shopify": "shopify theme dev",
     "dev:vite": "vite",
+    "deploy": "pnpm run build && pnpm run deploy:shopify",
+    "deploy:shopify": "shopify theme push",
     "build": "vite build",
     "lint": "standard \"*.js\" \"*.cjs\" \"frontend/**/*.js\"",
     "format": "prettier -w . --cache --plugin-search-dir=."
@@ -25,8 +27,5 @@
     "tailwindcss": "^3.1.8",
     "vite": "^4.3.9",
     "vite-plugin-shopify": "^2.1.1"
-  },
-  "config": {
-    "store": "my-shop.myshopify.com"
   }
 }
