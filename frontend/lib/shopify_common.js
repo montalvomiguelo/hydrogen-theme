@@ -2,7 +2,7 @@
  * Shopify Common JS
  *
  */
-if ((typeof window.Shopify) === 'undefined') {
+if (typeof window.Shopify === 'undefined') {
   window.Shopify = {}
 }
 
@@ -23,7 +23,9 @@ window.Shopify.setSelectorByValue = function (selector, value) {
 }
 
 window.Shopify.addListener = function (target, eventName, callback) {
-  target.addEventListener ? target.addEventListener(eventName, callback, false) : target.attachEvent('on' + eventName, callback)
+  target.addEventListener
+    ? target.addEventListener(eventName, callback, false)
+    : target.attachEvent('on' + eventName, callback)
 }
 
 window.Shopify.postLink = function (path, options) {
@@ -47,12 +49,22 @@ window.Shopify.postLink = function (path, options) {
   document.body.removeChild(form)
 }
 
-window.Shopify.CountryProvinceSelector = function (countryDomid, provinceDomid, options) {
+window.Shopify.CountryProvinceSelector = function (
+  countryDomid,
+  provinceDomid,
+  options
+) {
   this.countryEl = document.getElementById(countryDomid)
   this.provinceEl = document.getElementById(provinceDomid)
-  this.provinceContainer = document.getElementById(options.hideElement || provinceDomid)
+  this.provinceContainer = document.getElementById(
+    options.hideElement || provinceDomid
+  )
 
-  window.Shopify.addListener(this.countryEl, 'change', window.Shopify.bind(this.countryHandler, this))
+  window.Shopify.addListener(
+    this.countryEl,
+    'change',
+    window.Shopify.bind(this.countryHandler, this)
+  )
 
   this.initCountry()
   this.initProvince()
@@ -105,5 +117,5 @@ window.Shopify.CountryProvinceSelector.prototype = {
       opt.innerHTML = values[i]
       selector.appendChild(opt)
     }
-  }
+  },
 }

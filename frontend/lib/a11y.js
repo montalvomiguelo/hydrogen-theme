@@ -1,4 +1,4 @@
-export function getFocusableElements (container) {
+export function getFocusableElements(container) {
   const elements = Array.from(
     container.querySelectorAll(
       "summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
@@ -7,16 +7,19 @@ export function getFocusableElements (container) {
 
   // Filter out elements that are not visible.
   // Copied from jQuery https://github.com/jquery/jquery/blob/2d4f53416e5f74fa98e0c1d66b6f3c285a12f0ce/src/css/hiddenVisibleSelectors.js
-  return elements.filter(element => !!(
-    element.offsetWidth ||
-    element.offsetHeight ||
-    element.getClientRects().length
-  ))
+  return elements.filter(
+    (element) =>
+      !!(
+        element.offsetWidth ||
+        element.offsetHeight ||
+        element.getClientRects().length
+      )
+  )
 }
 
 const trapFocusHandlers = {}
 
-export function trapFocus (container, elementToFocus = container) {
+export function trapFocus(container, elementToFocus = container) {
   const elements = getFocusableElements(container)
   const first = elements[0]
   const last = elements[elements.length - 1]
@@ -28,7 +31,9 @@ export function trapFocus (container, elementToFocus = container) {
       event.target !== container &&
       event.target !== last &&
       event.target !== first
-    ) { return }
+    ) {
+      return
+    }
 
     document.addEventListener('keydown', trapFocusHandlers.keydown)
   }
@@ -61,7 +66,7 @@ export function trapFocus (container, elementToFocus = container) {
   elementToFocus.focus()
 }
 
-export function removeTrapFocus (elementToFocus = null) {
+export function removeTrapFocus(elementToFocus = null) {
   document.removeEventListener('focusin', trapFocusHandlers.focusin)
   document.removeEventListener('focusout', trapFocusHandlers.focusout)
   document.removeEventListener('keydown', trapFocusHandlers.keydown)
@@ -69,7 +74,7 @@ export function removeTrapFocus (elementToFocus = null) {
   if (elementToFocus) elementToFocus.focus()
 }
 
-export function onKeyUpEscape (event) {
+export function onKeyUpEscape(event) {
   if (event.code.toUpperCase() !== 'ESCAPE') return
 
   const openDetailsElement = event.target.closest('details[open]')
@@ -81,17 +86,23 @@ export function onKeyUpEscape (event) {
   summaryElement.focus()
 }
 
-export function initDisclosureWidgets (summaries) {
+export function initDisclosureWidgets(summaries) {
   summaries.forEach((summary) => {
     summary.setAttribute('role', 'button')
-    summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'))
+    summary.setAttribute(
+      'aria-expanded',
+      summary.parentNode.hasAttribute('open')
+    )
 
     if (summary.nextElementSibling.getAttribute('id')) {
       summary.setAttribute('aria-controls', summary.nextElementSibling.id)
     }
 
     summary.addEventListener('click', (event) => {
-      event.currentTarget.setAttribute('aria-expanded', !event.currentTarget.closest('details').hasAttribute('open'))
+      event.currentTarget.setAttribute(
+        'aria-expanded',
+        !event.currentTarget.closest('details').hasAttribute('open')
+      )
     })
 
     summary.parentElement.addEventListener('keyup', onKeyUpEscape)

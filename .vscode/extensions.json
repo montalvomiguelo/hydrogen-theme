@@ -1,3 +1,7 @@
 {
-  "recommendations": ["shopify.theme-check-vscode", "bradlc.vscode-tailwindcss", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "shopify.theme-check-vscode",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode"
+  ]
 }

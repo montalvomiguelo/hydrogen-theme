@@ -1,18 +1,18 @@
 import CartItems from './cart-items'
 
 class CartDrawerItems extends CartItems {
-  getSectionsToRender () {
+  getSectionsToRender() {
     return [
       {
         id: 'CartDrawer',
         section: 'cart-drawer',
-        selector: '[tabindex="-1"]'
+        selector: '[tabindex="-1"]',
       },
       {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
-        selector: '.shopify-section'
-      }
+        selector: '.shopify-section',
+      },
     ]
   }
 }

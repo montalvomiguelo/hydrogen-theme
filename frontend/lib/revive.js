@@ -1,4 +1,4 @@
-function media ({ query }) {
+function media({ query }) {
   const mediaQuery = window.matchMedia(query)
   return new Promise(function (resolve) {
     if (mediaQuery.matches) {
@@ -9,7 +9,7 @@ function media ({ query }) {
   })
 }
 
-function visible ({ element }) {
+function visible({ element }) {
   return new Promise(function (resolve) {
     const observer = new window.IntersectionObserver(async function (entries) {
       for (const entry of entries) {
@@ -24,7 +24,7 @@ function visible ({ element }) {
   })
 }
 
-function idle () {
+function idle() {
   return new Promise(function (resolve) {
     if ('requestIdleCallback' in window) {
       window.requestIdleCallback(resolve)
@@ -36,8 +36,8 @@ function idle () {
 
 export const islands = import.meta.glob('@/islands/*.js')
 
-export function revive (islands) {
-  const observer = new window.MutationObserver(mutations => {
+export function revive(islands) {
+  const observer = new window.MutationObserver((mutations) => {
     for (let i = 0; i < mutations.length; i++) {
       const { addedNodes } = mutations[i]
       for (let j = 0; j < addedNodes.length; j++) {
@@ -47,7 +47,7 @@ export function revive (islands) {
     }
   })
 
-  async function dfs (node) {
+  async function dfs(node) {
     const tagName = node.tagName.toLowerCase()
     const potentialJsPath = `/frontend/islands/${tagName}.js`
     const isPotentialCustomElementName = /-/.test(tagName)
@@ -81,6 +81,6 @@ export function revive (islands) {
 
   observer.observe(document.body, {
     childList: true,
-    subtree: true
+    subtree: true,
   })
 }

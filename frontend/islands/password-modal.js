@@ -1,10 +1,11 @@
 import DetailsModal from './details-modal'
 
 class PasswordModal extends DetailsModal {
-  constructor () {
+  constructor() {
     super()
 
-    if (this.querySelector('input[aria-invalid="true"]')) this.open({ target: this.querySelector('details') })
+    if (this.querySelector('input[aria-invalid="true"]'))
+      this.open({ target: this.querySelector('details') })
   }
 }
 

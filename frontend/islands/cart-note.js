@@ -1,13 +1,16 @@
 import { fetchConfig } from '@/lib/utils'
 
 class CartNote extends window.HTMLElement {
-  constructor () {
+  constructor() {
     super()
 
-    this.addEventListener('change', event => {
+    this.addEventListener('change', (event) => {
       event.stopPropagation()
       const body = JSON.stringify({ note: event.target.value })
-      fetch(`${window.routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
+      fetch(`${window.routes.cart_update_url}`, {
+        ...fetchConfig(),
+        ...{ body },
+      })
     })
   }
 }

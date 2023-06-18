@@ -1,15 +1,21 @@
 import { trapFocus, removeTrapFocus } from '@/lib/a11y'
 
 class CartDrawer extends window.HTMLElement {
-  constructor () {
+  constructor() {
     super()
 
-    this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close())
-    this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this))
+    this.addEventListener(
+      'keyup',
+      (evt) => evt.code === 'Escape' && this.close()
+    )
+    this.querySelector('#CartDrawer-Overlay').addEventListener(
+      'click',
+      this.close.bind(this)
+    )
     this.setHeaderCartIconAccessibility()
   }
 
-  setHeaderCartIconAccessibility () {
+  setHeaderCartIconAccessibility() {
     const cartLink = document.querySelector('#cart-icon-bubble')
     cartLink.setAttribute('role', 'button')
     cartLink.setAttribute('aria-haspopup', 'dialog')
@@ -25,59 +31,72 @@ class CartDrawer extends window.HTMLElement {
     })
   }
 
-  open (triggeredBy) {
+  open(triggeredBy) {
     if (triggeredBy) this.setActiveElement(triggeredBy)
     // here the animation doesn't seem to always get triggered. A timeout seem to help
-    setTimeout(() => { this.classList.add('active') })
+    setTimeout(() => {
+      this.classList.add('active')
+    })
 
-    this.addEventListener('transitionend', () => {
-      const containerToTrapFocusOn = document.getElementById('CartDrawer')
-      const focusElement = this.querySelector('[tabindex="-1"]')
-      trapFocus(containerToTrapFocusOn, focusElement)
-    }, { once: true })
+    this.addEventListener(
+      'transitionend',
+      () => {
+        const containerToTrapFocusOn = document.getElementById('CartDrawer')
+        const focusElement = this.querySelector('[tabindex="-1"]')
+        trapFocus(containerToTrapFocusOn, focusElement)
+      },
+      { once: true }
+    )
 
     document.body.classList.add('overflow-hidden')
   }
 
-  close () {
+  close() {
     this.classList.remove('active')
     removeTrapFocus(this.activeElement)
     document.body.classList.remove('overflow-hidden')
   }
 
-  renderContents (parsedState) {
+  renderContents(parsedState) {
     this.productId = parsedState.id
-    this.getSectionsToRender().forEach(section => {
-      const sectionElement = section.selector ? document.querySelector(section.selector) : document.getElementById(section.id)
-      sectionElement.innerHTML =
-        this.getSectionInnerHTML(parsedState.sections[section.id], section.selector)
+    this.getSectionsToRender().forEach((section) => {
+      const sectionElement = section.selector
+        ? document.querySelector(section.selector)
+        : document.getElementById(section.id)
+      sectionElement.innerHTML = this.getSectionInnerHTML(
+        parsedState.sections[section.id],
+        section.selector
+      )
     })
 
     setTimeout(() => {
-      this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this))
+      this.querySelector('#CartDrawer-Overlay').addEventListener(
+        'click',
+        this.close.bind(this)
+      )
       this.open()
     })
   }
 
-  getSectionInnerHTML (html, selector = '.shopify-section') {
+  getSectionInnerHTML(html, selector = '.shopify-section') {
     return new window.DOMParser()
       .parseFromString(html, 'text/html')
       .querySelector(selector).innerHTML
   }
 
-  getSectionsToRender () {
+  getSectionsToRender() {
     return [
       {
         id: 'cart-drawer',
-        selector: '#CartDrawer'
+        selector: '#CartDrawer',
       },
       {
-        id: 'cart-icon-bubble'
-      }
+        id: 'cart-icon-bubble',
+      },
     ]
   }
 
-  setActiveElement (element) {
+  setActiveElement(element) {
     this.activeElement = element
   }
 }

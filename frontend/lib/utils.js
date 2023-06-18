@@ -1,11 +1,14 @@
-export function fetchConfig (type = 'json') {
+export function fetchConfig(type = 'json') {
   return {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: `application/${type}` }
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: `application/${type}`,
+    },
   }
 }
 
-export function debounce (fn, wait) {
+export function debounce(fn, wait) {
   let t
   return (...args) => {
     clearTimeout(t)

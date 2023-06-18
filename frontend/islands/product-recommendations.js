@@ -1,8 +1,8 @@
 class ProductRecommendations extends window.HTMLElement {
-  connectedCallback () {
+  connectedCallback() {
     fetch(this.dataset.url)
-      .then(response => response.text())
-      .then(text => {
+      .then((response) => response.text())
+      .then((text) => {
         const html = document.createElement('div')
         html.innerHTML = text
         const recommendations = html.querySelector('product-recommendations')
@@ -11,7 +11,7 @@ class ProductRecommendations extends window.HTMLElement {
           this.innerHTML = recommendations.innerHTML
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e)
       })
   }

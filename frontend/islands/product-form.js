@@ -1,7 +1,7 @@
 import { fetchConfig } from '@/lib/utils'
 
 class ProductForm extends window.HTMLElement {
-  constructor () {
+  constructor() {
     super()
 
     this.form = this.querySelector('form')
@@ -9,10 +9,11 @@ class ProductForm extends window.HTMLElement {
     this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
     this.cart = document.querySelector('cart-drawer')
     this.submitButton = this.querySelector('[type="submit"]')
-    if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog')
+    if (document.querySelector('cart-drawer'))
+      this.submitButton.setAttribute('aria-haspopup', 'dialog')
   }
 
-  onSubmitHandler (evt) {
+  onSubmitHandler(evt) {
     evt.preventDefault()
     if (this.submitButton.getAttribute('aria-disabled') === true) return
 
@@ -27,15 +28,18 @@ class ProductForm extends window.HTMLElement {
 
     const formData = new window.FormData(this.form)
     if (this.cart) {
-      formData.append('sections', this.cart.getSectionsToRender().map(section => section.id))
+      formData.append(
+        'sections',
+        this.cart.getSectionsToRender().map((section) => section.id)
+      )
       formData.append('sections_url', window.location.pathname)
       this.cart.setActiveElement(document.activeElement)
     }
     config.body = formData
 
     fetch(`${window.routes.cart_add_url}`, config)
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         if (response.status) {
           this.handleErrorMessage(response.description)
 
@@ -52,18 +56,20 @@ class ProductForm extends window.HTMLElement {
         this.error = false
         this.cart.renderContents(response)
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e)
       })
       .finally(() => {
         this.submitButton.classList.remove('loading')
-        if (this.cart && this.cart.classList.contains('is-empty')) this.cart.classList.remove('is-empty')
+        if (this.cart && this.cart.classList.contains('is-empty'))
+          this.cart.classList.remove('is-empty')
         if (!this.error) this.submitButton.removeAttribute('aria-disabled')
       })
   }
 
-  handleErrorMessage (errorMessage = false) {
-    this.errorMessage = this.errorMessage || this.querySelector('[data-error-message]')
+  handleErrorMessage(errorMessage = false) {
+    this.errorMessage =
+      this.errorMessage || this.querySelector('[data-error-message]')
 
     this.errorMessage.toggleAttribute('hidden', !errorMessage)
 

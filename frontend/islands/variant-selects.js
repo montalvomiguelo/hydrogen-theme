@@ -1,10 +1,10 @@
 export default class VariantSelects extends window.HTMLElement {
-  constructor () {
+  constructor() {
     super()
     this.addEventListener('change', this.onVariantChange)
   }
 
-  onVariantChange () {
+  onVariantChange() {
     this.updateOptions()
     this.updateMasterId()
     this.toggleAddButton(true, '', false)
@@ -20,25 +20,36 @@ export default class VariantSelects extends window.HTMLElement {
     }
   }
 
-  updateOptions () {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value)
+  updateOptions() {
+    this.options = Array.from(
+      this.querySelectorAll('select'),
+      (select) => select.value
+    )
   }
 
-  updateMasterId () {
+  updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
-      return !variant.options.map((option, index) => {
-        return this.options[index] === option
-      }).includes(false)
+      return !variant.options
+        .map((option, index) => {
+          return this.options[index] === option
+        })
+        .includes(false)
     })
   }
 
-  updateURL () {
+  updateURL() {
     if (!this.currentVariant || this.dataset.updateUrl === 'false') return
-    window.history.replaceState({ }, '', `${this.dataset.url}?variant=${this.currentVariant.id}`)
+    window.history.replaceState(
+      {},
+      '',
+      `${this.dataset.url}?variant=${this.currentVariant.id}`
+    )
   }
 
-  updateVariantInput () {
-    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`)
+  updateVariantInput() {
+    const productForms = document.querySelectorAll(
+      `#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`
+    )
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]')
       input.value = this.currentVariant.id
@@ -46,7 +57,7 @@ export default class VariantSelects extends window.HTMLElement {
     })
   }
 
-  removeErrorMessage () {
+  removeErrorMessage() {
     const section = this.closest('section')
     if (!section) return
 
@@ -54,24 +65,46 @@ export default class VariantSelects extends window.HTMLElement {
     if (productForm) productForm.handleErrorMessage()
   }
 
-  renderProductInfo () {
-    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`)
+  renderProductInfo() {
+    fetch(
+      `${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${
+        this.dataset.originalSection
+          ? this.dataset.originalSection
+          : this.dataset.section
+      }`
+    )
       .then((response) => response.text())
       .then((responseText) => {
-        const html = new window.DOMParser().parseFromString(responseText, 'text/html')
-        const destination = document.getElementById(`price-${this.dataset.section}`)
-        const source = html.getElementById(`price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`)
+        const html = new window.DOMParser().parseFromString(
+          responseText,
+          'text/html'
+        )
+        const destination = document.getElementById(
+          `price-${this.dataset.section}`
+        )
+        const source = html.getElementById(
+          `price-${
+            this.dataset.originalSection
+              ? this.dataset.originalSection
+              : this.dataset.section
+          }`
+        )
         if (source && destination) destination.innerHTML = source.innerHTML
 
         const price = document.getElementById(`price-${this.dataset.section}`)
 
         if (price) price.classList.remove('invisible')
-        this.toggleAddButton(!this.currentVariant.available, window.variantStrings.soldOut)
+        this.toggleAddButton(
+          !this.currentVariant.available,
+          window.variantStrings.soldOut
+        )
       })
   }
 
-  toggleAddButton (disable = true, text, modifyClass = true) {
-    const productForm = document.getElementById(`product-form-${this.dataset.section}`)
+  toggleAddButton(disable = true, text, modifyClass = true) {
+    const productForm = document.getElementById(
+      `product-form-${this.dataset.section}`
+    )
     if (!productForm) return
     const addButton = productForm.querySelector('[name="add"]')
     const addButtonText = productForm.querySelector('[name="add"] > span')
@@ -86,8 +119,10 @@ export default class VariantSelects extends window.HTMLElement {
     }
   }
 
-  setUnavailable () {
-    const button = document.getElementById(`product-form-${this.dataset.section}`)
+  setUnavailable() {
+    const button = document.getElementById(
+      `product-form-${this.dataset.section}`
+    )
     const addButton = button.querySelector('[name="add"]')
     const addButtonText = button.querySelector('[name="add"] > span')
     const price = document.getElementById(`price-${this.dataset.section}`)
@@ -96,8 +131,10 @@ export default class VariantSelects extends window.HTMLElement {
     if (price) price.classList.add('invisible')
   }
 
-  getVariantData () {
-    this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent)
+  getVariantData() {
+    this.variantData =
+      this.variantData ||
+      JSON.parse(this.querySelector('[type="application/json"]').textContent)
     return this.variantData
   }
 }

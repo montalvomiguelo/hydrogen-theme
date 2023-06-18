@@ -1,5 +1,5 @@
 class StickyHeader extends window.HTMLElement {
-  connectedCallback () {
+  connectedCallback() {
     this.header = document.getElementById('shopify-section-header')
     this.headerBounds = {}
     this.currentScrollTop = 0
@@ -15,7 +15,7 @@ class StickyHeader extends window.HTMLElement {
     this.createObserver()
   }
 
-  createObserver () {
+  createObserver() {
     const observer = new window.IntersectionObserver((entries, observer) => {
       this.headerBounds = entries[0].intersectionRect
       observer.disconnect()
@@ -24,15 +24,21 @@ class StickyHeader extends window.HTMLElement {
     observer.observe(this.header)
   }
 
-  onScroll () {
+  onScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop
 
     if (this.predictiveSearch && this.predictiveSearch.isOpen) return
 
-    if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+    if (
+      scrollTop > this.currentScrollTop &&
+      scrollTop > this.headerBounds.bottom
+    ) {
       if (this.preventHide) return
       window.requestAnimationFrame(this.hide.bind(this))
-    } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+    } else if (
+      scrollTop < this.currentScrollTop &&
+      scrollTop > this.headerBounds.bottom
+    ) {
       if (!this.preventReveal) {
         window.requestAnimationFrame(this.reveal.bind(this))
       } else {
@@ -51,17 +57,22 @@ class StickyHeader extends window.HTMLElement {
     this.currentScrollTop = scrollTop
   }
 
-  hide () {
+  hide() {
     this.header.classList.add('-translate-y-full', 'sticky', 'top-0')
   }
 
-  reveal () {
+  reveal() {
     this.header.classList.add('sticky', 'top-0', 'transition-transform')
     this.header.classList.remove('-translate-y-full')
   }
 
-  reset () {
-    this.header.classList.remove('-translate-y-full', 'sticky', 'top-0', 'transition-transform')
+  reset() {
+    this.header.classList.remove(
+      '-translate-y-full',
+      'sticky',
+      'top-0',
+      'transition-transform'
+    )
   }
 }
 
