@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
-    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run dev:shopify {@}\" \"pnpm run dev:vite\"",
+    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run dev:shopify {@}\" \"pnpm run dev:vite\" --",
     "dev:shopify": "shopify theme dev",
     "dev:vite": "vite",
     "deploy": "pnpm run build && pnpm run deploy:shopify",
