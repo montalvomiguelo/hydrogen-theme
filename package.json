@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
-    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run dev:shopify {@}\" \"pnpm run dev:vite\" --",
-    "dev:shopify": "shopify theme dev",
-    "dev:vite": "vite",
-    "deploy": "pnpm run build && pnpm run deploy:shopify",
-    "deploy:shopify": "shopify theme push",
+    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run shopify:dev {@}\" \"pnpm run vite:dev\" --",
     "build": "vite build",
+    "deploy": "pnpm run build && pnpm run shopify:deploy",
     "lint": "eslint .",
-    "format": "prettier -w . --cache --plugin-search-dir=."
+    "format": "prettier -w . --cache --plugin-search-dir=.",
+    "vite:dev": "vite",
+    "shopify:dev": "shopify theme dev",
+    "shopify:deploy": "shopify theme push"
   },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.1.0",
