@@ -35,21 +35,21 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
 
 ## 🧞 Commands
 
-| Command                                 | Action                                                                  |
-| :-------------------------------------- | :---------------------------------------------------------------------- |
-| `pnpm install`                          | Installs dependencies                                                   |
-| `pnpm dev --live-reload full-page`      | Launch the Shopify and Vite servers in parallel                         |
-| `pnpm run deploy --store johns-apparel` | Bundle your theme's assets and upload your local theme files to Shopify |
+| Command                            | Action                                                                  |
+| :--------------------------------- | :---------------------------------------------------------------------- |
+| `pnpm install`                     | Installs dependencies                                                   |
+| `pnpm dev --live-reload full-page` | Launch the Shopify and Vite servers in parallel                         |
+| `pnpm run deploy`                  | Bundle your theme's assets and upload your local theme files to Shopify |
 
 ## 🏝️ Hydration Directives
 
 The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
 
-| Directive        | Description                                                                                                                                        |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client:idle`    | Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)            |
-| `client:visible` | Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)    |
-| `client:media`   | Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)  |
+| Directive        | Description                                                                                                                                       |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client:idle`    | Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)           |
+| `client:visible` | Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)   |
+| `client:media`   | Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) |
 
 ```html
 <my-component client:visible>This is an island.</my-component>
