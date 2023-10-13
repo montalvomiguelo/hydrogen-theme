@@ -4,10 +4,12 @@
     assign banner_class = 'h-screen-no-nav'
   endif
 
-  assign loading = 'lazy'
-  unless section.settings.lazy_load_enable
-    assign loading = 'eager'
-  endunless
+  assign preload = true
+  assign loading = 'eager'
+  if section.index0 > 0
+    assign loading = 'lazy'
+    assign preload = false
+  endif
 -%}
 
 <div id="Banner-{{ section.id }}" class="relative flex w-full flex-col justify-end {{ banner_class }}">
@@ -27,7 +29,7 @@
           | image_url: width: 1500
           | image_tag:
             loading: loading,
-            preload: section.settings.preload_first_image_enable,
+            preload: preload,
             width: section.settings.image.width,
             height: image_height,
             class: 'block object-cover w-full h-full',
@@ -120,20 +122,6 @@
       "id": "full_page_height_enable",
       "default": true,
       "label": "Full page height"
-    },
-    {
-      "type": "checkbox",
-      "id": "lazy_load_enable",
-      "default": true,
-      "label": "Lazy load",
-      "info": "The images aren't loaded until they're almost in view."
-    },
-    {
-      "type": "checkbox",
-      "id": "preload_first_image_enable",
-      "default": false,
-      "label": "Preload first image",
-      "info": "Preload the largest contentful paint image."
     }
   ],
   "blocks": [
