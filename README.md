@@ -26,28 +26,30 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
         └── styles
 ```
 
-| Subdirectory  | Description                                                                                                                                       |
-| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `entrypoints` | The entry points for your theme. These may be JavaScript or CSS files, and include preprocessed languages such as TypeScript, JSX, TSX, and Sass. |
-| `islands`     | The interactive islands in your theme                                                                                                             |
-| `lib`         | Theme specific libraries                                                                                                                          |
-| `styles`      | The styles of your theme                                                                                                                          |
+| Subdirectory  | Description                           |
+| :------------ | :------------------------------------ |
+| `entrypoints` | The entry points for your theme       |
+| `islands`     | The interactive islands in your theme |
+| `lib`         | Theme specific libraries              |
+| `styles`      | The styles of your theme              |
 
 ## 🧞 Commands
 
-| Command                                                  | Action                                                                  |
-| :------------------------------------------------------- | :---------------------------------------------------------------------- |
-| `pnpm install`                                           | Installs dependencies                                                   |
-| `pnpm dev --store johns-apparel --live-reload full-page` | Launch the Shopify and Vite servers in parallel                         |
-| `pnpm run deploy --store johns-apparel`                  | Bundle your theme's assets and upload your local theme files to Shopify |
+| Command                                 | Action                                                                  |
+| :-------------------------------------- | :---------------------------------------------------------------------- |
+| `pnpm install`                          | Installs dependencies                                                   |
+| `pnpm dev --live-reload full-page`      | Launch the Shopify and Vite servers in parallel                         |
+| `pnpm run deploy --store johns-apparel` | Bundle your theme's assets and upload your local theme files to Shopify |
 
 ## 🏝️ Hydration Directives
 
 The following hydration strategies are available (borrowed from [Astro](https://docs.astro.build/en/concepts/islands/)).
 
-- `client:idle` Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback).
-- `client:visible` Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
-- `client:media` Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
+| Directive        | Description                                                                                                                                        |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client:idle`    | Hydrate the component as soon as the main thread is [free](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)            |
+| `client:visible` | Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)    |
+| `client:media`   | Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)  |
 
 ```html
 <my-component client:visible>This is an island.</my-component>
@@ -57,8 +59,7 @@ The following hydration strategies are available (borrowed from [Astro](https://
 
 We would like to specifically thank the following projects for the inspiration and help regarding the creation of hydrogen-theme:
 
+- [vite-plugin-shopify](https://shopify-vite.barrelny.com/)
 - [hydrogen](https://github.com/Shopify/hydrogen)
-- [Dawn](https://github.com/Shopify/dawn)
+- [dawn](https://github.com/Shopify/dawn)
 - [astro](https://github.com/withastro/astro)
-- [iles](https://github.com/ElMassimo/iles)
-- [fresh](https://github.com/denoland/fresh)
