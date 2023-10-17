@@ -51,6 +51,7 @@ The following hydration strategies are available (borrowed from [Astro](https://
 | `client:visible` | Hydrates the component as soon as the element [enters the viewport](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)   |
 | `client:media`   | Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) |
 
+Usage:
 ```html
 <my-component client:visible>This is an island.</my-component>
 ```
@@ -59,7 +60,7 @@ The following hydration strategies are available (borrowed from [Astro](https://
 
 We would like to specifically thank the following projects for the inspiration and help regarding the creation of hydrogen-theme:
 
-- [vite-plugin-shopify](https://shopify-vite.barrelny.com/)
+- [vite-plugin-shopify](https://github.com/barrel/shopify-vite)
 - [hydrogen](https://github.com/Shopify/hydrogen)
 - [dawn](https://github.com/Shopify/dawn)
 - [astro](https://github.com/withastro/astro)
