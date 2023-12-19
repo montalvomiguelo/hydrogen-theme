@@ -17,3 +17,4 @@ vite.config.js
 /.vim
 frontend/
 assets/.vite/
+jsconfig.json
