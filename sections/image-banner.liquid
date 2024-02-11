@@ -13,7 +13,7 @@
 -%}
 
 <div id="Banner-{{ section.id }}" class="relative flex w-full flex-col justify-end {{ banner_class }}">
-  <div class="content-stretch pointer-events-none absolute inset-0 -z-10 grid flex-grow auto-cols-fr grid-flow-col overflow-clip">
+  <div class="pointer-events-none absolute inset-0 -z-10 grid flex-grow auto-cols-fr grid-flow-col content-stretch overflow-clip">
     {%- if section.settings.image != blank -%}
       <div>
         {%- liquid

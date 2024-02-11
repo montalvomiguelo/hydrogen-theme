@@ -6,7 +6,7 @@ class LocalizationForm extends window.HTMLElement {
         'input[name="language_code"], input[name="country_code"]'
       ),
       button: this.querySelector('button'),
-      list: this.querySelector('ul'),
+      list: this.querySelector('ul')
     }
     this.elements.button.addEventListener('click', this.toggleList.bind(this))
     this.elements.button.addEventListener(

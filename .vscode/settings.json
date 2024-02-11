@@ -1,4 +1,5 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": false,
   "[javascript]": {
     "editor.formatOnSave": true
@@ -8,5 +9,6 @@
   },
   "[liquid]": {
     "editor.formatOnSave": true
-  }
+  },
+  "prettier.documentSelectors": ["**/*.liquid"]
 }

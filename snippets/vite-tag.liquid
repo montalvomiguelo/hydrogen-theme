@@ -4,11 +4,11 @@
 {% endcomment %}
 {% assign path = vite-tag | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/frontend/entrypoints/customers.js" or path == "customers.js" %}
-  <script src="{{ 'customers.bYivGGHk.min.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modulepreload-polyfill.CpTBTuUC.min.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'customers.0-uxUFsu.min.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'modulepreload-polyfill.BCYanipZ.min.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/frontend/entrypoints/theme.css" or path == "theme.css" %}
-  {{ 'theme.2Dc20w83.min.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'theme.GFGXf3_Z.min.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/frontend/entrypoints/theme.js" or path == "theme.js" %}
-  <script src="{{ 'theme.IT5dB4OI.min.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modulepreload-polyfill.CpTBTuUC.min.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'theme.Cfke23E1.min.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'modulepreload-polyfill.BCYanipZ.min.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% endif %}

@@ -9,7 +9,7 @@ class CartNote extends window.HTMLElement {
       const body = JSON.stringify({ note: event.target.value })
       fetch(`${window.routes.cart_update_url}`, {
         ...fetchConfig(),
-        ...{ body },
+        ...{ body }
       })
     })
   }

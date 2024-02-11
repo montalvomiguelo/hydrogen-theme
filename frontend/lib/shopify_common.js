@@ -117,5 +117,5 @@ window.Shopify.CountryProvinceSelector.prototype = {
       opt.innerHTML = values[i]
       selector.appendChild(opt)
     }
-  },
+  }
 }

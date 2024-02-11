@@ -88,11 +88,11 @@ class CartDrawer extends window.HTMLElement {
     return [
       {
         id: 'cart-drawer',
-        selector: '#CartDrawer',
+        selector: '#CartDrawer'
       },
       {
-        id: 'cart-icon-bubble',
-      },
+        id: 'cart-icon-bubble'
+      }
     ]
   }
 

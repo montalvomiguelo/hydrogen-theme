@@ -52,6 +52,7 @@ The following hydration strategies are available (borrowed from [Astro](https://
 | `client:media`   | Hydrates the component as soon as the browser [matches the given media query](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) |
 
 Usage:
+
 ```html
 <my-component client:visible>This is an island.</my-component>
 ```
