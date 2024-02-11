@@ -4,12 +4,12 @@ const selectors = {
   addressContainer: '[data-address]',
   toggleAddressButton: 'button[aria-expanded]',
   cancelAddressButton: 'button[type="reset"]',
-  deleteAddressButton: 'button[data-confirm-message]',
+  deleteAddressButton: 'button[data-confirm-message]'
 }
 
 const attributes = {
   expanded: 'aria-expanded',
-  confirmMessage: 'data-confirm-message',
+  confirmMessage: 'data-confirm-message'
 }
 
 class CustomerAddresses {
@@ -37,7 +37,7 @@ class CustomerAddresses {
           ),
           countrySelects: container.querySelectorAll(
             selectors.addressCountrySelect
-          ),
+          )
         }
       : {}
   }
@@ -49,7 +49,7 @@ class CustomerAddresses {
         'AddressCountryNew',
         'AddressProvinceNew',
         {
-          hideElement: 'AddressProvinceContainerNew',
+          hideElement: 'AddressProvinceContainerNew'
         }
       )
       this.elements.countrySelects.forEach((select) => {
@@ -59,7 +59,7 @@ class CustomerAddresses {
           `AddressCountry_${formId}`,
           `AddressProvince_${formId}`,
           {
-            hideElement: `AddressProvinceContainer_${formId}`,
+            hideElement: `AddressProvinceContainer_${formId}`
           }
         )
       })
@@ -101,7 +101,7 @@ class CustomerAddresses {
     // eslint-disable-next-line no-alert
     if (window.confirm(currentTarget.getAttribute(attributes.confirmMessage))) {
       window.Shopify.postLink(currentTarget.dataset.target, {
-        parameters: { _method: 'delete' },
+        parameters: { _method: 'delete' }
       })
     }
   }

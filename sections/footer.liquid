@@ -5,7 +5,7 @@
 <footer
   role="contentinfo"
   style="--blocks-count: {{ section.blocks.size }};"
-  class="{{ container_class }} min-h-[25rem] w-full grid-cols-1 border-b bg-contrast py-8 px-6 text-primary md:grid md:grid-flow-row md:grid-cols-2 md:items-start md:gap-8 md:px-8 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] lg:gap-12 lg:px-12"
+  class="{{ container_class }} min-h-[25rem] w-full grid-cols-1 border-b bg-contrast px-6 py-8 text-primary md:grid md:grid-flow-row md:grid-cols-2 md:items-start md:gap-8 md:px-8 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] lg:gap-12 lg:px-12"
 >
   {%- for block in section.blocks -%}
     {%- case block.type -%}
@@ -60,7 +60,7 @@
               {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
                 <div class="relative">
                   <select
-                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
                     name="country_code"
                     aria-labelledby="CountryListLabel"
                   >
@@ -76,7 +76,7 @@
                       </option>
                     {%- endfor -%}
                   </select>
-                  <span class="absolute top-1/2 right-4 -translate-y-1/2">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2">
                     {% render 'icon-caret' %}
                   </span>
                 </div>
@@ -87,7 +87,7 @@
               {% form 'localization', class: 'relative' %}
                 <button
                   type="button"
-                  class="flex w-full items-center justify-between rounded border border-white py-3 px-4"
+                  class="flex w-full items-center justify-between rounded border border-white px-4 py-3"
                   aria-expanded="false"
                   aria-controls="CountryList"
                   aria-describedby="CountryListLabel"
@@ -99,7 +99,7 @@
                 <ul
                   id="CountryList"
                   role="list"
-                  class="absolute bottom-12 z-10 max-h-48 w-full overflow-y-auto rounded-t border border-white border-t-contrast/30 bg-contrast px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b"
+                  class="absolute bottom-12 z-10 max-h-48 w-full overflow-y-auto rounded-t border border-white border-t-contrast/30 bg-contrast px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-b md:border-t-0"
                   hidden
                 >
                   {% for country in localization.available_countries %}

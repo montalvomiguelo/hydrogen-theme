@@ -43,7 +43,7 @@
                     role="cell"
                     headers="ColumnOrder"
                     data-label="{{ 'customer.orders.order_number' | t }}"
-                    class="flex items-center pt-6 pb-2 before:grow before:content-[attr(data-label)] md:table-cell md:p-4 md:before:content-none"
+                    class="flex items-center pb-2 pt-6 before:grow before:content-[attr(data-label)] md:table-cell md:p-4 md:before:content-none"
                   >
                     <a
                       href="{{ order.customer_url }}"
@@ -94,7 +94,7 @@
 
         {%- if paginate.pages > 1 -%}
           {%- if paginate.parts.size > 0 -%}
-            <nav class="mt-10 mb-10" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+            <nav class="mb-10 mt-10" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
               <ul role="list" class="flex items-center justify-center gap-6">
                 {%- if paginate.previous -%}
                   <li>

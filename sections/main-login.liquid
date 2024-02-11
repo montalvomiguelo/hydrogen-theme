@@ -2,7 +2,7 @@
   <h1 id="recover" class="hidden w-full max-w-md text-4xl target:block" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
   </h1>
-  <div class="mt-4 mb-4 w-full max-w-md pt-6 pb-8 [#recover_+_&]:hidden [#recover:target_+_&]:block">
+  <div class="mb-4 mt-4 w-full max-w-md pb-8 pt-6 [#recover:target_+_&]:block [#recover_+_&]:hidden">
     <p>
       {{ 'customer.recover_password.subtext' | t }}
     </p>
@@ -18,7 +18,7 @@
           value=""
           name="email"
           id="RecoverEmail"
-          class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+          class="appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
@@ -54,7 +54,7 @@
   <h1 id="login" class="w-full max-w-md text-4xl [#recover:target_~_&]:hidden" tabindex="-1">
     {{ 'customer.login_page.title' | t }}
   </h1>
-  <div class="mt-4 mb-4 w-full max-w-md pt-6 pb-8 [#recover:target_~_#login_+_&]:hidden">
+  <div class="mb-4 mt-4 w-full max-w-md pb-8 pt-6 [#recover:target_~_#login_+_&]:hidden">
     {%- if recover_success == true -%}
       <h3 class="mb-10" tabindex="-1" autofocus>
         {{ 'customer.recover_password.success' | t }}
@@ -79,7 +79,7 @@
           type="email"
           name="customer[email]"
           id="CustomerEmail"
-          class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+          class="appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
           autocomplete="email"
           autocorrect="off"
           autocapitalize="off"
@@ -99,7 +99,7 @@
             value=""
             name="customer[password]"
             id="CustomerPassword"
-            class="appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+            class="appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
             autocomplete="current-password"
             {% if form.errors contains 'form' %}
               aria-invalid="true"

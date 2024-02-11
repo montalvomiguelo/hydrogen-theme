@@ -108,7 +108,7 @@
                       client:idle
                     >
                       {%- for option in product.options_with_values -%}
-                        <fieldset class="mb-4 flex flex-wrap gap-y-2 gap-x-4 last-of-type:mb-0">
+                        <fieldset class="mb-4 flex flex-wrap gap-x-4 gap-y-2 last-of-type:mb-0">
                           <legend class="block w-full pb-2 text-lead font-body-weight-bold">{{ option.name }}</legend>
                           {%- for value in option.values -%}
                             <div>
@@ -146,7 +146,7 @@
                       client:idle
                     >
                       {%- for option in product.options_with_values -%}
-                        <div class="mb-4 flex flex-col gap-y-2 gap-x-4 last-of-type:mb-0">
+                        <div class="mb-4 flex flex-col gap-x-4 gap-y-2 last-of-type:mb-0">
                           <label
                             class="block w-full pb-2 text-lead font-body-weight-bold"
                             for="Option-{{ section.id }}-{{ forloop.index0 }}"
@@ -156,7 +156,7 @@
                           <div class="relative">
                             <select
                               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                              class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                              class="block w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
                               name="options[{{ option.name | escape }}]"
                               form="{{ product_form_id }}"
                             >
@@ -171,7 +171,7 @@
                                 </option>
                               {%- endfor -%}
                             </select>
-                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2">
                               {% render 'icon-caret' %}
                             </span>
                           </div>
@@ -186,7 +186,7 @@
                 {%- endunless -%}
 
                 <noscript class="mb-10">
-                  <div class="mb-4 flex flex-col gap-y-2 gap-x-4 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
+                  <div class="mb-4 flex flex-col gap-x-4 gap-y-2 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
                     <label class="block w-full pb-2 text-lead font-body-weight-bold" for="Variants-{{ section.id }}">
                       {{- 'products.product.product_variants' | t -}}
                     </label>
@@ -194,7 +194,7 @@
                       <select
                         name="id"
                         id="Variants-{{ section.id }}"
-                        class="block w-full appearance-none rounded border border-white bg-transparent bg-none py-3 px-4"
+                        class="block w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
                         form="{{ product_form_id }}"
                       >
                         {%- for variant in product.variants -%}
@@ -213,7 +213,7 @@
                           </option>
                         {%- endfor -%}
                       </select>
-                      <span class="absolute top-1/2 right-4 -translate-y-1/2">
+                      <span class="absolute right-4 top-1/2 -translate-y-1/2">
                         {% render 'icon-caret' %}
                       </span>
                     </div>
@@ -236,7 +236,7 @@
                         value="{{ product.selected_or_first_available_variant.id }}"
                         disabled
                       >
-                      <div class="[&_button[aria-disabled]]:background-red-500 mb-12 grid items-stretch [&_[aria-hidden]]:hidden [&_.shopify-payment-button_>_div]:mt-4">
+                      <div class="[&_button[aria-disabled]]:background-red-500 mb-12 grid items-stretch [&_.shopify-payment-button_>_div]:mt-4 [&_[aria-hidden]]:hidden">
                         <button
                           type="submit"
                           name="add"

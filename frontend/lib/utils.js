@@ -3,8 +3,8 @@ export function fetchConfig(type = 'json') {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Accept: `application/${type}`,
-    },
+      Accept: `application/${type}`
+    }
   }
 }
 

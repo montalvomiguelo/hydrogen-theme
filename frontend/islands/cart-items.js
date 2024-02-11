@@ -33,23 +33,23 @@ export default class CartItems extends window.HTMLElement {
       {
         id: 'main-cart-items',
         section: document.getElementById('main-cart-items').dataset.id,
-        selector: '.js-contents',
+        selector: '.js-contents'
       },
       {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
-        selector: '.shopify-section',
+        selector: '.shopify-section'
       },
       {
         id: 'cart-live-region-text',
         section: 'cart-live-region-text',
-        selector: '.shopify-section',
+        selector: '.shopify-section'
       },
       {
         id: 'cart-subtotal',
         section: 'cart-subtotal',
-        selector: '.shopify-section',
-      },
+        selector: '.shopify-section'
+      }
     ]
   }
 
@@ -60,7 +60,7 @@ export default class CartItems extends window.HTMLElement {
       line,
       quantity,
       sections: this.getSectionsToRender().map((section) => section.section),
-      sections_url: window.location.pathname,
+      sections_url: window.location.pathname
     })
 
     fetch(`${window.routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
