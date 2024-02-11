@@ -2,10 +2,11 @@
 module.exports = {
   singleQuote: true,
   semi: false,
-  printWidth: 100,
+  printWidth: 80,
+  trailingComma: 'none',
   plugins: [
     require.resolve('@shopify/prettier-plugin-liquid/standalone'),
-    'prettier-plugin-tailwindcss',
+    'prettier-plugin-tailwindcss'
   ],
   overrides: [
     {
@@ -13,7 +14,8 @@ module.exports = {
       options: {
         parser: 'liquid-html',
         singleQuote: false,
-      },
-    },
-  ],
+        printWidth: 120
+      }
+    }
+  ]
 }
