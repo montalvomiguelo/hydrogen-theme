@@ -21,6 +21,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.shopify
 
 # Editor directories and files
 .vscode/*
