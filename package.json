@@ -1,6 +1,7 @@
 {
   "name": "hygrogen-theme",
   "private": true,
+  "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
@@ -9,6 +10,7 @@
     "deploy": "pnpm run build && pnpm run shopify:deploy",
     "lint": "eslint .",
     "format": "prettier --write --cache .",
+    "format-check": "prettier --check .",
     "vite:dev": "vite",
     "shopify:dev": "shopify theme dev",
     "shopify:deploy": "shopify theme push"
