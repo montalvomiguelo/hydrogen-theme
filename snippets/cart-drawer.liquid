@@ -12,17 +12,17 @@
   <div id="CartDrawer" class="fixed inset-0 z-20 flex h-full w-screen justify-end">
     <div id="CartDrawer-Overlay" class="fixed inset-0 hidden bg-black/25 [.active_&]:block"></div>
     <div
-      class="relative flex h-full w-full max-w-lg translate-x-full flex-col overflow-y-auto bg-contrast transition-transform duration-300 [.active_&]:translate-x-0"
+      class="bg-contrast relative flex h-full w-full max-w-lg translate-x-full flex-col overflow-y-auto transition-transform duration-300 [.active_&]:translate-x-0"
       role="dialog"
       aria-modal="true"
       aria-label="{{ 'sections.cart.title' | t }}"
       tabindex="-1"
     >
-      <div class="flex h-nav shrink-0 items-center justify-between px-6 sm:px-8 md:px-12">
-        <h2 class="max-w-prose whitespace-pre-wrap text-lead font-body-weight-bold">{{ 'sections.cart.title' | t }}</h2>
+      <div class="h-nav flex shrink-0 items-center justify-between px-6 sm:px-8 md:px-12">
+        <h2 class="text-lead font-body-weight-bold max-w-prose whitespace-pre-wrap">{{ 'sections.cart.title' | t }}</h2>
         <button
           type="button"
-          class="-m-4 p-4 text-primary transition hover:text-primary/50"
+          class="text-primary hover:text-primary/50 -m-4 p-4 transition"
           onclick="this.closest('cart-drawer').close()"
           aria-label="{{ 'accessibility.close' | t }}"
         >
@@ -43,7 +43,7 @@
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" method="post">
           <div
             id="CartDrawer-CartItems"
-            class="grid gap-6 px-6 pb-6 md:gap-10 md:px-12 sm-max:pt-2 [.loading&]:pointer-events-none"
+            class="sm-max:pt-2 grid gap-6 px-6 pb-6 md:gap-10 md:px-12 [.loading&]:pointer-events-none"
           >
             {%- for item in cart.items -%}
               <div id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item grid grid-cols-[auto_1fr] gap-4">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="flex flex-grow justify-between">
                   <div class="grid gap-2">
-                    <h3 class="max-w-prose whitespace-pre-wrap text-copy font-body-weight-bold">
+                    <h3 class="text-copy font-body-weight-bold max-w-prose whitespace-pre-wrap">
                       <a class="cart-item-name" href="{{ item.url }}">{{ item.product.title | escape }}</a>
                     </h3>
                     {%- if item.product.has_only_default_variant == false
@@ -75,7 +75,7 @@
                         <dl class="grid">
                           {%- if item.product.has_only_default_variant == false -%}
                             {%- for option in item.options_with_values -%}
-                              <div class="flex max-w-prose whitespace-pre-wrap text-copy text-primary/50">
+                              <div class="text-copy text-primary/50 flex max-w-prose whitespace-pre-wrap">
                                 <dt>{{ option.name }}:</dt>
                                 <dd>{{ option.value }}</dd>
                               </div>
@@ -85,7 +85,7 @@
                           {%- for property in item.properties -%}
                             {%- assign property_first_char = property.first | slice: 0 -%}
                             {%- if property.last != blank and property_first_char != '_' -%}
-                              <div class="flex max-w-prose whitespace-pre-wrap text-copy text-primary/50">
+                              <div class="text-copy text-primary/50 flex max-w-prose whitespace-pre-wrap">
                                 <dt>{{ property.first }}:</dt>
                                 <dd>
                                   {%- if property.last contains '/uploads/' -%}
@@ -106,13 +106,13 @@
                           {%- endfor -%}
                         </dl>
 
-                        <p class="flex max-w-prose whitespace-pre-wrap text-copy text-primary/50">
+                        <p class="text-copy text-primary/50 flex max-w-prose whitespace-pre-wrap">
                           {{ item.selling_plan_allocation.selling_plan.name }}
                         </p>
 
                         <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
                           {%- for discount in item.discounts -%}
-                            <li class="flex items-center gap-2 text-primary/50">
+                            <li class="text-primary/50 flex items-center gap-2">
                               {%- render 'icon-discount' -%}
                               {{ discount.title }}
                             </li>
@@ -124,7 +124,7 @@
                     <div class="flex items-center gap-2">
                       <quantity-input class="flex min-h-[theme(spacing.10)] max-w-[107px] rounded border" client:idle>
                         <button
-                          class="h-10 w-10 shrink-0 text-primary/50 transition hover:text-primary disabled:cursor-wait"
+                          class="text-primary/50 hover:text-primary h-10 w-10 shrink-0 transition disabled:cursor-wait"
                           type="button"
                           name="minus"
                           aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}"
@@ -142,7 +142,7 @@
                           data-index="{{ item.index | plus: 1 }}"
                         >
                         <button
-                          class="h-10 w-10 shrink-0 text-primary/50 transition hover:text-primary disabled:cursor-wait"
+                          class="text-primary/50 hover:text-primary h-10 w-10 shrink-0 transition disabled:cursor-wait"
                           type="button"
                           name="plus"
                           aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}"
@@ -165,13 +165,13 @@
                       </cart-remove-button>
                     </div>
                   </div>
-                  <div class="relative text-copy">
-                    <div class="loading-overlay absolute right-0 top-0 hidden">
+                  <div class="text-copy relative">
+                    <div class="loading-overlay absolute top-0 right-0 hidden">
                       <svg
                         aria-hidden="true"
                         focusable="false"
                         role="presentation"
-                        class="h-5 w-5 animate-spin text-primary"
+                        class="text-primary h-5 w-5 animate-spin"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -197,7 +197,7 @@
 
                 <p
                   id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}"
-                  class="col-span-2 text-copy text-primary/50 text-red-500"
+                  class="text-copy text-primary/50 col-span-2 text-red-500"
                   role="alert"
                 ></p>
               </div>
@@ -208,7 +208,7 @@
                 <div class="grid gap-2 [.is-empty_&]:hidden">
                   <label class="text-copy text-primary" for="Note">{{ 'sections.cart.note' | t }}</label>
                   <textarea
-                    class="min-h-[100px] rounded border bg-primary text-contrast"
+                    class="bg-primary text-contrast min-h-[100px] rounded border"
                     name="note"
                     id="Note"
                     data-cart-note
@@ -225,7 +225,7 @@
       </cart-drawer-items>
       <div class="mt-auto grid gap-6 border-t p-6 md:px-12 [.is-empty_&]:hidden">
         <div class="grid gap-2">
-          <div class="flex items-center justify-between font-body-weight-bold" role="status">
+          <div class="font-body-weight-bold flex items-center justify-between" role="status">
             <h2 class="text-copy">{{ 'sections.cart.subtotal' | t }}</h2>
             <p class="text-copy">{{ cart.total_price | money_with_currency }}</p>
           </div>
@@ -234,7 +234,7 @@
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
                 {%- for discount in cart.cart_level_discount_applications -%}
-                  <li class="flex items-center gap-2 text-primary/50">
+                  <li class="text-primary/50 flex items-center gap-2">
                     {%- render 'icon-discount' -%}
                     {{ discount.title }}
                     (-{{ discount.total_allocated_amount | money }})
@@ -267,7 +267,7 @@
           <button
             type="submit"
             id="CartDrawer-Checkout"
-            class="button w-full bg-primary text-contrast"
+            class="button bg-primary text-contrast w-full"
             name="checkout"
             form="CartDrawer-Form"
             {% if cart == empty %}
