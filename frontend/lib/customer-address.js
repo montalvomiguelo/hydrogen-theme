@@ -44,7 +44,6 @@ class CustomerAddresses {
 
   _setupCountries() {
     if (window.Shopify && window.Shopify.CountryProvinceSelector) {
-      // eslint-disable-next-line no-new
       new window.Shopify.CountryProvinceSelector(
         'AddressCountryNew',
         'AddressProvinceNew',
@@ -54,7 +53,6 @@ class CustomerAddresses {
       )
       this.elements.countrySelects.forEach((select) => {
         const formId = select.dataset.formId
-        // eslint-disable-next-line no-new
         new window.Shopify.CountryProvinceSelector(
           `AddressCountry_${formId}`,
           `AddressProvince_${formId}`,
@@ -98,7 +96,6 @@ class CustomerAddresses {
   }
 
   _handleDeleteButtonClick = ({ currentTarget }) => {
-    // eslint-disable-next-line no-alert
     if (window.confirm(currentTarget.getAttribute(attributes.confirmMessage))) {
       window.Shopify.postLink(currentTarget.dataset.target, {
         parameters: { _method: 'delete' }

@@ -101,7 +101,7 @@ export default class VariantSelects extends window.HTMLElement {
       })
   }
 
-  toggleAddButton(disable = true, text, modifyClass = true) {
+  toggleAddButton(disable = true, text) {
     const productForm = document.getElementById(
       `product-form-${this.dataset.section}`
     )
