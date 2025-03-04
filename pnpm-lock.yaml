@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@eslint/js':
+        specifier: ^9.21.0
+        version: 9.21.0
     devDependencies:
       '@shopify/prettier-plugin-liquid':
         specifier: ^1.8.3
