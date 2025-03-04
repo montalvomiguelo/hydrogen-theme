@@ -1,7 +1,9 @@
-const plugin = require('tailwindcss/plugin')
+import plugin from 'tailwindcss/plugin'
+import formsPlugin from '@tailwindcss/forms'
+import typographyPlugin from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./frontend/**/*.js', './**/*.liquid'],
   theme: {
     extend: {
@@ -25,11 +27,9 @@ module.exports = {
         '2xl-only': { min: '96em' }
       },
       spacing: {
-        nav: 'var(--height-nav)',
-        screen: 'var(--screen-height, 100vh)'
+        nav: 'var(--height-nav)'
       },
       height: {
-        screen: 'var(--screen-height, 100vh)',
         'screen-no-nav': 'calc(var(--screen-height, 100vh) - var(--height-nav))'
       },
       width: {
@@ -63,8 +63,8 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
+    formsPlugin,
+    typographyPlugin,
     plugin(({ addVariant }) => {
       addVariant('no-js', '.no-js &')
     })

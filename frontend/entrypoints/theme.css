@@ -1,6 +1,5 @@
-@import 'tailwindcss/base';
+@import 'tailwindcss' source('../..');
+@config '../../tailwind.config.js';
 @import '@/styles/base.css';
-@import 'tailwindcss/components';
-@import '@/styles/components';
-@import 'tailwindcss/utilities';
-@import '@/styles/utilities';
+@import '@/styles/components.css';
+@import '@/styles/utilities.css';
