@@ -8,7 +8,7 @@
     "dev": "concurrently -r -k -P 'shopify theme dev {@}' 'vite'",
     "build": "vite build",
     "deploy": "pnpm run build && shopify theme push",
-    "lint": "eslint --cache .",
+    "lint": "eslint .",
     "format": "prettier --write --cache .",
     "format-check": "prettier --check ."
   },
