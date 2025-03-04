@@ -5,15 +5,12 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
-    "dev": "concurrently --raw --kill-others --passthrough-arguments \"pnpm run shopify:dev {@}\" \"pnpm run vite:dev\" --",
+    "dev": "concurrently -c auto -n shopify,vite -k -P 'shopify theme dev {@}' 'vite'",
     "build": "vite build",
-    "deploy": "pnpm run build && pnpm run shopify:deploy",
+    "deploy": "pnpm run build && shopify theme push",
     "lint": "eslint --cache .",
     "format": "prettier --write --cache .",
-    "format-check": "prettier --check .",
-    "vite:dev": "vite",
-    "shopify:dev": "shopify theme dev",
-    "shopify:deploy": "shopify theme push"
+    "format-check": "prettier --check ."
   },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.8.3",
