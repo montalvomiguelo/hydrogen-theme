@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.12.0",
   "scripts": {
-    "dev": "concurrently -c auto -n shopify,vite -k -P 'shopify theme dev {@}' 'vite'",
+    "dev": "concurrently -r -k -P 'shopify theme dev {@}' 'vite'",
     "build": "vite build",
     "deploy": "pnpm run build && shopify theme push",
     "lint": "eslint --cache .",
