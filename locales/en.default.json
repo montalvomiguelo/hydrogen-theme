@@ -73,8 +73,7 @@
       "checkout": "Check out",
       "note": "Order special instructions",
       "cart_error": "There was an error while updating your cart. Please try again.",
-      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
-      "update": "Update"
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart."
     },
     "collection_template": {
       "title": "Collection"
@@ -132,9 +131,6 @@
     "account_fallback": "Account",
     "log_in": "Log in",
     "log_out": "Log out",
-    "order": {
-      "discount": "Discount"
-    },
     "order": {
       "title": "Order {{ name }}",
       "date_html": "Placed on {{ date }}",
