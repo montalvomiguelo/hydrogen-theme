@@ -5,6 +5,7 @@ export default {
   printWidth: 80,
   trailingComma: 'none',
   plugins: ['@shopify/prettier-plugin-liquid', 'prettier-plugin-tailwindcss'],
+  tailwindStylesheet: './frontend/entrypoints/theme.css',
   overrides: [
     {
       files: '*.liquid',
