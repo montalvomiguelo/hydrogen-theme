@@ -1,5 +1,45 @@
 @import 'tailwindcss' source('../..');
-@config '../../tailwind.config.js';
-@import '@/styles/base.css';
-@import '@/styles/components.css';
-@import '@/styles/utilities.css';
+
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/forms';
+
+@import '@/styles/base.css' layer(base);
+@import '@/styles/components.css' layer(components);
+@import '@/styles/utilities.css' layer(utilities);
+
+@theme {
+  --color-primary: rgb(20 20 20);
+  --color-contrast: rgb(250 250 249);
+  --color-notice: rgb(191 72 0);
+  --color-shop-pay: #5a31f4;
+
+  --spacing-nav: var(--height-nav);
+  --spacing-screen-no-nav: calc(
+    var(--screen-height, 100vh) - var(--height-nav)
+  );
+  --spacing-mobileGallery: calc(100vw - 3rem);
+  --spacing-prose-narrow: 45ch;
+  --spacing-prose-wide: 80ch;
+
+  --font-body: var(--font-body-family);
+  --font-heading: var(--font-heading-family);
+
+  --text-display: var(--font-size-display);
+  --text-display-line-height: 1.1;
+  --text-heading: var(--font-size-heading);
+  --text-heading-line-height: 1.25;
+  --text-lead: var(--font-size-lead);
+  --text-lead-line-height: 1.333;
+  --text-copy: var(--font-size-copy);
+  --text-coy-line-height: 1.5;
+  --text-fine: var(--font-size-fine);
+  --text-fine-line-height: 1.333;
+
+  --font-weight-body-weight: var(--font-body-weight);
+  --font-weight-body-weight-bold: var(--font-body-weight-bold);
+  --font-weight-heading-weight: var(--font-heading-weight);
+
+  --shadow-border: inset 0px 0px 0px 1px rgb(var(--color-primary) / 0.08);
+  --shadow-dark-header: inset 0px -1px 0px 0px rgba(21, 21, 21, 0.4);
+  --shadow-light-header: inset 0px -1px 0px 0px rgba(21, 21, 21, 0.05);
+}
