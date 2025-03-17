@@ -14,7 +14,9 @@
   --color-shop-pay: #5a31f4;
 
   --spacing-nav: var(--height-nav);
-  --spacing-screen-no-nav:  calc(var(--screen-height, 100vh) - var(--height-nav));
+  --spacing-screen-no-nav: calc(
+    var(--screen-height, 100vh) - var(--height-nav)
+  );
   --spacing-mobileGallery: calc(100vw - 3rem);
   --spacing-prose-narrow: 45ch;
   --spacing-prose-wide: 80ch;
