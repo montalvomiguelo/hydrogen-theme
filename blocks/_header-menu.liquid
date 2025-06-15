@@ -1,0 +1,26 @@
+{%- doc -%}
+  Displays a menu in the header.
+{%- enddoc -%}
+
+<nav class="hidden gap-8 lg:flex" {{ block.shopify_attributes }}>
+  {%- for link in block.settings.menu.links -%}
+    <a href="{{ link.url }}">
+      {{ link.title }}
+    </a>
+  {%- endfor -%}
+</nav>
+
+{% schema %}
+{
+  "name": "Menu desktop",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Primary navigation"
+    }
+  ]
+}
+{% endschema %}

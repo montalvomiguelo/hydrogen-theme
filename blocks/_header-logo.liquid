@@ -1,0 +1,24 @@
+{%- doc -%}
+  Displays a logo in the header.
+{%- enddoc -%}
+
+{%- if request.page_type == 'index' -%}
+  <h1 class="w-full lg:w-auto">
+{%- endif %}
+<a
+  href="{{ routes.root_url }}"
+  class="font-heading font-heading-weight flex h-full w-full flex-grow items-center justify-center self-stretch leading-[3rem] md:leading-[4rem] lg:inline lg:h-auto lg:w-auto lg:leading-none"
+  {{ block.shopify_attributes }}
+>
+  {{ shop.name }}
+</a>
+{%- if request.page_type == 'index' -%}
+  </h1>
+{%- endif %}
+
+{% schema %}
+{
+  "name": "Logo",
+  "tag": null
+}
+{% endschema %}
