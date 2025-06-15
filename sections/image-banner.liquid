@@ -6,9 +6,11 @@
 
   assign preload = true
   assign loading = 'eager'
+  assign fetchpriority = 'high'
   if section.index0 > 0
     assign loading = 'lazy'
     assign preload = false
+    assign fetchpriority = 'auto'
   endif
 -%}
 
@@ -30,6 +32,7 @@
           | image_tag:
             loading: loading,
             preload: preload,
+            fetchpriority: fetchpriority,
             width: section.settings.image.width,
             height: image_height,
             class: 'block object-cover w-full h-full',
@@ -59,6 +62,7 @@
           | image_url: width: 1500
           | image_tag:
             loading: loading,
+            fetchpriority: fetchpriority,
             width: section.settings.image_2.width,
             height: image_height_2,
             class: 'block object-cover w-full h-full',
@@ -70,35 +74,8 @@
       </div>
     {%- endif -%}
   </div>
-  <div class="flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t from-contrast/60 to-contrast/0 px-6 py-8 text-primary sm:px-8 md:px-12">
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'heading' -%}
-          <h2 class="max-w-md font-heading text-display font-heading-weight" {{ block.shopify_attributes }}>
-            <span>{{ block.settings.heading | escape }}</span>
-          </h2>
-        {%- when 'text' -%}
-          <div class="max-w-prose-narrow text-lead font-body-weight-bold" {{ block.shopify_attributes }}>
-            <span>{{ block.settings.text | escape }}</span>
-          </div>
-        {%- when 'buttons' -%}
-          <div {{ block.shopify_attributes }}>
-            {%- if block.settings.button_label_1 != blank -%}
-              <a
-                {% if block.settings.button_link_1 == blank %}
-                  role="link" aria-disabled="true"
-                {% else %}
-                  href="{{ block.settings.button_link_1 }}"
-                {% endif %}
-                class="flex max-w-prose items-center gap-2 text-lead font-body-weight-bold"
-              >
-                {{ block.settings.button_label_1 | escape }}
-                {%- render 'icon-arrow' -%}
-              </a>
-            {%- endif -%}
-          </div>
-      {%- endcase -%}
-    {%- endfor -%}
+  <div class="from-contrast/60 to-contrast/0 text-primary *:data-[slot=text]:max-w-prose-narrow flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t px-6 py-8 *:data-[slot=heading]:max-w-md sm:px-8 md:px-12">
+    {%- content_for 'blocks' -%}
   </div>
 </div>
 
@@ -124,67 +101,37 @@
       "label": "Full page height"
     }
   ],
-  "blocks": [
-    {
-      "type": "heading",
-      "name": "Heading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Image banner",
-          "label": "Heading"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "Text",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "default": "Give customers details about the banner image(s) or content on the template.",
-          "label": "Description"
-        }
-      ]
-    },
-    {
-      "type": "buttons",
-      "name": "Buttons",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "button_label_1",
-          "default": "Button label",
-          "label": "First button label",
-          "info": "Leave the label blank to hide the button."
-        },
-        {
-          "type": "url",
-          "id": "button_link_1",
-          "label": "First button link"
-        }
-      ]
-    }
-  ],
+  "blocks": [{ "type": "@theme" }],
   "presets": [
     {
       "name": "Image banner",
-      "blocks": [
-        {
-          "type": "heading"
+      "category": "Banners",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "xl",
+            "heading_level": "h2"
+          }
         },
-        {
-          "type": "text"
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Give customers details about the banner image(s) or content on the template.</strong></p>",
+            "text_size": "lg"
+          }
         },
-        {
-          "type": "buttons"
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop all →",
+            "button_variant": "link",
+            "button_size": "lg"
+          }
         }
-      ]
+      },
+      "block_order": ["heading", "text", "button"]
     }
   ]
 }

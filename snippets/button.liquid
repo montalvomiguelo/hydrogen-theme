@@ -1,0 +1,41 @@
+{%- doc -%}
+  Displays a button or link.
+
+  @param {string} content
+  @param {string} [href]
+  @param {string} [type]
+  @param {string} [variant]
+  @param {string} [size]
+  @param {string} [shopify_attributes]
+{%- enddoc -%}
+
+{%- liquid
+  assign button_tag = 'button'
+  if href != blank
+    assign button_tag = 'a'
+  endif
+-%}
+
+{%- if content != blank -%}
+  <{{ button_tag }}
+    class="button data-[size=lg]:text-lead bg-primary text-contrast flex items-center gap-2 data-[variant=link]:bg-transparent data-[variant=link]:p-0 data-[variant=link]:text-inherit"
+    data-slot="button"
+    {% if size != blank -%}
+      data-size="{{ size }}"
+    {%- endif %}
+    {% if variant != blank -%}
+      data-variant="{{ variant }}"
+    {%- endif %}
+    {% if href != blank -%}
+      href="{{ href }}"
+    {%- endif %}
+    {% if type != blank and href == blank -%}
+      type="{{ type }}"
+    {%- endif %}
+    {% if shopify_attributes != blank -%}
+      {{ shopify_attributes }}
+    {%- endif %}
+  >
+    {{- content -}}
+  </{{ button_tag }}>
+{%- endif -%}

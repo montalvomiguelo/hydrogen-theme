@@ -1,0 +1,37 @@
+{%- doc -%}
+  Displays a heading element.
+
+  @param {string} content
+  @param {string} [level]
+  @param {string} [size]
+  @param {string} [shopify_attributes]
+{%- enddoc -%}
+
+{%- liquid
+  assign heading_tag = 'div'
+  assign level = level | default: 'div'
+
+  case level
+    when 'h1'
+      assign heading_tag = 'h1'
+    when 'h2'
+      assign heading_tag = 'h2'
+    when 'h3'
+      assign heading_tag = 'h3'
+  endcase
+-%}
+
+{%- if content != blank -%}
+  <{{ heading_tag }}
+    class="font-heading font-heading-weight data-[size=xl]:text-display data-[size=lg]:text-heading data-[size=md]:text-lead"
+    data-slot="heading"
+    {% if size != blank -%}
+      data-size="{{ size }}"
+    {%- endif %}
+    {% if shopify_attributes != blank -%}
+      {{ shopify_attributes }}
+    {%- endif %}
+  >
+    {{- content | escape -}}
+  </{{ heading_tag }}>
+{%- endif -%}

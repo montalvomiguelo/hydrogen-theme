@@ -6,20 +6,25 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner"
+            "heading": "Image banner",
+            "heading_size": "xl",
+            "heading_level": "h2"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template."
+            "text": "<p><strong>Give customers details about the banner image(s) or content on the template.</strong></p>",
+            "text_size": "lg"
           }
         },
         "button": {
-          "type": "buttons",
+          "type": "button",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all"
+            "button_label": "Shop all →",
+            "button_variant": "link",
+            "button_size": "lg",
+            "button_link": "shopify://collections/all"
           }
         }
       },

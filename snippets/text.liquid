@@ -1,0 +1,20 @@
+{%- doc -%}
+  Displays a block of text content.
+
+  @param {string} content
+  @param {string} [size]
+  @param {string} [shopify_attributes]
+{%- enddoc -%}
+
+<div
+  class="data-[size=lg]:text-lead"
+  data-slot="text"
+  {% if size != blank -%}
+    data-size="{{ size }}"
+  {%- endif %}
+  {% if shopify_attributes != blank -%}
+    {{ shopify_attributes }}
+  {%- endif %}
+>
+  {{- content -}}
+</div>

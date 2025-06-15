@@ -1,0 +1,66 @@
+{%- render 'button',
+  content: block.settings.button_label,
+  href: block.settings.button_link,
+  size: block.settings.button_size,
+  variant: block.settings.button_variant,
+  shopify_attributes: block.shopify_attributes
+-%}
+
+{% schema %}
+{
+  "name": "Button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "Button label",
+      "info": "Leave the label blank to hide the button."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_variant",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "link",
+          "label": "Link"
+        }
+      ],
+      "default": "",
+      "label": "Button variant"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "",
+      "label": "Button size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button",
+      "category": "Basic"
+    }
+  ]
+}
+{% endschema %}
