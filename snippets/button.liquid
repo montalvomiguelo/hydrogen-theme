@@ -10,8 +10,6 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign variant = variant | default: ''
-  assign size = size | default: ''
   assign button_tag = 'button'
   if href != blank
     assign button_tag = 'a'
