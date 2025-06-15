@@ -1,0 +1,102 @@
+{%- doc -%}
+  Displays a country selector in the footer.
+{%- enddoc -%}
+
+<section class="grid w-full gap-4 pt-10 md:max-w-[335px] md:pt-0" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}
+    <h3
+      id="CountryListLabel"
+      class="font-heading text-lead font-heading-weight max-w-prose whitespace-pre-wrap"
+    >
+      {{- block.settings.heading | escape -}}
+    </h3>
+  {%- endif -%}
+  {%- if localization.available_countries.size > 1 -%}
+    <noscript>
+      {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
+        <div class="relative">
+          <select
+            class="block w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
+            name="country_code"
+            aria-labelledby="CountryListLabel"
+          >
+            {%- for country in localization.available_countries -%}
+              <option
+                value="{{ country.iso_code }}"
+                {%- if country.iso_code == localization.country.iso_code %}
+                  selected
+                {% endif %}
+              >
+                {{ country.name }} ({{ country.currency.iso_code }}
+                {{ country.currency.symbol }})
+              </option>
+            {%- endfor -%}
+          </select>
+          <span class="absolute right-4 top-1/2 -translate-y-1/2">
+            {% render 'icon-caret' %}
+          </span>
+        </div>
+        <button class="mt-4 block w-full text-center">{{ 'localization.update_country' | t }}</button>
+      {%- endform -%}
+    </noscript>
+    <localization-form class="no-js:hidden" client:visible>
+      {% form 'localization', class: 'relative' %}
+        <button
+          type="button"
+          class="flex w-full items-center justify-between rounded border border-white px-4 py-3"
+          aria-expanded="false"
+          aria-controls="CountryList"
+          aria-describedby="CountryListLabel"
+        >
+          {{ localization.country.name }} ({{ localization.country.currency.iso_code }}
+          {{ localization.country.currency.symbol }})
+          {%- render 'icon-caret' -%}
+        </button>
+        <ul
+          id="CountryList"
+          role="list"
+          class="border-t-contrast/30 bg-contrast absolute bottom-12 z-10 max-h-48 w-full overflow-y-auto rounded-t border border-white px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-b md:border-t-0"
+          hidden
+        >
+          {% for country in localization.available_countries %}
+            <li tabindex="-1">
+              <a
+                class="bg-contrast text-primary flex w-full cursor-pointer items-center justify-start rounded p-2 text-left"
+                href="#"
+                {% if country.iso_code == localization.country.iso_code %}
+                  aria-current="true"
+                {% endif %}
+                data-value="{{ country.iso_code }}"
+              >
+                {{ country.name }} ({{ country.currency.iso_code }}
+                {{ country.currency.symbol }})
+                {%- if country.iso_code == localization.country.iso_code -%}
+                  <span class="ml-2">
+                    {%- render 'icon-check' -%}
+                  </span>
+                {%- endif -%}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+        <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+      {% endform %}
+    </localization-form>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Country selector",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Country",
+      "label": "Heading",
+      "info": "Heading required to display the country selector"
+    }
+  ]
+}
+{% endschema %}

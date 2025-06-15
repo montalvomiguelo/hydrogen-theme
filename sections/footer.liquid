@@ -4,133 +4,11 @@
 
 <footer
   role="contentinfo"
-  style="--blocks-count: {{ section.blocks.size }};"
-  class="{{ container_class }} min-h-[25rem] w-full grid-cols-1 border-b bg-contrast px-6 py-8 text-primary md:grid md:grid-flow-row md:grid-cols-2 md:items-start md:gap-8 md:px-8 lg:grid-cols-[repeat(var(--blocks-count),_minmax(0,_1fr))] lg:gap-12 lg:px-12"
+  class="{{ container_class }} bg-contrast text-primary min-h-[25rem] w-full grid-cols-1 border-b px-6 py-8 md:grid md:grid-flow-row md:grid-cols-2 md:items-start md:gap-8 md:px-8 lg:grid-cols-[repeat(auto-fill,minmax(260px,1fr))] lg:gap-12 lg:px-12"
 >
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when 'link_list' -%}
-        <section class="pt-10 first-of-type:-mt-10 md:pt-0 first-of-type:md:mt-0">
-          <details id="Details-{{ block.id }}" class="md:hidden">
-            <summary>
-              <h3 class="flex max-w-prose justify-between overflow-hidden whitespace-pre-wrap font-heading text-lead font-heading-weight">
-                <span class="flex-shrink">{{- block.settings.heading | escape -}}</span>
-                {%- render 'icon-caret' -%}
-              </h3>
-            </summary>
-            <div id="Panel-{{ block.id }}" class="footer-panel pt-4">
-              <nav class="grid gap-2 pb-2">
-                {%- for link in block.settings.menu.links -%}
-                  <a href="{{ link.url }}">
-                    {{ link.title }}
-                  </a>
-                {%- endfor -%}
-              </nav>
-            </div>
-          </details>
-          <div class="hidden gap-4 md:grid">
-            <h3 class="max-w-prose whitespace-pre-wrap font-heading text-lead font-heading-weight">
-              {{- block.settings.heading | escape -}}
-            </h3>
-            <div>
-              <nav class="grid gap-2 pb-6">
-                {%- for link in block.settings.menu.links -%}
-                  <div>
-                    <a href="{{ link.url }}">
-                      {{ link.title }}
-                    </a>
-                  </div>
-                {%- endfor -%}
-              </nav>
-            </div>
-          </div>
-        </section>
-      {%- when 'country_selector' -%}
-        <section class="grid w-full gap-4 pt-10 md:max-w-[335px] md:pt-0">
-          {%- if block.settings.heading != blank -%}
-            <h3
-              id="CountryListLabel"
-              class="max-w-prose whitespace-pre-wrap font-heading text-lead font-heading-weight"
-            >
-              {{- block.settings.heading | escape -}}
-            </h3>
-          {%- endif -%}
-          {%- if localization.available_countries.size > 1 -%}
-            <noscript>
-              {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
-                <div class="relative">
-                  <select
-                    class="block w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3"
-                    name="country_code"
-                    aria-labelledby="CountryListLabel"
-                  >
-                    {%- for country in localization.available_countries -%}
-                      <option
-                        value="{{ country.iso_code }}"
-                        {%- if country.iso_code == localization.country.iso_code %}
-                          selected
-                        {% endif %}
-                      >
-                        {{ country.name }} ({{ country.currency.iso_code }}
-                        {{ country.currency.symbol }})
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                  <span class="absolute right-4 top-1/2 -translate-y-1/2">
-                    {% render 'icon-caret' %}
-                  </span>
-                </div>
-                <button class="mt-4 block w-full text-center">{{ 'localization.update_country' | t }}</button>
-              {%- endform -%}
-            </noscript>
-            <localization-form class="no-js:hidden" client:visible>
-              {% form 'localization', class: 'relative' %}
-                <button
-                  type="button"
-                  class="flex w-full items-center justify-between rounded border border-white px-4 py-3"
-                  aria-expanded="false"
-                  aria-controls="CountryList"
-                  aria-describedby="CountryListLabel"
-                >
-                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }}
-                  {{ localization.country.currency.symbol }})
-                  {%- render 'icon-caret' -%}
-                </button>
-                <ul
-                  id="CountryList"
-                  role="list"
-                  class="absolute bottom-12 z-10 max-h-48 w-full overflow-y-auto rounded-t border border-white border-t-contrast/30 bg-contrast px-2 py-2 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-b md:border-t-0"
-                  hidden
-                >
-                  {% for country in localization.available_countries %}
-                    <li tabindex="-1">
-                      <a
-                        class="flex w-full cursor-pointer items-center justify-start rounded bg-contrast p-2 text-left text-primary"
-                        href="#"
-                        {% if country.iso_code == localization.country.iso_code %}
-                          aria-current="true"
-                        {% endif %}
-                        data-value="{{ country.iso_code }}"
-                      >
-                        {{ country.name }} ({{ country.currency.iso_code }}
-                        {{ country.currency.symbol }})
-                        {%- if country.iso_code == localization.country.iso_code -%}
-                          <span class="ml-2">
-                            {%- render 'icon-check' -%}
-                          </span>
-                        {%- endif -%}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-              {% endform %}
-            </localization-form>
-          {%- endif -%}
-        </section>
-    {%- endcase -%}
-  {%- endfor -%}
-  <div class="self-end pt-14 opacity-50 md:col-span-2 md:pt-8 lg:col-[span_var(--blocks-count)]">
+  {%- content_for 'blocks' -%}
+  {%- content_for 'block', type: '_footer-country-selector', id: 'footer-country-selector' -%}
+  <div class="self-end pt-14 opacity-50 md:col-span-2 md:pt-8 lg:col-span-full">
     &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}
     {{ powered_by_link }}
   </div>
@@ -139,49 +17,11 @@
 {% schema %}
 {
   "name": "Footer",
-  "blocks": [
-    {
-      "type": "link_list",
-      "name": "Menu",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Quick links",
-          "label": "Heading",
-          "info": "Heading required to display the menu"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "default": "footer",
-          "label": "Menu",
-          "info": "Displays only top-level menu items"
-        }
-      ]
-    },
-    {
-      "type": "country_selector",
-      "name": "Country selector",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Country",
-          "label": "Heading",
-          "info": "Heading required to display the country selector"
-        }
-      ]
-    }
-  ],
+  "blocks": [{ "type": "_footer-menu" }],
   "default": {
     "blocks": [
       {
-        "type": "link_list"
-      },
-      {
-        "type": "country_selector"
+        "type": "_footer-menu"
       }
     ]
   }
