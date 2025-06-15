@@ -1,0 +1,42 @@
+{%- render 'text',
+  content: block.settings.text,
+  size: block.settings.text_size,
+  shopify_attributes: block.shopify_attributes
+-%}
+
+{% schema %}
+{
+  "name": "Text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Share information about your brand with your customers.</p>",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "",
+      "label": "Text size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text",
+      "category": "Basic"
+    }
+  ]
+}
+{% endschema %}
