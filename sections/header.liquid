@@ -14,55 +14,7 @@
     class="{{ container_class }} flex h-nav w-full items-center justify-between gap-4 px-4 leading-none backdrop-blur-lg md:px-8 lg:gap-8 lg:px-12 lg:py-8"
   >
     <div class="flex w-full items-center justify-start gap-4 lg:hidden">
-      {%- if section.settings.menu != blank -%}
-        <header-drawer client:media="(max-width: 1023px)">
-          <details>
-            <summary
-              class="h-8 w-8 [.menu-opening_&]:before:absolute [.menu-opening_&]:before:inset-0 [.menu-opening_&]:before:h-screen [.menu-opening_&]:before:bg-black/25 [.no-js_details[open]_&]:absolute [.no-js_details[open]_&]:left-1/2 [.no-js_details[open]_&]:z-50 [.no-js_details[open]_&]:-translate-x-1/2 [.no-js_details[open]_&]:-translate-y-1/2"
-              aria-haspopup="dialog"
-              aria-label="{{ 'sections.header.menu' | t }}"
-            >
-              <span class="flex h-full w-full items-center justify-center [.no-js_details[open]_&]:hidden">
-                {% render 'icon-menu' %}
-              </span>
-              <span class="hidden h-full w-full items-center justify-center [.no-js_details[open]_&]:flex">
-                {%- render 'icon-close' -%}
-              </span>
-            </summary>
-            <div
-              id="menu-drawer"
-              class="fixed inset-0 z-20 h-screen max-w-lg overflow-y-auto bg-contrast [.js_&]:-translate-x-full [.js_&]:transition [.js_&]:duration-300 [.js_.menu-opening_&]:translate-x-0"
-              role="dialog"
-              aria-modal="true"
-              aria-label="{{ 'sections.header.menu' | t }}"
-              tabindex="-1"
-            >
-              <div class="flex h-nav items-center justify-between px-6 sm:px-8 md:px-12">
-                <h2 class="max-w-prose text-lead font-body-weight-bold">{{ 'sections.header.menu' | t }}</h2>
-                <button
-                  type="button"
-                  class="-m-4 p-4 text-primary transition hover:text-primary/50 [.no-js_details[open]_&]:hidden"
-                  aria-label="{{ 'accessibility.close' | t }}"
-                >
-                  {%- render 'icon-close' -%}
-                </button>
-              </div>
-              <nav class="grid gap-4 px-6 py-6 text-copy after:block after:h-nav after:content-[''] sm:gap-6 sm:px-12 sm:py-8">
-                {%- for link in section.settings.menu.links -%}
-                  <a
-                    href="{{ link.url }}"
-                    {% if link.current %}
-                      aria-current="page"
-                    {% endif %}
-                  >
-                    {{ link.title | escape }}
-                  </a>
-                {%- endfor -%}
-              </nav>
-            </div>
-          </details>
-        </header-drawer>
-      {%- endif -%}
+      {%- content_for 'block', type: '_header-menu-mobile', id: 'header-menu-mobile' -%}
 
       <form
         action="{{ routes.search_url }}"
@@ -87,26 +39,9 @@
     </div>
 
     <div class="flex w-full items-center gap-12 lg:w-auto">
-      {%- if request.page_type == 'index' -%}
-        <h1 class="w-full lg:w-auto">
-      {%- endif %}
-      <a
-        href="{{ routes.root_url }}"
-        class="flex h-full w-full flex-grow items-center justify-center self-stretch font-heading font-heading-weight leading-[3rem] md:leading-[4rem] lg:inline lg:h-auto lg:w-auto lg:leading-none"
-      >
-        {{ shop.name }}
-      </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif %}
+      {%- content_for 'block', type: '_header-logo', id: 'header-logo' -%}
 
-      <nav class="hidden gap-8 lg:flex">
-        {%- for link in section.settings.menu.links -%}
-          <a href="{{ link.url }}">
-            {{ link.title }}
-          </a>
-        {%- endfor -%}
-      </nav>
+      {%- content_for 'block', type: '_header-menu', id: 'header-menu' -%}
     </div>
 
     <div class="flex w-full items-center justify-end gap-4 lg:w-auto lg:gap-1">
@@ -194,12 +129,6 @@
   "name": "Header",
   "class": "z-10",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "Primary navigation"
-    },
     {
       "type": "checkbox",
       "id": "enable_sticky_header",
