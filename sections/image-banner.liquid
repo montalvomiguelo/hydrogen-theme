@@ -76,36 +76,6 @@
   </div>
   <div class="from-contrast/60 to-contrast/0 text-primary *:data-[slot=text]:max-w-prose-narrow flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t px-6 py-8 *:data-[slot=heading]:max-w-md sm:px-8 md:px-12">
     {%- content_for 'blocks' -%}
-    {%- comment -%}
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2 class="font-heading text-display font-heading-weight max-w-md" {{ block.shopify_attributes }}>
-              <span>{{ block.settings.heading | escape }}</span>
-            </h2>
-          {%- when 'text' -%}
-            <div class="max-w-prose-narrow text-lead font-body-weight-bold" {{ block.shopify_attributes }}>
-              <span>{{ block.settings.text | escape }}</span>
-            </div>
-          {%- when 'buttons' -%}
-            <div {{ block.shopify_attributes }}>
-              {%- if block.settings.button_label_1 != blank -%}
-                <a
-                  {% if block.settings.button_link_1 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_1 }}"
-                  {% endif %}
-                  class="text-lead font-body-weight-bold flex max-w-prose items-center gap-2"
-                >
-                  {{ block.settings.button_label_1 | escape }}
-                  {%- render 'icon-arrow' -%}
-                </a>
-              {%- endif -%}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
-    {%- endcomment -%}
   </div>
 </div>
 
