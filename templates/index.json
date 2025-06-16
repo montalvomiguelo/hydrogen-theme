@@ -37,8 +37,24 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "blocks": {
+        "featured-collection-header": {
+          "type": "_featured-collection-header",
+          "static": true,
+          "settings": {
+            "title": "Featured collection"
+          }
+        },
+        "static-product-card": {
+          "type": "product-card",
+          "static": true,
+          "id": "static-product-card",
+          "settings": {
+            "product": "{{ closest.product }}"
+          }
+        }
+      },
       "settings": {
-        "title": "Featured products",
         "collection": "all",
         "products_to_show": 8
       }

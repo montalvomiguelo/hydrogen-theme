@@ -5,6 +5,7 @@
   @param {string} [level]
   @param {string} [size]
   @param {string} [shopify_attributes]
+  @param {string} [class]
 {%- enddoc -%}
 
 {%- liquid
@@ -23,7 +24,7 @@
 
 {%- if content != blank -%}
   <{{ heading_tag }}
-    class="font-heading font-heading-weight data-[size=xl]:text-display data-[size=lg]:text-heading data-[size=md]:text-lead"
+    class="{{ class }} font-heading font-heading-weight data-[size=xl]:text-display data-[size=lg]:text-heading data-[size=md]:text-lead"
     data-slot="heading"
     {% if size != blank -%}
       data-size="{{ size }}"

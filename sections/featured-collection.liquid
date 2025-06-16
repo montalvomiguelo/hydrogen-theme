@@ -1,28 +1,22 @@
 <div class="grid w-full gap-4 py-6 md:gap-8 md:py-8 lg:py-12">
-  <h2 class="px-6 font-heading text-lead font-heading-weight md:px-8 lg:px-12">
-    {{ section.settings.title | escape }}
-  </h2>
+  {%- content_for 'block', type: '_featured-collection-header', id: 'featured-collection-header' -%}
   <div class="swimlane hidden-scroll md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
     {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
-      {%- render 'card-product', card_product: product, wrapper_class: 'w-80' -%}
+      {%- content_for 'block', type: 'product-card', id: 'static-product-card', closest.product: product -%}
     {%- else -%}
       {%- for i in (1..4) -%}
         {% render 'card-product', wrapper_class: 'w-80' %}
       {%- endfor -%}
     {%- endfor -%}
   </div>
+  {%- content_for 'blocks' -%}
 </div>
 
 {% schema %}
 {
   "name": "Featured collection",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Featured collection"
-    },
     {
       "type": "collection",
       "id": "collection",
@@ -40,7 +34,26 @@
   ],
   "presets": [
     {
-      "name": "Featured collection"
+      "name": "Featured collection",
+      "category": "Products",
+      "blocks": [
+        {
+          "type": "_featured-collection-header",
+          "static": true,
+          "id": "featured-collection-header",
+          "settings": {
+            "title": "Featured collection"
+          }
+        },
+        {
+          "type": "product-card",
+          "static": true,
+          "id": "static-product-card",
+          "settings": {
+            "product": "{{ closest.product }}"
+          }
+        }
+      ]
     }
   ]
 }
