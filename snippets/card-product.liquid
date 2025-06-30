@@ -1,14 +1,13 @@
-{% comment %}
+{%- doc -%}
   Renders a product card
 
-  Accepts:
-  - card_product: {Object} Product Liquid object (optional)
-  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
-  - wrapper_class: {String} Wrapper class for card (optional)
-
-  Usage:
-  {% render 'card-product', card_product: product %}
-{% endcomment %}
+  @param {product} card_product
+  @param {boolean} [lazy_load]
+  @param {string} [wrapper_class]
+  @param {string} [shopify_attributes]
+  @param {string} [media_aspect_ratio]
+  @param {string} [section_id]
+{%- enddoc -%}
 
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -22,9 +21,14 @@
       assign ratio = 1
     endif
   -%}
-  <div class="relative">
+  <div
+    class="relative"
+    {% if shopify_attributes != blank -%}
+      {{ shopify_attributes }}
+    {%- endif %}
+  >
     <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
-      <div class="aspect-[4/5] overflow-hidden rounded bg-primary/5">
+      <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded">
         {%- if card_product.featured_media -%}
           {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
           <img
@@ -73,14 +77,14 @@
 {%- else -%}
   <div class="relative">
     <div class="grid w-80 snap-start gap-6">
-      <div class="aspect-[4/5] overflow-hidden rounded bg-primary/5"></div>
+      <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded"></div>
       <div class="grid gap-1">
         <h3 class="text-copy">
           <a role="link" aria-disabled="true">
             {{ 'onboarding.product_title' | t }}
           </a>
         </h3>
-        <div class="relative z-0 flex gap-4 text-copy">
+        <div class="text-copy relative z-0 flex gap-4">
           <span>{{ 1999 | money_without_trailing_zeros }}</span>
         </div>
       </div>

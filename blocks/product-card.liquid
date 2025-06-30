@@ -1,4 +1,9 @@
-{%- render 'card-product', card_product: block.settings.product, wrapper_class: 'w-80' -%}
+{%- render 'card-product',
+  card_product: block.settings.product,
+  wrapper_class: 'w-80',
+  shopify_attributes: block.shopify_attributes,
+  section_id: section.id
+-%}
 
 {% schema %}
 {
