@@ -37,9 +37,6 @@
     },
     "featured_collection": {
       "type": "featured-collection",
-      "settings": {
-        "collection": "all"
-      },
       "blocks": {
         "heading": {
           "type": "heading",
