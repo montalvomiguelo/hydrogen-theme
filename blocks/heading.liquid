@@ -1,15 +1,8 @@
-{%- doc -%}
-  Renders a heading element.
-
-  @param {string} wrapper_class
-{%- enddoc -%}
-
 {%- render 'heading',
   content: block.settings.heading,
   size: block.settings.heading_size,
   level: block.settings.heading_level,
-  shopify_attributes: block.shopify_attributes,
-  class: wrapper_class
+  shopify_attributes: block.shopify_attributes
 -%}
 
 {% schema %}
