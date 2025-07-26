@@ -12,7 +12,7 @@
       -%}
     {%- else -%}
       {%- for i in (1..4) -%}
-        {% render 'card-product', wrapper_class: 'w-80' %}
+        {% render 'card-product', card_product: null, wrapper_class: 'w-80' %}
       {%- endfor -%}
     {%- endfor -%}
   </div>
