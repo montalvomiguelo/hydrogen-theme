@@ -28,11 +28,11 @@
   >
     <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
       <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded">
-        {%- content_for 'block', type: 'image', id: 'image', closest.product: card_product, lazy_load: lazy_load -%}
+        {%- content_for 'block', type: 'image', id: 'image', lazy_load: lazy_load -%}
       </div>
       <div class="grid gap-1">
-        {%- content_for 'block', type: 'text', id: 'heading', closest.product: card_product -%}
-        {%- content_for 'block', type: 'price', id: 'price', closest.product: card_product -%}
+        {%- content_for 'block', type: 'text', id: 'heading' -%}
+        {%- content_for 'block', type: 'price', id: 'price' -%}
       </div>
     </div>
   </div>

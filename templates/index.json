@@ -39,10 +39,10 @@
       "type": "featured-collection",
       "blocks": {
         "featured-collection-header": {
-          "type": "_featured-collection-header",
+          "type": "heading",
           "static": true,
           "settings": {
-            "title": "Featured collection"
+            "heading": "Featured collection"
           }
         },
         "static-product-card": {
