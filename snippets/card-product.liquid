@@ -4,7 +4,6 @@
   @param {product} card_product
   @param {boolean} [lazy_load]
   @param {string} [wrapper_class]
-  @param {string} [shopify_attributes]
   @param {string} [media_aspect_ratio]
   @param {string} [section_id]
 {%- enddoc -%}
@@ -23,9 +22,6 @@
   -%}
   <div
     class="relative"
-    {% if shopify_attributes != blank -%}
-      {{ shopify_attributes }}
-    {%- endif %}
   >
     <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
       <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded">
