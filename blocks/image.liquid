@@ -1,0 +1,49 @@
+{%- doc -%}
+  Renders an image element.
+
+  @param {boolean} [lazy_load]
+{%- enddoc -%}
+
+{%- liquid
+  assign image = block.settings.image
+-%}
+
+{%- if block.settings.image -%}
+  {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+  <img
+    srcset="
+      {%- if image.width >= 165 -%}{{ image | image_url: width: 165 }} 165w,{%- endif -%}
+      {%- if image.width >= 360 -%}{{ image | image_url: width: 360 }} 360w,{%- endif -%}
+      {%- if image.width >= 533 -%}{{ image | image_url: width: 533 }} 533w,{%- endif -%}
+      {%- if image.width >= 720 -%}{{ image | image_url: width: 720 }} 720w,{%- endif -%}
+      {%- if image.width >= 940 -%}{{ image | image_url: width: 940 }} 940w,{%- endif -%}
+      {%- if image.width >= 1066 -%}{{ image | image_url: width: 1066 }} 1066w,{%- endif -%}
+      {{ image | image_url }} {{ image.width }}w
+    "
+    src="{{ image | image_url: width: 533 }}"
+    sizes="320px"
+    alt="{{ image.alt | escape }}"
+    class="aspect-[inherit] h-full w-full object-cover object-center"
+    {% unless lazy_load == false %}
+      loading="lazy"
+    {% endunless %}
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    {{ block.shopify_attributes }}
+  >
+  {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ]
+}
+{% endschema %}

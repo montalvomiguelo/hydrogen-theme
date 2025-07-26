@@ -1,9 +1,58 @@
-{%- render 'card-product',
-  card_product: block.settings.product,
-  wrapper_class: 'w-80',
-  shopify_attributes: block.shopify_attributes,
-  section_id: section.id
+{%- doc -%}
+  Renders a product card
+
+  @param {boolean} [lazy_load]
+  @param {string} [wrapper_class]
+  @param {string} [media_aspect_ratio]
+{%- enddoc -%}
+
+{%- liquid
+  assign card_product = block.settings.product
 -%}
+
+{%- if card_product and card_product != empty -%}
+  {%- liquid
+    assign ratio = 1
+    if card_product.featured_media and media_aspect_ratio == 'portrait'
+      assign ratio = 0.8
+    elsif card_product.featured_media and media_aspect_ratio == 'adapt'
+      assign ratio = card_product.featured_media.aspect_ratio
+    endif
+    if ratio == 0 or ratio == null
+      assign ratio = 1
+    endif
+  -%}
+  <div
+    class="relative"
+    {{ block.shopify_attributes }}
+  >
+    <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
+      <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded">
+        {%- content_for 'block', type: 'image', id: 'image', closest.product: card_product, lazy_load: lazy_load -%}
+      </div>
+      <div class="grid gap-1">
+        {%- content_for 'block', type: 'text', id: 'heading', closest.product: card_product -%}
+        {%- content_for 'block', type: 'price', id: 'price', closest.product: card_product -%}
+      </div>
+    </div>
+  </div>
+{%- else -%}
+  <div class="relative">
+    <div class="grid w-80 snap-start gap-6">
+      <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded"></div>
+      <div class="grid gap-1">
+        <h3 class="text-copy">
+          <a role="link" aria-disabled="true">
+            {{ 'onboarding.product_title' | t }}
+          </a>
+        </h3>
+        <div class="text-copy relative z-0 flex gap-4">
+          <span>{{ 1999 | money_without_trailing_zeros }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {

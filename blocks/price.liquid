@@ -1,0 +1,14 @@
+{%- render 'price', product: block.settings.product, shopify_attributes: block.shopify_attributes -%}
+
+{% schema %}
+{
+  "name": "Price",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}

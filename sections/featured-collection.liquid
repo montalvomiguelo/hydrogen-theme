@@ -2,7 +2,12 @@
   {%- content_for 'block', type: '_featured-collection-header', id: 'featured-collection-header' -%}
   <div class="swimlane hidden-scroll md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
     {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
-      {%- content_for 'block', type: 'product-card', id: 'static-product-card', closest.product: product -%}
+      {%- content_for 'block',
+        type: 'product-card',
+        id: 'static-product-card',
+        closest.product: product,
+        wrapper_class: 'w-80'
+      -%}
     {%- else -%}
       {%- for i in (1..4) -%}
         {% render 'card-product', wrapper_class: 'w-80' %}
@@ -51,7 +56,33 @@
           "id": "static-product-card",
           "settings": {
             "product": "{{ closest.product }}"
-          }
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "static": true,
+              "id": "heading",
+              "settings": {
+                "text": "<p>{{ closest.product.title }}</p>"
+              }
+            },
+            {
+              "type": "price",
+              "static": true,
+              "id": "price",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.product.featured_image }}"
+              }
+            }
+          ]
         }
       ]
     }
