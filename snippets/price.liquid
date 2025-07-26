@@ -1,14 +1,11 @@
-{% comment %}
+{%- doc -%}
   Renders a list of product's price (regular, sale)
 
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-  - price_class: {String} Adds a price class to the price element (optional)
+  @param {boolean} [use_variant] - Renders selected or first variant price instead of overall product pricing
+  @param {string} [price_class] - Adds a price class to the price element
+  @param {string} [shopify_attributes] - Additional attributes to add to the price element
+{%- enddoc -%}
 
-  Usage:
-  {% render 'price', product: product %}
-{% endcomment %}
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
@@ -19,9 +16,12 @@
 
 <div
   class="
-    relative z-0 flex gap-4 text-copy
+    text-copy relative z-0 flex gap-4
     {%- if price_class %} {{ price_class }}{% endif -%}
   "
+  {% if shopify_attributes != blank -%}
+    {{ shopify_attributes }}
+  {%- endif %}
 >
   {%- if target.compare_at_price > target.price -%}
     <span class="sr-only">{{ 'products.product.price.sale_price' | t }}</span>
