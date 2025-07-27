@@ -26,6 +26,9 @@
     class="relative"
     {{ block.shopify_attributes }}
   >
+    <a href="{{ card_product.url }}" class="absolute inset-0">
+      <span class="sr-only">{{ card_product.title }}</span>
+    </a>
     <div class="grid snap-start gap-6 {% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}">
       <div class="bg-primary/5 aspect-[4/5] overflow-hidden rounded">
         {%- content_for 'block', type: 'image', id: 'image', lazy_load: lazy_load -%}
