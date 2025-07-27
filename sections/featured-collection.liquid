@@ -4,10 +4,17 @@
   </div>
   <div class="swimlane hidden-scroll -mt-1 pt-1 md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
     {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+      {%- liquid
+        assign lazy_load = true
+        if section.index == 0 and forloop.index.first
+          assign lazy_load = true
+        endif
+      -%}
       {%- content_for 'block',
         type: 'product-card',
         id: 'static-product-card',
         closest.product: product,
+        lazy_load: lazy_load,
         wrapper_class: 'w-80'
       -%}
     {%- else -%}
