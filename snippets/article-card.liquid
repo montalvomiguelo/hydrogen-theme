@@ -10,7 +10,7 @@
 {% endcomment %}
 
 <div class="relative">
-  <div class="aspect-[3/2] overflow-hidden rounded bg-primary/5 ">
+  <div class="bg-primary/5 aspect-[3/2] overflow-hidden rounded ">
     {%- if article.image -%}
       {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
       <img
@@ -36,7 +36,7 @@
       {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
     {%- endif -%}
   </div>
-  <h3 class="mt-4 font-body-weight-bold">
+  <h3 class="font-body-weight-bold mt-4">
     <a class="after:absolute after:inset-0 after:z-10 after:content-['']" href="{{ article.url }}">
       {{- article.title -}}
     </a>

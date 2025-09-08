@@ -3,7 +3,7 @@
 }
 
 .button {
-  @apply inline-block rounded px-6 py-3 text-center font-body-weight-bold;
+  @apply font-body-weight-bold inline-block rounded px-6 py-3 text-center;
 }
 
 .article {
@@ -14,7 +14,7 @@
   h6 {
     @apply font-heading text-primary;
   }
-  @apply prose mx-auto mb-12 grid justify-center font-body text-primary;
+  @apply prose font-body text-primary mx-auto mb-12 grid justify-center;
   p,
   ul,
   li {
