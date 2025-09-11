@@ -1,10 +1,10 @@
 <div class="grid w-full justify-items-start gap-8 p-6 py-8 md:p-8 lg:p-12">
-  <h1 class="inline-block max-w-prose-narrow font-heading text-heading font-heading-weight">
+  <h1 class="max-w-prose-narrow font-heading text-heading font-heading-weight inline-block">
     <span class="sr-only">{{ 'sections.collection_template.title' | t }}: </span>
     {{- collection.title | escape -}}
   </h1>
   {%- if section.settings.show_collection_description -%}
-    <div class="flex w-full max-w-prose-narrow items-baseline justify-between text-copy empty:hidden">
+    <div class="max-w-prose-narrow text-copy flex w-full items-baseline justify-between empty:hidden">
       {{ collection.description }}
     </div>
   {%- endif -%}

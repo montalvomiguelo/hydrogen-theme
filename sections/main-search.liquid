@@ -1,17 +1,17 @@
 <div class="grid w-full justify-items-start gap-8 p-6 py-8 md:p-8 lg:p-12">
   {%- if search.performed -%}
-    <h1 class="max-w-prose font-heading text-copy font-heading-weight">{{ 'templates.search.title' | t }}</h1>
+    <h1 class="font-heading text-copy font-heading-weight max-w-prose">{{ 'templates.search.title' | t }}</h1>
   {%- else -%}
-    <h1 class="max-w-prose font-heading text-copy font-heading-weight">{{ 'general.search.search' | t }}</h1>
+    <h1 class="font-heading text-copy font-heading-weight max-w-prose">{{ 'general.search.search' | t }}</h1>
   {%- endif -%}
-  <form action="{{ routes.search_url }}" method="get" role="search" class="relative flex w-full text-heading">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="text-heading relative flex w-full">
     <input type="hidden" name="type" value="product">
     <input
       type="search"
       name="q"
       value="{{ search.terms | escape }}"
       placeholder="{{ 'general.search.search' | t }}"
-      class="w-full border-x-0 border-b-2 border-t-0 border-primary/10 bg-transparent px-0 py-2 text-heading transition focus:border-primary/90 focus:ring-0"
+      class="border-primary/10 text-heading focus:border-primary/90 w-full border-x-0 border-b-2 border-t-0 bg-transparent px-0 py-2 transition focus:ring-0"
     >
     <input name="options[prefix]" type="hidden" value="last">
     <button type="submit" class="absolute right-0 py-2">
@@ -23,7 +23,7 @@
 {% if search.performed %}
   {%- if search.results_count == 0 -%}
     <div class="grid w-full gap-4 px-6 md:gap-8 md:px-8 lg:px-12">
-      <p class="max-w-prose text-copy opacity-50">
+      <p class="text-copy max-w-prose opacity-50">
         {{ 'general.search.no_results_html' | t: terms: search.terms | replace: '*', '' }}
       </p>
     </div>

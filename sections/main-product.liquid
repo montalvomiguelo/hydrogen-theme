@@ -35,7 +35,7 @@
               assign loading = 'eager'
             endif
           -%}
-          <div class="aspect-square w-mobileGallery snap-center overflow-hidden rounded bg-contrast/10 md:w-full {{ media_wrapper_class }}">
+          <div class="w-mobileGallery bg-contrast/10 aspect-square snap-center overflow-hidden rounded md:w-full {{ media_wrapper_class }}">
             {{
               media.preview_image
               | image_url: width: 1445
@@ -84,7 +84,7 @@
                 <div class="tab mb-10 [.tab_+_&]:-mt-6" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
-                      <h2 class="flex justify-between text-lead font-body-weight-bold">
+                      <h2 class="text-lead font-body-weight-bold flex justify-between">
                         {{ block.settings.title | default: block.settings.page.title }}
                         <span class="h-5 w-5 [details[open]_&]:rotate-180">
                           {% render 'icon-caret' %}
@@ -101,7 +101,7 @@
                 {%- unless product.has_only_default_variant -%}
                   {%- if block.settings.picker_type == 'button' -%}
                     <variant-radios
-                      class="mb-10 grid gap-4 no-js:hidden"
+                      class="no-js:hidden mb-10 grid gap-4"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
@@ -109,7 +109,7 @@
                     >
                       {%- for option in product.options_with_values -%}
                         <fieldset class="mb-4 flex flex-wrap gap-x-4 gap-y-2 last-of-type:mb-0">
-                          <legend class="block w-full pb-2 text-lead font-body-weight-bold">{{ option.name }}</legend>
+                          <legend class="text-lead font-body-weight-bold block w-full pb-2">{{ option.name }}</legend>
                           {%- for value in option.values -%}
                             <div>
                               <input
@@ -124,7 +124,7 @@
                                 {% endif %}
                               >
                               <label
-                                class="cursor-pointer py-1 leading-none transition-all duration-200 peer-checked:border-b-[1.5px] peer-checked:border-primary/50"
+                                class="peer-checked:border-primary/50 cursor-pointer py-1 leading-none transition-all duration-200 peer-checked:border-b-[1.5px]"
                                 for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                               >
                                 {{ value }}
@@ -139,7 +139,7 @@
                     </variant-radios>
                   {%- else -%}
                     <variant-selects
-                      class="mb-10 grid gap-4 no-js:hidden"
+                      class="no-js:hidden mb-10 grid gap-4"
                       data-section="{{ section.id }}"
                       data-url="{{ product.url }}"
                       {{ block.shopify_attributes }}
@@ -148,7 +148,7 @@
                       {%- for option in product.options_with_values -%}
                         <div class="mb-4 flex flex-col gap-x-4 gap-y-2 last-of-type:mb-0">
                           <label
-                            class="block w-full pb-2 text-lead font-body-weight-bold"
+                            class="text-lead font-body-weight-bold block w-full pb-2"
                             for="Option-{{ section.id }}-{{ forloop.index0 }}"
                           >
                             {{ option.name }}
@@ -187,7 +187,7 @@
 
                 <noscript class="mb-10">
                   <div class="mb-4 flex flex-col gap-x-4 gap-y-2 last-of-type:mb-0{% if product.has_only_default_variant %} hidden{% endif %}">
-                    <label class="block w-full pb-2 text-lead font-body-weight-bold" for="Variants-{{ section.id }}">
+                    <label class="text-lead font-body-weight-bold block w-full pb-2" for="Variants-{{ section.id }}">
                       {{- 'products.product.product_variants' | t -}}
                     </label>
                     <div class="relative">
@@ -240,7 +240,7 @@
                         <button
                           type="submit"
                           name="add"
-                          class="button w-full bg-primary text-contrast disabled:cursor-not-allowed disabled:opacity-50"
+                          class="button bg-primary text-contrast w-full disabled:cursor-not-allowed disabled:opacity-50"
                           {% if product.selected_or_first_available_variant.available == false %}
                             disabled
                           {% endif %}
