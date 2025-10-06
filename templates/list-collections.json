@@ -1,7 +1,41 @@
 {
   "sections": {
     "main": {
-      "type": "main-list-collections"
+      "type": "main-list-collections",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "id": "heading",
+          "settings": {
+            "heading": "Collections",
+            "heading_level": "h1",
+            "heading_size": "lg"
+          }
+        },
+        "collection-card": {
+          "type": "collection-card",
+          "static": true,
+          "blocks": {
+            "image": {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.collection.image }}"
+              }
+            },
+            "heading": {
+              "type": "heading",
+              "static": true,
+              "id": "heading",
+              "settings": {
+                "heading": "{{ closest.collection.title }}"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "order": ["main"]

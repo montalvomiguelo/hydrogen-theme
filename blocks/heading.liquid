@@ -1,9 +1,29 @@
-{%- render 'heading',
-  content: block.settings.heading,
-  size: block.settings.heading_size,
-  level: block.settings.heading_level,
-  shopify_attributes: block.shopify_attributes
+{%- doc -%}
+  Displays a heading element.
+
+  @param {string} [wrapper_class]
+{%- enddoc -%}
+
+{%- liquid
+  assign heading_tag = 'div'
+  case block.settings.heading_level
+    when 'h1'
+      assign heading_tag = 'h1'
+    when 'h2'
+      assign heading_tag = 'h2'
+    when 'h3'
+      assign heading_tag = 'h3'
+  endcase
 -%}
+
+<{{ heading_tag }}
+  class="{{ wrapper_class }} font-heading font-heading-weight data-[size=xl]:text-display data-[size=lg]:text-heading data-[size=md]:text-lead"
+  data-slot="heading"
+  data-size="{{ block.settings.heading_size }}"
+  {{ block.shopify_attributes }}
+>
+  {{- block.settings.heading | escape -}}
+</{{ heading_tag }}>
 
 {% schema %}
 {

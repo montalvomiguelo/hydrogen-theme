@@ -1,12 +1,12 @@
 <div class="grid w-full justify-items-start gap-8 p-6 py-8 md:p-8 lg:p-12">
-  <h1 class="max-w-prose-narrow font-heading text-heading font-heading-weight inline-block">{{ page_title }}</h1>
+  {%- content_for 'block', type: 'heading', id: 'heading', wrapper_class: 'max-w-prose-narrow inline-block' -%}
 </div>
 <div class="grid w-full gap-4 border-none p-6 md:gap-8 md:p-8 lg:p-12">
   {%- paginate collections by 12 -%}
     <ul class="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 md:grid-cols-2 md:gap-4 lg:gap-6" role="list">
       {%- for collection in collections -%}
         <li>
-          {% render 'card-collection', card_collection: collection %}
+          {%- content_for 'block', type: 'collection-card', id: 'collection-card', closest.collection: collection -%}
         </li>
       {%- endfor -%}
     </ul>

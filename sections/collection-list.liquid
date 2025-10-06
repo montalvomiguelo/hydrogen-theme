@@ -1,8 +1,12 @@
 <div class="grid w-full gap-4 border-none p-6 md:gap-8 md:p-8 lg:p-12">
-  <h2 class="font-heading text-lead font-heading-weight">{{ section.settings.title | escape }}</h2>
-  <div class="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 sm:grid-cols-3 md:gap-4 lg:gap-6">
-    {%- for block in section.blocks -%}
-      {% render 'card-collection', card_collection: block.settings.collection %}
+  {%- content_for 'block', type: 'heading', id: 'heading' -%}
+
+  <div
+    class="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 sm:grid-cols-[repeat(var(--columns-desktop),minmax(0,1fr))] md:gap-4 lg:gap-6"
+    style="--columns-desktop: {{ section.settings.columns_desktop }};"
+  >
+    {%- for collection in section.settings.collection_list -%}
+      {%- content_for 'block', type: 'collection-card', id: 'collection-card', closest.collection: collection -%}
     {%- endfor -%}
   </div>
 </div>
@@ -10,13 +14,11 @@
 {% schema %}
 {
   "name": "Collection list",
-  "max_blocks": 15,
   "settings": [
     {
-      "type": "text",
-      "id": "title",
-      "default": "Collections",
-      "label": "Heading"
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "Collections"
     },
     {
       "type": "range",
@@ -28,31 +30,42 @@
       "label": "Number of columns on desktop"
     }
   ],
-  "blocks": [
-    {
-      "type": "featured_collection",
-      "name": "Collection",
-      "settings": [
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Collection"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
       "name": "Collection list",
       "blocks": [
         {
-          "type": "featured_collection"
+          "type": "heading",
+          "static": true,
+          "id": "heading",
+          "settings": {
+            "heading": "Collections",
+            "heading_level": "h2",
+            "heading_size": "md"
+          }
         },
         {
-          "type": "featured_collection"
-        },
-        {
-          "type": "featured_collection"
+          "type": "collection-card",
+          "id": "collection-card",
+          "static": true,
+          "blocks": [
+            {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.collection.image }}"
+              }
+            },
+            {
+              "type": "heading",
+              "static": true,
+              "id": "heading",
+              "settings": {
+                "heading": "{{ closest.collection.title }}"
+              }
+            }
+          ]
         }
       ]
     }
