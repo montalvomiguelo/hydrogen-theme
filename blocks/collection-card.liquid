@@ -1,0 +1,33 @@
+{% doc %}
+  Renders a collection card
+{% enddoc %}
+
+{%- liquid
+  assign card_collection = closest.collection
+-%}
+
+<div class="relative" {{ block.shopify_attributes }}>
+  <a href="{{ card_collection.url }}" class="absolute inset-0 overflow-hidden">
+    <span class="sr-only">{{ card_collection.title }}</span>
+  </a>
+  <div class="grid gap-4">
+    <div class="bg-primary/5 aspect-[3/2] overflow-hidden rounded">
+      {%- content_for 'block', type: 'image', id: 'image' -%}
+    </div>
+    {%- content_for 'block', type: 'heading', id: 'heading' -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection card",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Collection card",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

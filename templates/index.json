@@ -88,21 +88,40 @@
     "collection_list": {
       "type": "collection-list",
       "blocks": {
-        "featured-collection-0": {
-          "type": "featured_collection"
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "id": "heading",
+          "settings": {
+            "heading": "Collections",
+            "heading_level": "h2",
+            "heading_size": "md"
+          }
         },
-        "featured-collection-1": {
-          "type": "featured_collection"
-        },
-        "featured-collection-2": {
-          "type": "featured_collection"
+        "collection-card": {
+          "type": "collection-card",
+          "id": "collection-card",
+          "static": true,
+          "blocks": {
+            "image": {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.collection.image }}"
+              }
+            },
+            "heading": {
+              "type": "heading",
+              "static": true,
+              "id": "heading",
+              "settings": {
+                "heading": "{{ closest.collection.title }}"
+              }
+            }
+          }
         }
-      },
-      "block_order": [
-        "featured-collection-0",
-        "featured-collection-1",
-        "featured-collection-2"
-      ]
+      }
     }
   },
   "order": ["image_banner", "featured_collection", "collection_list"]
