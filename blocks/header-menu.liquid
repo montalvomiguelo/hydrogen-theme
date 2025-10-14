@@ -1,0 +1,26 @@
+{%- doc -%}
+  Displays a header menu block.
+
+  @param {string} [variant]
+{%- enddoc -%}
+
+{%- if variant == 'mobile' -%}
+  {%- render 'header-drawer', shopify_attributes: block.shopify_attributes, linklist: block.settings.menu -%}
+{%- else -%}
+  {%- render 'header-mega-menu', shopify_attributes: block.shopify_attributes, linklist: block.settings.menu -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Primary navigation"
+    }
+  ]
+}
+{% endschema %}
