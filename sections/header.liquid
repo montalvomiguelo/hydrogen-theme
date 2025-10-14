@@ -14,7 +14,7 @@
     class="{{ container_class }} h-nav flex w-full items-center justify-between gap-4 px-4 leading-none backdrop-blur-lg md:px-8 lg:gap-8 lg:px-12 lg:py-8"
   >
     <div class="flex w-full items-center justify-start gap-4 lg:hidden">
-      {%- content_for 'block', type: '_header-menu-mobile', id: 'header-menu-mobile' -%}
+      {%- content_for 'block', type: 'header-menu', id: 'header-menu', variant: 'mobile' -%}
 
       <form
         action="{{ routes.search_url }}"
@@ -41,7 +41,9 @@
     <div class="flex w-full items-center gap-12 lg:w-auto">
       {%- content_for 'block', type: '_header-logo', id: 'header-logo' -%}
 
-      {%- content_for 'block', type: '_header-menu', id: 'header-menu' -%}
+      {%- # theme-check-disable UniqueStaticBlockId -%}
+      {%- content_for 'block', type: 'header-menu', id: 'header-menu' -%}
+      {%- # theme-check-enable UniqueStaticBlockId -%}
     </div>
 
     <div class="flex w-full items-center justify-end gap-4 lg:w-auto lg:gap-1">

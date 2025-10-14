@@ -1,0 +1,14 @@
+{%- doc -%}
+  Displays a megamenu for the header.
+
+  @param {string} shopify_attributes
+  @param {linklist} linklist
+{%- enddoc -%}
+
+<nav class="hidden gap-8 lg:flex" {{ shopify_attributes }}>
+  {%- for link in linklist.links -%}
+    <a href="{{ link.url }}">
+      {{ link.title }}
+    </a>
+  {%- endfor -%}
+</nav>
