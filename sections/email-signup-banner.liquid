@@ -1,71 +1,7 @@
 <div id="Banner-{{ section.id }}" class="relative flex w-full flex-wrap">
   <div class="relative flex min-h-[34rem] w-full items-center justify-center">
     <div class="flex h-fit w-full flex-col items-center gap-4 px-6 text-center md:px-8 lg:px-12">
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2 class="font-heading text-heading font-heading-weight" {{ block.shopify_attributes }}>
-              {{ block.settings.heading | escape }}
-            </h2>
-          {%- when 'paragraph' -%}
-            <div class="text-lead" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
-          {%- when 'email_form' -%}
-            <div class="w-full max-w-[335px]" {{ block.shopify_attributes }}>
-              {% form 'customer', class: '' %}
-                <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="w-full">
-                  <div class="relative flex w-full">
-                    <input
-                      id="NewsletterForm--{{ section.id }}"
-                      type="email"
-                      name="contact[email]"
-                      class="w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3 pr-16 placeholder:text-white"
-                      value="{{ form.email }}"
-                      aria-required="true"
-                      autocorrect="off"
-                      autocapitalize="off"
-                      autocomplete="email"
-                      {% if form.errors %}
-                        autofocus
-                        aria-invalid="true"
-                        aria-describedby="Newsletter-error--{{ section.id }}"
-                      {% elsif form.posted_successfully? %}
-                        aria-describedby="Newsletter-success--{{ section.id }}"
-                      {% endif %}
-                      placeholder="{{ 'newsletter.label' | t }}"
-                      required
-                    >
-                    <label class="sr-only" for="NewsletterForm--{{ section.id }}">
-                      {{ 'newsletter.label' | t }}
-                    </label>
-                    <button
-                      type="submit"
-                      class="jutify-center absolute bottom-0 right-0 top-0 flex h-full items-center pl-4 pr-4"
-                      name="commit"
-                      id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
-                    >
-                      {% render 'icon-arrow' %}
-                    </button>
-                  </div>
-                  {%- if form.errors -%}
-                    <small class="" id="Newsletter-error--{{ section.id }}">
-                      {%- render 'icon-error' -%}
-                      {{- form.errors.translated_fields.email | capitalize }}
-                      {{ form.errors.messages.email -}}
-                    </small>
-                  {%- endif -%}
-                </div>
-                {%- if form.posted_successfully? -%}
-                  <h3 class="" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
-                    {% render 'icon-success' -%}
-                    {{- 'newsletter.success' | t }}
-                  </h3>
-                {%- endif -%}
-              {% endform %}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
+      {%- content_for 'blocks' -%}
     </div>
   </div>
 </div>
@@ -74,51 +10,27 @@
 {
   "name": "Email signup banner",
   "tag": "section",
-  "blocks": [
-    {
-      "type": "heading",
-      "name": "Heading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Opening soon",
-          "label": "Heading"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "name": "Paragraph",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "text",
-          "default": "<p>Be the first to know when we launch.</p>",
-          "label": "Description"
-        }
-      ]
-    },
-    {
-      "type": "email_form",
-      "name": "Email signup banner",
-      "limit": 1
-    }
-  ],
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
   "presets": [
     {
       "name": "Email signup banner",
       "blocks": [
         {
-          "type": "heading"
+          "type": "heading",
+          "settings": {
+            "heading": "Opening soon",
+            "heading_level": "h2",
+            "heading_size": "lg"
+          }
         },
         {
-          "type": "paragraph"
+          "type": "text",
+          "settings": {
+            "text": "<p>Be the first to know when we launch.</p>"
+          }
         },
         {
-          "type": "email_form"
+          "type": "email-signup"
         }
       ]
     }
