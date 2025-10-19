@@ -3,27 +3,56 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button"
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true
-          }
-        },
-        "tab": {
-          "type": "tab"
+        "product-details": {
+          "static": true,
+          "type": "product-details",
+          "blocks": {
+            "title": {
+              "type": "heading",
+              "settings": {
+                "heading": "{{ closest.product.title }}",
+                "heading_level": "h1",
+                "heading_size": "lg"
+              }
+            },
+            "vendor": {
+              "type": "text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>"
+              }
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            "tab": {
+              "type": "tab"
+            }
+          },
+          "block_order": [
+            "title",
+            "vendor",
+            "price",
+            "variant_picker",
+            "buy_buttons",
+            "tab"
+          ]
         }
-      },
-      "block_order": ["price", "variant_picker", "buy_buttons", "tab"]
+      }
     },
     "product-recommendations": {
       "type": "product-recommendations",

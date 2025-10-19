@@ -1,0 +1,65 @@
+{%- doc -%}
+  Renders a product media gallery.
+{%- enddoc -%}
+
+{%- assign selected_product = closest.product -%}
+
+<div
+  class="swimlane hidden-scroll w-screen md:w-full md:grid-flow-row md:grid-cols-2 md:overflow-x-auto md:p-0 lg:col-span-2"
+  {{ block.shopify_attributes }}
+>
+  {%- for media in selected_product.media -%}
+    {%- liquid
+      assign decimal = forloop.index0 | modulo: 3
+      assign is_first = false
+      if forloop.first
+        assign is_first = true
+      endif
+      assign is_fourth = false
+      if forloop.index0 == 3
+        assign is_fourth = true
+      endif
+      assign is_full_width = false
+      if decimal == 0
+        assign is_full_width = true
+      endif
+      if is_full_width
+        assign media_wrapper_class = 'md:col-span-2'
+        assign sizes = '(min-width: 64em) 60vw, (min-width: 48em) 50vw, 90vw'
+      else
+        assign media_wrapper_class = 'md:col-span-1'
+        assign sizes = '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'
+      endif
+      unless is_first or is_fourth
+        assign media_wrapper_class = media_wrapper_class | append: ' md:aspect-[4/5]'
+      endunless
+      assign loading = 'lazy'
+      if is_first
+        assign loading = 'eager'
+      endif
+    -%}
+    <div class="w-mobileGallery bg-contrast/10 aspect-square snap-center overflow-hidden rounded md:w-full {{ media_wrapper_class }}">
+      {{
+        media.preview_image
+        | image_url: width: 1445
+        | image_tag:
+          loading: loading,
+          preload: forloop.first,
+          width: media.preview_image.width,
+          height: media.preview_image.height,
+          class: 'w-full h-full aspect-[inherit] object-cover object-center',
+          sizes: sizes,
+          widths: '550, 1100, 1445, 1680, 2048, 22200, 2890, 4096',
+          alt: media.preview_image.alt
+        | escape
+      }}
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Produc media",
+  "tag": null
+}
+{% endschema %}

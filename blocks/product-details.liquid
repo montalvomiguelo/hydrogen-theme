@@ -1,0 +1,27 @@
+{%- doc -%}
+  Renders product details.
+{%- enddoc -%}
+
+<div
+  class="flex w-full max-w-xl flex-col p-6 md:mx-auto md:max-w-sm md:px-0 [&>*+*]:my-4 [&>*:first-child]:mt-0 [&>[data-slot=heading]+[data-slot=text]]:mt-0 [&>[data-slot=text]+[data-slot=heading]]:mt-0"
+  {{ block.shopify_attributes }}
+>
+  {%- content_for 'blocks' -%}
+</div>
+
+{% schema %}
+{
+  "name": "Details",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" },
+    { "type": "heading" },
+    { "type": "text" },
+    { "type": "price" },
+    { "type": "variant-picker" },
+    { "type": "buy-buttons" },
+    { "type": "tab" }
+  ],
+  "tag": null
+}
+{% endschema %}
