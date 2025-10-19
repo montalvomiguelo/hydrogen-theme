@@ -1,0 +1,47 @@
+<div class="tab mb-10 [.tab_+_&]:-mt-6" {{ block.shopify_attributes }}>
+  <details id="Details-{{ block.id }}-{{ section.id }}">
+    <summary>
+      <h2 class="text-lead font-body-weight-bold flex justify-between">
+        {{ block.settings.title | default: block.settings.page.title }}
+        <span class="h-5 w-5 [details[open]_&]:rotate-180">
+          {% render 'icon-caret' %}
+        </span>
+      </h2>
+    </summary>
+    <div class="prose prose-invert pb-4 pt-4" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+      {{ block.settings.content }}
+      {{ block.settings.page.content }}
+    </div>
+  </details>
+</div>
+
+{% schema %}
+{
+  "name": "Tab",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shipping information"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Tab content",
+      "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Tab content from page"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab"
+    }
+  ]
+}
+{% endschema %}
