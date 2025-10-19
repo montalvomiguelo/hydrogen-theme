@@ -1,7 +1,37 @@
 {
   "sections": {
     "main": {
-      "type": "main-404"
+      "type": "section",
+      "settings": {
+        "gap": 32,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "id": "heading",
+          "settings": {
+            "heading": "404 Page Not Found",
+            "heading_level": "h1",
+            "heading_size": "lg"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The page you requested does not exist.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Continue shopping",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"]
     }
   },
   "order": ["main"]
