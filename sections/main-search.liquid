@@ -1,23 +1,6 @@
 <div class="grid w-full justify-items-start gap-8 p-6 py-8 md:p-8 lg:p-12">
-  {%- if search.performed -%}
-    <h1 class="font-heading text-copy font-heading-weight max-w-prose">{{ 'templates.search.title' | t }}</h1>
-  {%- else -%}
-    <h1 class="font-heading text-copy font-heading-weight max-w-prose">{{ 'general.search.search' | t }}</h1>
-  {%- endif -%}
-  <form action="{{ routes.search_url }}" method="get" role="search" class="text-heading relative flex w-full">
-    <input type="hidden" name="type" value="product">
-    <input
-      type="search"
-      name="q"
-      value="{{ search.terms | escape }}"
-      placeholder="{{ 'general.search.search' | t }}"
-      class="border-primary/10 text-heading focus:border-primary/90 w-full border-x-0 border-b-2 border-t-0 bg-transparent px-0 py-2 transition focus:ring-0"
-    >
-    <input name="options[prefix]" type="hidden" value="last">
-    <button type="submit" class="absolute right-0 py-2">
-      {{ 'general.search.submit' | t }}
-    </button>
-  </form>
+  {%- content_for 'block', type: 'heading', id: 'heading', wrapper_class: 'max-w-prose' -%}
+  {%- content_for 'block', type: 'search-input', id: 'search-input' -%}
 </div>
 
 {% if search.performed %}
@@ -37,7 +20,7 @@
             if forloop.index > 2
               assign lazy_load = true
             endif
-            render 'card-product', card_product: item, lazy_load: lazy_load
+            content_for 'block', type: 'product-card', id: 'static-product-card', closest.product: item, lazy_load: lazy_load
           endfor
         -%}
       </div>
