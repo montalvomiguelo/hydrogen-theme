@@ -3,7 +3,7 @@
 {% enddoc %}
 
 {%- liquid
-  assign card_collection = closest.collection
+  assign card_collection = block.settings.collection
 -%}
 
 <div class="relative" {{ block.shopify_attributes }}>
@@ -22,7 +22,13 @@
 {
   "name": "Collection card",
   "tag": null,
-  "settings": [],
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
   "presets": [
     {
       "name": "Collection card",

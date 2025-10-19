@@ -16,6 +16,9 @@
         "collection-card": {
           "type": "collection-card",
           "static": true,
+          "settings": {
+            "collection": "{{ closest.collection }}"
+          },
           "blocks": {
             "image": {
               "type": "image",
