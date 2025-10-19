@@ -1,32 +1,10 @@
 <div class="grid w-full gap-4 p-6 py-8 md:justify-items-center md:p-8 md:text-center lg:p-12">
-  <h1 class="max-w-prose-narrow font-heading text-heading font-heading-weight inline-block">
-    {{ article.title | escape }}
-  </h1>
-  <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+  {%- content_for 'block', type: 'heading', id: 'heading', wrapper_class: 'max-w-prose-narrow inline-block' -%}
+  {%- content_for 'block', type: 'details', id: 'details' -%}
 </div>
 <div class="grid w-full gap-4 border-none px-6 md:gap-8 md:px-8 lg:px-12">
-  {%- if article.image -%}
-    <img
-      srcset="
-        {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
-        {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
-        {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
-        {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
-        {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
-        {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
-        {{ article.image | image_url }} {{ article.image.width }}w
-      "
-      sizes="(min-width: 1200px) 1100px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-      src="{{ article.image | image_url: width: 1100 }}"
-      class="mx-auto mt-8 w-full max-w-7xl md:mt-16"
-      loading="eager"
-      fetchpriority="high"
-      width="{{ article.image.width }}"
-      height="{{ article.image.height }}"
-      alt="{{ article.image.alt | escape }}"
-    >
-  {%- endif -%}
-  <div class="article prose">{{ article.content }}</div>
+  {%- content_for 'block', type: 'image', id: 'image' -%}
+  {%- content_for 'block', type: 'article-content', id: 'article-content' -%}
 </div>
 
 <script type="application/ld+json">
@@ -67,7 +45,3 @@
     }
   }
 </script>
-
-{% schema %}
-{}
-{% endschema %}

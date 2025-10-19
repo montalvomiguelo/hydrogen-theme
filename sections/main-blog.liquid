@@ -1,13 +1,11 @@
 {%- paginate blog.articles by 6 -%}
   <div class="grid w-full justify-items-start gap-0 p-6 py-8 md:p-8 lg:p-12">
-    <h1 class="max-w-prose-narrow font-heading text-heading font-heading-weight inline-block">
-      {{ blog.title | escape }}
-    </h1>
+    {%- content_for 'block', type: 'heading', id: 'heading', wrapper_class: 'max-w-prose-narrow inline-block' -%}
 
     <div class="grid w-full grid-flow-row grid-cols-2 gap-6 pt-24">
       {%- for article in blog.articles -%}
         <div>
-          {%- render 'article-card', article: article -%}
+          {%- content_for 'block', type: 'article-card', id: 'article-card', closest.article: article -%}
         </div>
       {%- endfor -%}
     </div>
