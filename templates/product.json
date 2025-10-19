@@ -56,7 +56,50 @@
     },
     "product-recommendations": {
       "type": "product-recommendations",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "settings": {
+            "heading": "You may also like",
+            "heading_level": "h2",
+            "heading_size": "md"
+          }
+        },
+        "static-product-card": {
+          "type": "product-card",
+          "static": true,
+          "settings": {
+            "product": "{{ closest.product }}"
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "static": true,
+              "settings": {
+                "text": "<p>{{ closest.product.title }}</p>"
+              }
+            },
+            "price": {
+              "type": "price",
+              "static": true,
+              "id": "price",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            "image": {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.product.featured_image }}"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "order": ["main", "product-recommendations"]
