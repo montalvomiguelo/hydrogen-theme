@@ -1,0 +1,66 @@
+<div class="w-full max-w-[335px]" {{ block.shopify_attributes }}>
+  {% form 'customer', class: '' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="w-full">
+      <div class="relative flex w-full">
+        <input
+          id="NewsletterForm--{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="w-full appearance-none rounded border border-white bg-transparent bg-none px-4 py-3 pr-16 placeholder:text-white"
+          value="{{ form.email }}"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          {% if form.errors %}
+            autofocus
+            aria-invalid="true"
+            aria-describedby="Newsletter-error--{{ section.id }}"
+          {% elsif form.posted_successfully? %}
+            aria-describedby="Newsletter-success--{{ section.id }}"
+          {% endif %}
+          placeholder="{{ 'newsletter.label' | t }}"
+          required
+        >
+        <label class="sr-only" for="NewsletterForm--{{ section.id }}">
+          {{ 'newsletter.label' | t }}
+        </label>
+        <button
+          type="submit"
+          class="jutify-center absolute bottom-0 right-0 top-0 flex h-full items-center pl-4 pr-4"
+          name="commit"
+          id="Subscribe"
+          aria-label="{{ 'newsletter.button_label' | t }}"
+        >
+          {% render 'icon-arrow' %}
+        </button>
+      </div>
+      {%- if form.errors -%}
+        <small class="" id="Newsletter-error--{{ section.id }}">
+          {%- render 'icon-error' -%}
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </small>
+      {%- endif -%}
+    </div>
+    {%- if form.posted_successfully? -%}
+      <h3 class="" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
+        {% render 'icon-success' -%}
+        {{- 'newsletter.success' | t }}
+      </h3>
+    {%- endif -%}
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Email signup",
+  "tag": null,
+  "presets": [
+    {
+      "name": "Email signup"
+    }
+  ]
+}
+{% endschema %}
