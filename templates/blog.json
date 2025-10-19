@@ -2,7 +2,39 @@
   "sections": {
     "main": {
       "type": "main-blog",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "settings": {
+            "heading": "{{ closest.blog.title }}",
+            "heading_size": "lg",
+            "heading_level": "h1"
+          }
+        },
+        "article-card": {
+          "static": true,
+          "type": "article-card",
+          "blocks": {
+            "heading": {
+              "type": "heading",
+              "static": true,
+              "settings": {
+                "heading": "{{ closest.article.title }}"
+              }
+            },
+            "image": {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.article.image }}"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "order": ["main"]

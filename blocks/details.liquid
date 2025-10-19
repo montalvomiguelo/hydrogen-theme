@@ -1,0 +1,18 @@
+{%- doc -%}
+  Displays article details.
+
+  @param {string} [wrapper_class]
+{%- enddoc -%}
+
+{%- assign article = closest.article -%}
+
+<span class="{{ wrapper_class }} block" {{ block.shopify_attributes }}>
+  {{ article.published_at | time_tag: format: 'date' }}
+</span>
+
+{% schema %}
+{
+  "name": "Details",
+  "tag": null
+}
+{% endschema %}

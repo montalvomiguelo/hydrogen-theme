@@ -1,7 +1,27 @@
 {
   "sections": {
     "main": {
-      "type": "main-article"
+      "type": "main-article",
+      "settings": {},
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "settings": {
+            "heading": "{{ closest.article.title }}",
+            "heading_size": "lg",
+            "heading_level": "h1"
+          }
+        },
+        "image": {
+          "type": "image",
+          "static": true,
+          "id": "image",
+          "settings": {
+            "image": "{{ closest.article.image }}"
+          }
+        }
+      }
     }
   },
   "order": ["main"]
