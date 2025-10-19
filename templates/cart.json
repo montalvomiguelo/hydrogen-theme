@@ -1,7 +1,18 @@
 {
   "sections": {
     "main": {
-      "type": "main-cart"
+      "type": "main-cart",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "settings": {
+            "heading": "Your cart",
+            "heading_size": "lg",
+            "heading_level": "h1"
+          }
+        }
+      }
     }
   },
   "order": ["main"]
