@@ -2,7 +2,28 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "static": true,
+          "settings": {
+            "heading": "{{ closest.page.title }}",
+            "heading_level": "h1",
+            "heading_size": "lg"
+          }
+        },
+        "page-content": {
+          "type": "page-content",
+          "static": true,
+          "settings": {
+            "heading": "{{ closest.page.title }}",
+            "heading_level": "h1",
+            "heading_size": "lg"
+          }
+        }
+      },
+      "block_order": []
     }
   },
   "order": ["main"]
