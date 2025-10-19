@@ -1,14 +1,67 @@
 {
   "sections": {
     "collection-header": {
-      "type": "collection-header",
+      "type": "section",
       "settings": {
-        "show_collection_description": true
-      }
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "gap": 32
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ closest.collection.title }}",
+            "heading_size": "lg",
+            "heading_level": "h1"
+          }
+        },
+        "description": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ closest.collection.description }}</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "description"]
     },
     "main-collection": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "static-product-card": {
+          "type": "product-card",
+          "static": true,
+          "settings": {
+            "product": "{{ closest.product }}"
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "static": true,
+              "settings": {
+                "text": "<p>{{ closest.product.title }}</p>"
+              }
+            },
+            "price": {
+              "type": "price",
+              "static": true,
+              "id": "price",
+              "settings": {
+                "product": "{{ closest.product }}"
+              }
+            },
+            "image": {
+              "type": "image",
+              "static": true,
+              "id": "image",
+              "settings": {
+                "image": "{{ closest.product.featured_image }}"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "order": ["collection-header", "main-collection"]

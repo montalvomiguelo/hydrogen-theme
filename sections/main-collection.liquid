@@ -11,11 +11,11 @@
           if forloop.index > 2
             assign lazy_load = true
           endif
-          render 'card-product', card_product: product, lazy_load: lazy_load
+          content_for 'block', type: 'product-card', id: 'static-product-card', closest.product: product, lazy_load: lazy_load
         else
           if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0
             for i in (1..4)
-              render 'card-product'
+              render 'card-product', card_product: null
             endfor
           endif
         endfor
