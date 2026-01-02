@@ -1,4 +1,5 @@
 import { fetchConfig } from '@/lib/utils'
+import { dispatchCartEvent } from '@/lib/cart-events'
 
 class ProductForm extends window.HTMLElement {
   constructor() {
@@ -7,7 +8,6 @@ class ProductForm extends window.HTMLElement {
     this.form = this.querySelector('form')
     this.form.querySelector('[name="id"]').disabled = false
     this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
-    this.cart = document.querySelector('cart-drawer')
     this.submitButton = this.querySelector('[type="submit"]')
     if (document.querySelector('cart-drawer'))
       this.submitButton.setAttribute('aria-haspopup', 'dialog')
@@ -27,15 +27,24 @@ class ProductForm extends window.HTMLElement {
     delete config.headers['Content-Type']
 
     const formData = new window.FormData(this.form)
-    if (this.cart) {
+    const variantId = formData.get('id')
+    const quantity = formData.get('quantity') || 1
+
+    const cartDrawer = document.querySelector('cart-drawer')
+    if (cartDrawer) {
       formData.append(
         'sections',
-        this.cart.getSectionsToRender().map((section) => section.id)
+        cartDrawer.getSectionsToRender().map((section) => section.id)
       )
       formData.append('sections_url', window.location.pathname)
-      this.cart.setActiveElement(document.activeElement)
     }
     config.body = formData
+
+    dispatchCartEvent('adding', {
+      variantId,
+      quantity,
+      form: this.form
+    })
 
     fetch(`${window.routes.cart_add_url}`, config)
       .then((response) => response.json())
@@ -45,24 +54,37 @@ class ProductForm extends window.HTMLElement {
 
           this.submitButton.setAttribute('aria-disabled', true)
           this.error = true
+          dispatchCartEvent('error', {
+            error: response.description,
+            action: 'add'
+          })
           return
         }
 
-        if (!this.cart) {
+        if (!cartDrawer) {
           window.location = window.routes.cart_url
           return
         }
 
         this.error = false
-        this.cart.renderContents(response)
+        dispatchCartEvent('added', {
+          variantId,
+          quantity,
+          cart: response,
+          sections: response.sections
+        })
       })
       .catch((e) => {
         console.error(e)
+        dispatchCartEvent('error', {
+          error: e.message,
+          action: 'add'
+        })
       })
       .finally(() => {
         this.submitButton.classList.remove('loading')
-        if (this.cart && this.cart.classList.contains('is-empty'))
-          this.cart.classList.remove('is-empty')
+        if (cartDrawer && cartDrawer.classList.contains('is-empty'))
+          cartDrawer.classList.remove('is-empty')
         if (!this.error) this.submitButton.removeAttribute('aria-disabled')
       })
   }

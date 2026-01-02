@@ -1,4 +1,5 @@
 import { trapFocus, removeTrapFocus } from '@/lib/a11y'
+import { onCartEvent } from '@/lib/cart-events'
 
 class CartDrawer extends window.HTMLElement {
   constructor() {
@@ -13,6 +14,11 @@ class CartDrawer extends window.HTMLElement {
       this.close.bind(this)
     )
     this.setHeaderCartIconAccessibility()
+
+    onCartEvent('added', (detail) => {
+      this.renderContents(detail)
+      this.open()
+    })
   }
 
   setHeaderCartIconAccessibility() {
@@ -57,14 +63,14 @@ class CartDrawer extends window.HTMLElement {
     document.body.classList.remove('overflow-hidden')
   }
 
-  renderContents(parsedState) {
-    this.productId = parsedState.id
+  renderContents(detail) {
+    const sections = detail.sections || detail.cart?.sections
     this.getSectionsToRender().forEach((section) => {
       const sectionElement = section.selector
         ? document.querySelector(section.selector)
         : document.getElementById(section.id)
       sectionElement.innerHTML = this.getSectionInnerHTML(
-        parsedState.sections[section.id],
+        sections[section.id],
         section.selector
       )
     })
@@ -74,7 +80,6 @@ class CartDrawer extends window.HTMLElement {
         'click',
         this.close.bind(this)
       )
-      this.open()
     })
   }
 

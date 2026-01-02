@@ -4,7 +4,7 @@ The cart drawer is a slide-out panel that displays the customer's cart contents 
 
 ## Architecture Overview
 
-The cart drawer uses a component hierarchy of Web Components (custom elements) that communicate via DOM events and Shopify's Section Rendering API.
+The cart drawer uses a component hierarchy of Web Components (custom elements) that communicate via a global event system and Shopify's Section Rendering API. Components are decoupled through cart events dispatched on the `document`, enabling other parts of the theme to react to cart changes without direct dependencies.
 
 ```
 cart-drawer                    # Main drawer container, handles open/close
@@ -20,6 +20,7 @@ cart-drawer                    # Main drawer container, handles open/close
 |------|---------|
 | `snippets/cart-drawer.liquid` | Main Liquid template with HTML structure |
 | `sections/cart-drawer.liquid` | Section wrapper (renders the snippet) |
+| `frontend/lib/cart-events.js` | Global cart event helpers |
 | `frontend/islands/cart-drawer.js` | Drawer open/close behavior, focus management |
 | `frontend/islands/cart-drawer-items.js` | Cart updates, extends `cart-items.js` |
 | `frontend/islands/cart-items.js` | Base class for cart item management |
@@ -39,12 +40,12 @@ The outer container that controls drawer visibility and manages accessibility.
 - Listens for Escape key to close
 - Handles overlay click to close
 - Attaches click handler to `#cart-icon-bubble` in the header
-- Provides `renderContents()` method called by `product-form` after add-to-cart
+- Listens for `cart:added` event to open and render new contents
 
 **Key Methods:**
 - `open(triggeredBy)` - Opens drawer, stores triggering element for focus return
 - `close()` - Closes drawer, returns focus to triggering element
-- `renderContents(parsedState)` - Re-renders drawer content after cart changes
+- `renderContents(detail)` - Re-renders drawer content from event detail
 - `getSectionsToRender()` - Returns sections to fetch via Section Rendering API
 
 ### cart-drawer-items
@@ -63,7 +64,7 @@ Extends `cart-items` base class. Manages quantity changes and cart updates withi
 Shared logic between drawer cart and full cart page. Located at `frontend/islands/cart-items.js`.
 
 **Key Methods:**
-- `updateQuantity(line, quantity, name)` - Updates item quantity via API
+- `updateQuantity(line, quantity, name)` - Updates item quantity via API, dispatches `cart:updating`, `cart:updated`, `cart:removing`, `cart:removed` events
 - `getSectionsToRender()` - Override in subclasses to specify which sections to re-render
 - `enableLoading(line)` / `disableLoading()` - Toggle loading UI state
 
@@ -73,25 +74,28 @@ Shared logic between drawer cart and full cart page. Located at `frontend/island
 
 **cart-remove-button**: Calls `cartItems.updateQuantity(index, 0)` to remove item.
 
-**cart-note**: Persists note to `/cart/update.js` on textarea change.
+**cart-note**: Persists note to `/cart/update.js` on textarea change, dispatches `cart:note-updated` event.
 
 ## Data Flow
 
 ### Adding a Product (product-form.js)
 
 1. `product-form` intercepts form submit
-2. POSTs to `/cart/add.js` with form data + sections to render
-3. On success, calls `cart-drawer.renderContents(response)`
-4. `renderContents()` updates drawer HTML and opens the drawer
+2. Dispatches `cart:adding` event
+3. POSTs to `/cart/add.js` with form data + sections to render
+4. On success, dispatches `cart:added` event with cart data and sections
+5. `cart-drawer` listens for `cart:added`, calls `renderContents()` and `open()`
 
 ### Updating Quantity
 
 1. User clicks +/- or edits quantity input
 2. `quantity-input` dispatches `change` event
 3. `cart-drawer-items` receives event (debounced 300ms)
-4. `updateQuantity()` POSTs to `/cart/change.js`
-5. Response includes re-rendered section HTML
-6. DOM is updated, focus is managed, loading state removed
+4. Dispatches `cart:updating` event (and `cart:removing` if quantity is 0)
+5. `updateQuantity()` POSTs to `/cart/change.js`
+6. Response includes re-rendered section HTML
+7. DOM is updated, focus is managed, loading state removed
+8. Dispatches `cart:updated` event (and `cart:removed` if item was removed)
 
 ## Theme Settings
 
@@ -125,11 +129,58 @@ All cart components use `client:idle` hydration directive, meaning they hydrate 
 - Screen reader live regions for cart updates
 - Keyboard-accessible quantity controls
 
+## Global Cart Events
+
+Cart components dispatch events on the `document` to enable loose coupling. Any component or script can listen for these events to react to cart changes.
+
+### Event Reference
+
+| Event | When Fired | Detail Payload |
+|-------|------------|----------------|
+| `cart:adding` | Before add-to-cart API call | `{ variantId, quantity, form }` |
+| `cart:added` | After successful add | `{ variantId, quantity, cart, sections }` |
+| `cart:updating` | Before quantity change | `{ line, quantity }` |
+| `cart:updated` | After successful update | `{ cart, sections }` |
+| `cart:removing` | Before item removal | `{ line }` |
+| `cart:removed` | After item removed | `{ line, cart, sections }` |
+| `cart:note-updated` | After note saved | `{ note, cart }` |
+| `cart:error` | On any cart API error | `{ error, action }` |
+
+### Listening to Events
+
+```javascript
+// Using the helper
+import { onCartEvent } from '@/lib/cart-events'
+
+onCartEvent('added', ({ cart }) => {
+  console.log(`Cart now has ${cart.item_count} items`)
+})
+
+// Or using native API
+document.addEventListener('cart:added', (event) => {
+  console.log(event.detail.cart)
+})
+```
+
+### Dispatching Events
+
+```javascript
+import { dispatchCartEvent } from '@/lib/cart-events'
+
+dispatchCartEvent('added', {
+  variantId: '12345',
+  quantity: 1,
+  cart: response,
+  sections: response.sections
+})
+```
+
 ## Extending the Cart Drawer
 
 To add new functionality:
 
-1. **New island component**: Create in `frontend/islands/`, extend `HTMLElement`, use `client:idle` directive
-2. **Modify sections to render**: Override `getSectionsToRender()` in `cart-drawer-items.js` if you need additional sections updated
-3. **Add Liquid markup**: Edit `snippets/cart-drawer.liquid` for structural changes
-4. **New settings**: Add to the "Cart" section in `config/settings_schema.json`
+1. **Listen to cart events**: Use `onCartEvent()` to react to cart changes without modifying existing components
+2. **New island component**: Create in `frontend/islands/`, extend `HTMLElement`, use `client:idle` directive
+3. **Modify sections to render**: Override `getSectionsToRender()` in `cart-drawer-items.js` if you need additional sections updated
+4. **Add Liquid markup**: Edit `snippets/cart-drawer.liquid` for structural changes
+5. **New settings**: Add to the "Cart" section in `config/settings_schema.json`

@@ -1,5 +1,6 @@
 import { debounce, fetchConfig } from '@/lib/utils'
 import { trapFocus } from '@/lib/a11y'
+import { dispatchCartEvent } from '@/lib/cart-events'
 
 export default class CartItems extends window.HTMLElement {
   constructor() {
@@ -55,6 +56,13 @@ export default class CartItems extends window.HTMLElement {
 
   updateQuantity(line, quantity, name) {
     this.enableLoading(line)
+
+    const isRemoving = parseInt(quantity) === 0
+
+    dispatchCartEvent('updating', { line, quantity })
+    if (isRemoving) {
+      dispatchCartEvent('removing', { line })
+    }
 
     const body = JSON.stringify({
       line,
@@ -113,8 +121,20 @@ export default class CartItems extends window.HTMLElement {
           )
         }
         this.disableLoading()
+
+        dispatchCartEvent('updated', {
+          cart: parsedState,
+          sections: parsedState.sections
+        })
+        if (isRemoving) {
+          dispatchCartEvent('removed', {
+            line,
+            cart: parsedState,
+            sections: parsedState.sections
+          })
+        }
       })
-      .catch(() => {
+      .catch((e) => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) =>
           overlay.classList.add('hidden')
         )
@@ -123,6 +143,11 @@ export default class CartItems extends window.HTMLElement {
           document.getElementById('CartDrawer-CartErrors')
         errors.textContent = window.cartStrings.error
         this.disableLoading()
+
+        dispatchCartEvent('error', {
+          error: e.message || window.cartStrings.error,
+          action: isRemoving ? 'remove' : 'update'
+        })
       })
   }
 
