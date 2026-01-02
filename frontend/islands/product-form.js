@@ -1,5 +1,4 @@
-import { fetchConfig } from '@/lib/utils'
-import { dispatchCartEvent } from '@/lib/cart-events'
+import { dispatchCartEvent, onCartEvent } from '@/lib/cart-events'
 
 class ProductForm extends window.HTMLElement {
   constructor() {
@@ -9,8 +8,13 @@ class ProductForm extends window.HTMLElement {
     this.form.querySelector('[name="id"]').disabled = false
     this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
     this.submitButton = this.querySelector('[type="submit"]')
+    this.pending = false
+
     if (document.querySelector('cart-drawer'))
       this.submitButton.setAttribute('aria-haspopup', 'dialog')
+
+    onCartEvent('added', this.onCartAdded.bind(this))
+    onCartEvent('error', this.onCartError.bind(this))
   }
 
   onSubmitHandler(evt) {
@@ -18,75 +22,57 @@ class ProductForm extends window.HTMLElement {
     if (this.submitButton.getAttribute('aria-disabled') === true) return
 
     this.handleErrorMessage()
-
     this.submitButton.setAttribute('aria-disabled', true)
     this.submitButton.classList.add('loading')
-
-    const config = fetchConfig('javascript')
-    config.headers['X-Requested-With'] = 'XMLHttpRequest'
-    delete config.headers['Content-Type']
+    this.pending = true
 
     const formData = new window.FormData(this.form)
     const variantId = formData.get('id')
-    const quantity = formData.get('quantity') || 1
+    const quantity = parseInt(formData.get('quantity')) || 1
+    const properties = this.getLineItemProperties(formData)
+    const sellingPlanId = formData.get('selling_plan')
 
-    const cartDrawer = document.querySelector('cart-drawer')
-    if (cartDrawer) {
-      formData.append(
-        'sections',
-        cartDrawer.getSectionsToRender().map((section) => section.id)
-      )
-      formData.append('sections_url', window.location.pathname)
-    }
-    config.body = formData
-
-    dispatchCartEvent('adding', {
+    dispatchCartEvent('add', {
       variantId,
       quantity,
-      form: this.form
+      properties: Object.keys(properties).length > 0 ? properties : undefined,
+      sellingPlanId: sellingPlanId || undefined
     })
+  }
 
-    fetch(`${window.routes.cart_add_url}`, config)
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.status) {
-          this.handleErrorMessage(response.description)
+  getLineItemProperties(formData) {
+    const properties = {}
+    for (const [key, value] of formData.entries()) {
+      const match = key.match(/^properties\[(.+)\]$/)
+      if (match && value) {
+        properties[match[1]] = value
+      }
+    }
+    return properties
+  }
 
-          this.submitButton.setAttribute('aria-disabled', true)
-          this.error = true
-          dispatchCartEvent('error', {
-            error: response.description,
-            action: 'add'
-          })
-          return
-        }
+  onCartAdded() {
+    if (!this.pending) return
+    this.pending = false
+    this.submitButton.classList.remove('loading')
+    this.submitButton.removeAttribute('aria-disabled')
 
-        if (!cartDrawer) {
-          window.location = window.routes.cart_url
-          return
-        }
+    const cartDrawer = document.querySelector('cart-drawer')
+    if (cartDrawer && cartDrawer.classList.contains('is-empty')) {
+      cartDrawer.classList.remove('is-empty')
+    }
 
-        this.error = false
-        dispatchCartEvent('added', {
-          variantId,
-          quantity,
-          cart: response,
-          sections: response.sections
-        })
-      })
-      .catch((e) => {
-        console.error(e)
-        dispatchCartEvent('error', {
-          error: e.message,
-          action: 'add'
-        })
-      })
-      .finally(() => {
-        this.submitButton.classList.remove('loading')
-        if (cartDrawer && cartDrawer.classList.contains('is-empty'))
-          cartDrawer.classList.remove('is-empty')
-        if (!this.error) this.submitButton.removeAttribute('aria-disabled')
-      })
+    if (!cartDrawer) {
+      window.location = window.routes.cart_url
+    }
+  }
+
+  onCartError({ error, action }) {
+    if (!this.pending || action !== 'add') return
+    this.pending = false
+    this.handleErrorMessage(error)
+    this.submitButton.classList.remove('loading')
+    this.submitButton.setAttribute('aria-disabled', true)
   }
 
   handleErrorMessage(errorMessage = false) {
