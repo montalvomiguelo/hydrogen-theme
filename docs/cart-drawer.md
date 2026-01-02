@@ -21,6 +21,7 @@ cart-drawer                    # Main drawer container, handles open/close
 | `snippets/cart-drawer.liquid` | Main Liquid template with HTML structure |
 | `sections/cart-drawer.liquid` | Section wrapper (renders the snippet) |
 | `frontend/lib/cart-events.js` | Global cart event helpers |
+| `frontend/lib/cart-api.js` | Handles `cart:add` events, adds items to cart |
 | `frontend/islands/cart-drawer.js` | Drawer open/close behavior, focus management |
 | `frontend/islands/cart-drawer-items.js` | Cart updates, extends `cart-items.js` |
 | `frontend/islands/cart-items.js` | Base class for cart item management |
@@ -135,9 +136,17 @@ Cart components dispatch events on the `document` to enable loose coupling. Any 
 
 ### Event Reference
 
+**Action Events (dispatch these to trigger cart actions):**
+
+| Event | Purpose | Detail Payload |
+|-------|---------|----------------|
+| `cart:add` | Add item to cart | `{ variantId, quantity?, properties?, sellingPlanId? }` |
+
+**Lifecycle Events (listen to these to react to cart changes):**
+
 | Event | When Fired | Detail Payload |
 |-------|------------|----------------|
-| `cart:adding` | Before add-to-cart API call | `{ variantId, quantity, form }` |
+| `cart:adding` | Before add-to-cart API call | `{ variantId, quantity, form? }` |
 | `cart:added` | After successful add | `{ variantId, quantity, cart, sections }` |
 | `cart:updating` | Before quantity change | `{ line, quantity }` |
 | `cart:updated` | After successful update | `{ cart, sections }` |
@@ -162,18 +171,38 @@ document.addEventListener('cart:added', (event) => {
 })
 ```
 
-### Dispatching Events
+### Adding Items to Cart
+
+Any component can add items to the cart by dispatching a `cart:add` event:
 
 ```javascript
 import { dispatchCartEvent } from '@/lib/cart-events'
 
-dispatchCartEvent('added', {
+// Simple add
+dispatchCartEvent('add', {
+  variantId: '12345',
+  quantity: 1
+})
+
+// With line item properties
+dispatchCartEvent('add', {
   variantId: '12345',
   quantity: 1,
-  cart: response,
-  sections: response.sections
+  properties: {
+    'Gift wrap': 'Yes',
+    'Gift message': 'Happy birthday!'
+  }
+})
+
+// With selling plan (subscriptions)
+dispatchCartEvent('add', {
+  variantId: '12345',
+  quantity: 1,
+  sellingPlanId: '123456789'
 })
 ```
+
+The cart API listener (`frontend/lib/cart-api.js`) handles the request and dispatches `cart:adding`, `cart:added`, or `cart:error` events automatically.
 
 ## Extending the Cart Drawer
 
