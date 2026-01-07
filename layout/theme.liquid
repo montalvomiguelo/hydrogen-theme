@@ -59,8 +59,8 @@
     {% endstyle %}
 
     {%- liquid
-      render 'vite-tag' with 'theme.css', preload_stylesheet: true
-      render 'vite-tag' with 'theme.js'
+      render 'vite-tag', entry: 'theme.css', preload_stylesheet: true
+      render 'vite-tag', entry: 'theme.js'
     -%}
 
     {{ content_for_header }}
