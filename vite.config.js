@@ -1,3 +1,5 @@
+// @ts-check
+
 import { defineConfig } from 'vite'
 import shopify from 'vite-plugin-shopify'
 import importMaps from 'vite-plugin-shopify-import-maps'
@@ -9,7 +11,8 @@ export default defineConfig({
     shopify({ tunnel: true, versionNumbers: true }),
     importMaps({
       bareModules: {
-        defaultGroup: '@theme'
+        defaultGroup: '@theme',
+        groups: {}
       },
       modulePreload: true
     }),
