@@ -50,6 +50,9 @@ importers:
       vite-plugin-shopify:
         specifier: ^4.1.1
         version: 4.1.1(vite@7.2.4(@types/node@22.13.9)(jiti@2.4.2)(lightningcss@1.30.1))
+      vite-plugin-shopify-import-maps:
+        specifier: ^0.5.4
+        version: 0.5.4
 
 packages:
 
@@ -2309,6 +2312,9 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  vite-plugin-shopify-import-maps@0.5.4:
+    resolution: {integrity: sha512-YvWdvPgtTUhMxMSPwczF7uHuG7yh2OBAEMOsmdnW52CMJXDf0n+5Yj+lkeLO+kjU8jo8jTlMGKRCtvUoTVFyGA==}
 
   vite-plugin-shopify@4.1.1:
     resolution: {integrity: sha512-4kyh6NUjxb6hvTnXXqnXp2nVpwkvz5Kh4nFwhZfQ1fis3/b8k5KU0l6w8dmgU/zQcwmhJeFvfpzHoP/nBONmuw==}
@@ -4645,6 +4651,8 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  vite-plugin-shopify-import-maps@0.5.4: {}
 
   vite-plugin-shopify@4.1.1(vite@7.2.4(@types/node@22.13.9)(jiti@2.4.2)(lightningcss@1.30.1)):
     dependencies:

@@ -59,6 +59,7 @@
     {% endstyle %}
 
     {%- liquid
+      render 'importmap'
       render 'vite-tag', entry: 'theme.css', preload_stylesheet: true
       render 'vite-tag', entry: 'theme.js'
     -%}
