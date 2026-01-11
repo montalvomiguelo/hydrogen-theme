@@ -67,7 +67,7 @@
     {{ content_for_header }}
 
     <script>
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js')
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     </script>
   </head>
 
@@ -98,19 +98,19 @@
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
         cart_change_url: '{{ routes.cart_change_url }}',
-        cart_update_url: '{{ routes.cart_update_url }}'
-      }
+        cart_update_url: '{{ routes.cart_update_url }}',
+      };
 
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
-      }
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
 
       window.variantStrings = {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`
-      }
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      };
     </script>
   </body>
 </html>
