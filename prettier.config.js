@@ -12,7 +12,9 @@ export default {
       options: {
         parser: 'liquid-html',
         singleQuote: false,
-        printWidth: 120
+        semi: true,
+        printWidth: 120,
+        trailingComma: 'all'
       }
     }
   ]
