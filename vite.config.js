@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import shopify from 'vite-plugin-shopify'
 import importMaps from 'vite-plugin-shopify-import-maps'
 import tailwindcss from '@tailwindcss/vite'
+import cleanup from '@driver-digital/vite-plugin-shopify-clean'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
       },
       modulePreload: true
     }),
+    cleanup(),
     tailwindcss()
   ],
   build: {
