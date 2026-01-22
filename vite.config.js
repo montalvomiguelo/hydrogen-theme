@@ -22,6 +22,7 @@ export default defineConfig({
   ],
   build: {
     minify: false,
+    emptyOutDir: false,
     rollupOptions: {
       output: {
         entryFileNames: '[name].js',
