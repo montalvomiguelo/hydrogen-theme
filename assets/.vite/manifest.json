@@ -5,12 +5,12 @@
   },
   "frontend/entrypoints/theme.css": {
     "file": "theme.css",
-    "src": "frontend/entrypoints/theme.css",
-    "isEntry": true,
     "name": "theme",
     "names": [
       "theme.css"
-    ]
+    ],
+    "src": "frontend/entrypoints/theme.css",
+    "isEntry": true
   },
   "frontend/entrypoints/theme.js": {
     "file": "theme2.js",
@@ -42,9 +42,7 @@
     "src": "frontend/islands/cart-drawer-items.js",
     "isDynamicEntry": true,
     "imports": [
-      "frontend/islands/cart-items.js",
-      "_utils.js",
-      "frontend/entrypoints/theme.js"
+      "frontend/islands/cart-items.js"
     ]
   },
   "frontend/islands/cart-drawer.js": {
@@ -62,8 +60,8 @@
     "src": "frontend/islands/cart-items.js",
     "isDynamicEntry": true,
     "imports": [
-      "_utils.js",
-      "frontend/entrypoints/theme.js"
+      "frontend/entrypoints/theme.js",
+      "_utils.js"
     ]
   },
   "frontend/islands/cart-note.js": {
@@ -118,8 +116,7 @@
     "src": "frontend/islands/password-modal.js",
     "isDynamicEntry": true,
     "imports": [
-      "frontend/islands/details-modal.js",
-      "frontend/entrypoints/theme.js"
+      "frontend/islands/details-modal.js"
     ]
   },
   "frontend/islands/product-form.js": {
