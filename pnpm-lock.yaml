@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@driver-digital/vite-plugin-shopify-clean':
         specifier: ^1.1.1
-        version: 1.1.1(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))
+        version: 1.1.1(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))
       '@eslint/js':
         specifier: ^9.21.0
         version: 9.21.0
@@ -25,7 +25,7 @@ importers:
         version: 0.5.16(tailwindcss@4.1.11)
       '@tailwindcss/vite':
         specifier: ^4.1.11
-        version: 4.1.11(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))
+        version: 4.1.11(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))
       concurrently:
         specifier: ^9.1.2
         version: 9.1.2
@@ -48,14 +48,14 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11
       vite:
-        specifier: 8.0.0-beta.11
-        version: 8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)
+        specifier: 8.0.0-beta.12
+        version: 8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)
       vite-plugin-shopify:
         specifier: ^4.1.1
-        version: 4.1.1(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))
+        version: 4.1.1(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))
       vite-plugin-shopify-import-maps:
         specifier: ^0.7.0
-        version: 0.7.0(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))
+        version: 0.7.0(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))
 
 packages:
 
@@ -2246,8 +2246,8 @@ packages:
     peerDependencies:
       vite: '>=5.4.12 <6.0.0 || >=6.0.9 || ^7.0.0'
 
-  vite@8.0.0-beta.11:
-    resolution: {integrity: sha512-WkVbiYlZ5V4fuS2vjrqIC6+T1dzLHAp+horFVt0zm/Rb1KDMandGkTQJlk7Oo3ozeMQdOpE35j45s3NwxUccYQ==}
+  vite@8.0.0-beta.12:
+    resolution: {integrity: sha512-qW5a0fFhcprMTPmVNtvBdSoIDiUygIAwU6zSpd7Y67nOt+Mc/xrMw/kJXxIM8EMrjMTDpiqRtGjk8pGiKDlRNg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -2429,9 +2429,9 @@ snapshots:
 
   '@bugsnag/safe-json-stringify@6.0.0': {}
 
-  '@driver-digital/vite-plugin-shopify-clean@1.1.1(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))':
+  '@driver-digital/vite-plugin-shopify-clean@1.1.1(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))':
     dependencies:
-      vite: 8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)
+      vite: 8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)
 
   '@emnapi/core@1.8.1':
     dependencies:
@@ -2905,12 +2905,12 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.1.11
 
-  '@tailwindcss/vite@4.1.11(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2))':
+  '@tailwindcss/vite@4.1.11(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2))':
     dependencies:
       '@tailwindcss/node': 4.1.11
       '@tailwindcss/oxide': 4.1.11
       tailwindcss: 4.1.11
-      vite: 8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)
+      vite: 8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -4533,17 +4533,17 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite-plugin-shopify-import-maps@0.7.0(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)):
+  vite-plugin-shopify-import-maps@0.7.0(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)):
     dependencies:
-      vite: 8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)
+      vite: 8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)
 
-  vite-plugin-shopify@4.1.1(vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)):
+  vite-plugin-shopify@4.1.1(vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)):
     dependencies:
       '@shopify/cli-kit': 3.88.1
       '@shopify/plugin-cloudflare': 3.88.1
       debug: 4.4.0(supports-color@8.1.1)
       fast-glob: 3.3.3
-      vite: 8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2)
+      vite: 8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2)
     transitivePeerDependencies:
       - '@types/react'
       - bufferutil
@@ -4552,7 +4552,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  vite@8.0.0-beta.11(@types/node@22.13.9)(jiti@2.4.2):
+  vite@8.0.0-beta.12(@types/node@22.13.9)(jiti@2.4.2):
     dependencies:
       '@oxc-project/runtime': 0.111.0
       fdir: 6.5.0(picomatch@4.0.3)
