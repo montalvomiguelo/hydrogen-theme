@@ -13,7 +13,7 @@
     "format-check": "prettier --check ."
   },
   "devDependencies": {
-    "@driver-digital/vite-plugin-shopify-clean": "^1.0.3",
+    "@driver-digital/vite-plugin-shopify-clean": "^1.1.1",
     "@eslint/js": "^9.21.0",
     "@shopify/prettier-plugin-liquid": "^1.8.3",
     "@tailwindcss/forms": "^0.5.10",
