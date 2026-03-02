@@ -5,12 +5,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-pnpm install                        # Install dependencies
-pnpm dev -- --store <store-name>    # Run Shopify CLI + Vite dev servers in parallel
-pnpm run build                      # Bundle assets with Vite
-pnpm run deploy                     # Build and push theme to Shopify
-pnpm lint                           # ESLint check
-pnpm format                         # Prettier auto-format
+npm install                        # Install dependencies
+npm run dev -- --store <store-name>    # Run Shopify CLI + Vite dev servers in parallel
+npm run build                      # Bundle assets with Vite
+npm run deploy                     # Build and push theme to Shopify
+npm run lint                       # ESLint check
+npm run format                     # Prettier auto-format
 ```
 
 ## Architecture

@@ -10,7 +10,7 @@ A port of Hydrogen's default template to Shopify OS 2.0.
 ## 🔨 Requirements
 
 - [Node.js (latest LTS version)](https://nodejs.org/en/)
-- [pnpm](https://pnpm.io/)
+- [npm](https://www.npmjs.com/) (included with Node.js)
 - [Shopify CLI](https://shopify.dev/themes/tools/cli)
 
 ## 🚀 Project Structure
@@ -37,9 +37,9 @@ This theme leverages the [default Shopify theme folder structure](https://shopif
 
 | Command                             | Action                                                                  |
 | :---------------------------------- | :---------------------------------------------------------------------- |
-| `pnpm install`                      | Installs dependencies                                                   |
-| `pnpm dev -- --store johns-apparel` | Launch the Shopify and Vite servers in parallel                         |
-| `pnpm run deploy`                   | Bundle your theme's assets and upload your local theme files to Shopify |
+| `npm install`                      | Installs dependencies                                                   |
+| `npm run dev -- --store johns-apparel` | Launch the Shopify and Vite servers in parallel                         |
+| `npm run deploy`                   | Bundle your theme's assets and upload your local theme files to Shopify |
 
 ## 🏝️ Hydration Directives
 

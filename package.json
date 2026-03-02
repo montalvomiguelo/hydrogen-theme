@@ -3,11 +3,10 @@
   "private": true,
   "type": "module",
   "version": "0.0.0",
-  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
   "scripts": {
     "dev": "concurrently -r -k -P 'shopify theme dev {@}' 'vite'",
     "build": "vite build",
-    "deploy": "pnpm run build && shopify theme push",
+    "deploy": "npm run build && shopify theme push",
     "lint": "eslint .",
     "format": "prettier --write --cache .",
     "format-check": "prettier --check ."
@@ -27,11 +26,5 @@
     "tailwindcss": "^4.1.11",
     "vite": "^7.2.4",
     "vite-plugin-shopify": "^4.1.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "protobufjs"
-    ]
   }
 }
