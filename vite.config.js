@@ -9,7 +9,7 @@ import cleanup from '@driver-digital/vite-plugin-shopify-clean'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    shopify({ tunnel: true, versionNumbers: true }),
+    shopify({ versionNumbers: true }),
     importMaps({
       bareModules: {
         defaultGroup: '@theme',
