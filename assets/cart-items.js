@@ -1,5 +1,6 @@
 import { n as trapFocus } from "@theme/theme";
 import { n as fetchConfig, t as debounce } from "@theme/utils";
+//#region frontend/islands/cart-items.js
 var CartItems = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -102,4 +103,5 @@ var CartItems = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("cart-items", CartItems);
+//#endregion
 export { CartItems as default };

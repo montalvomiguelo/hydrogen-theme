@@ -1,3 +1,4 @@
+//#region frontend/islands/sticky-header.js
 var StickyHeader = class extends window.HTMLElement {
 	connectedCallback() {
 		this.header = document.getElementById("shopify-section-header");
@@ -46,3 +47,4 @@ var StickyHeader = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("sticky-header", StickyHeader);
+//#endregion

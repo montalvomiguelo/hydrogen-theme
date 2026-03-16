@@ -1,4 +1,5 @@
 import { n as fetchConfig } from "@theme/utils";
+//#region frontend/islands/product-form.js
 var ProductForm = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -53,3 +54,4 @@ var ProductForm = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("product-form", ProductForm);
+//#endregion

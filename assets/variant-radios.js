@@ -1,4 +1,5 @@
 import VariantSelects from "@theme/variant-selects";
+//#region frontend/islands/variant-radios.js
 var VariantRadios = class extends VariantSelects {
 	updateOptions() {
 		this.options = Array.from(this.querySelectorAll("fieldset")).map((fieldset) => {
@@ -7,3 +8,4 @@ var VariantRadios = class extends VariantSelects {
 	}
 };
 window.customElements.define("variant-radios", VariantRadios);
+//#endregion

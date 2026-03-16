@@ -1,3 +1,4 @@
+//#region frontend/islands/quantity-input.js
 var QuantityInput = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -13,3 +14,4 @@ var QuantityInput = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("quantity-input", QuantityInput);
+//#endregion

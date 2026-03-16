@@ -1,4 +1,5 @@
 import DetailsModal from "@theme/details-modal";
+//#region frontend/islands/password-modal.js
 var PasswordModal = class extends DetailsModal {
 	constructor() {
 		super();
@@ -6,3 +7,4 @@ var PasswordModal = class extends DetailsModal {
 	}
 };
 window.customElements.define("password-modal", PasswordModal);
+//#endregion

@@ -1,3 +1,4 @@
+//#region \0vite/modulepreload-polyfill.js
 (function polyfill() {
 	const relList = document.createElement("link").relList;
 	if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -27,6 +28,8 @@
 		fetch(link.href, fetchOpts);
 	}
 })();
+//#endregion
+//#region frontend/lib/a11y.js
 function getFocusableElements(container) {
 	return Array.from(container.querySelectorAll("summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe")).filter((element) => !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length));
 }
@@ -73,8 +76,8 @@ function onKeyUpEscape(event) {
 	summaryElement.setAttribute("aria-expanded", false);
 	summaryElement.focus();
 }
-function initDisclosureWidgets(summaries$1) {
-	summaries$1.forEach((summary) => {
+function initDisclosureWidgets(summaries) {
+	summaries.forEach((summary) => {
 		summary.setAttribute("role", "button");
 		summary.setAttribute("aria-expanded", summary.parentNode.hasAttribute("open"));
 		if (summary.nextElementSibling.getAttribute("id")) summary.setAttribute("aria-controls", summary.nextElementSibling.id);
@@ -84,21 +87,23 @@ function initDisclosureWidgets(summaries$1) {
 		summary.parentElement.addEventListener("keyup", onKeyUpEscape);
 	});
 }
+//#endregion
+//#region \0vite/preload-helper.js
 var scriptRel = "modulepreload";
 var assetsURL = function(dep, importerUrl) {
 	return new URL(dep, importerUrl).href;
 };
 var seen = {};
-const __vitePreload = function preload(baseModule, deps, importerUrl) {
+var __vitePreload = function preload(baseModule, deps, importerUrl) {
 	let promise = Promise.resolve();
 	if (deps && deps.length > 0) {
 		const links = document.getElementsByTagName("link");
 		const cspNonceMeta = document.querySelector("meta[property=csp-nonce]");
 		const cspNonce = cspNonceMeta?.nonce || cspNonceMeta?.getAttribute("nonce");
-		function allSettled(promises$2) {
-			return Promise.all(promises$2.map((p) => Promise.resolve(p).then((value$1) => ({
+		function allSettled(promises) {
+			return Promise.all(promises.map((p) => Promise.resolve(p).then((value) => ({
 				status: "fulfilled",
-				value: value$1
+				value
 			}), (reason) => ({
 				status: "rejected",
 				reason
@@ -110,9 +115,9 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 			seen[dep] = true;
 			const isCss = dep.endsWith(".css");
 			const cssSelector = isCss ? "[rel=\"stylesheet\"]" : "";
-			if (!!importerUrl) for (let i$1 = links.length - 1; i$1 >= 0; i$1--) {
-				const link$1 = links[i$1];
-				if (link$1.href === dep && (!isCss || link$1.rel === "stylesheet")) return;
+			if (!!importerUrl) for (let i = links.length - 1; i >= 0; i--) {
+				const link = links[i];
+				if (link.href === dep && (!isCss || link.rel === "stylesheet")) return;
 			}
 			else if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) return;
 			const link = document.createElement("link");
@@ -128,11 +133,11 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 			});
 		}));
 	}
-	function handlePreloadError(err$2) {
-		const e$1 = new Event("vite:preloadError", { cancelable: true });
-		e$1.payload = err$2;
-		window.dispatchEvent(e$1);
-		if (!e$1.defaultPrevented) throw err$2;
+	function handlePreloadError(err) {
+		const e = new Event("vite:preloadError", { cancelable: true });
+		e.payload = err;
+		window.dispatchEvent(e);
+		if (!e.defaultPrevented) throw err;
 	}
 	return promise.then((res) => {
 		for (const item of res || []) {
@@ -142,6 +147,8 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 		return baseModule().catch(handlePreloadError);
 	});
 };
+//#endregion
+//#region frontend/lib/revive.js
 function media({ query }) {
 	const mediaQuery = window.matchMedia(query);
 	return new Promise(function(resolve) {
@@ -167,7 +174,7 @@ function idle() {
 		else setTimeout(resolve, 200);
 	});
 }
-const islands = {
+var islands = /* @__PURE__ */ Object.assign({
 	"/frontend/islands/cart-drawer-items.js": () => __vitePreload(() => import("@theme/cart-drawer-items"), [], import.meta.url),
 	"/frontend/islands/cart-drawer.js": () => __vitePreload(() => import("@theme/cart-drawer"), [], import.meta.url),
 	"/frontend/islands/cart-items.js": () => __vitePreload(() => import("@theme/cart-items"), [], import.meta.url),
@@ -184,8 +191,8 @@ const islands = {
 	"/frontend/islands/sticky-header.js": () => __vitePreload(() => import("@theme/sticky-header"), [], import.meta.url),
 	"/frontend/islands/variant-radios.js": () => __vitePreload(() => import("@theme/variant-radios"), [], import.meta.url),
 	"/frontend/islands/variant-selects.js": () => __vitePreload(() => import("@theme/variant-selects"), [], import.meta.url)
-};
-function revive(islands$1) {
+});
+function revive(islands) {
 	const observer = new window.MutationObserver((mutations) => {
 		for (let i = 0; i < mutations.length; i++) {
 			const { addedNodes } = mutations[i];
@@ -198,12 +205,12 @@ function revive(islands$1) {
 	async function dfs(node) {
 		const tagName = node.tagName.toLowerCase();
 		const potentialJsPath = `/frontend/islands/${tagName}.js`;
-		if (/-/.test(tagName) && islands$1[potentialJsPath]) {
+		if (/-/.test(tagName) && islands[potentialJsPath]) {
 			if (node.hasAttribute("client:visible")) await visible({ element: node });
 			const clientMedia = node.getAttribute("client:media");
 			if (clientMedia) await media({ query: clientMedia });
 			if (node.hasAttribute("client:idle")) await idle();
-			islands$1[potentialJsPath]();
+			islands[potentialJsPath]();
 		}
 		let child = node.firstElementChild;
 		while (child) {
@@ -217,7 +224,10 @@ function revive(islands$1) {
 		subtree: true
 	});
 }
+//#endregion
+//#region frontend/entrypoints/theme.js
 var summaries = document.querySelectorAll("[id^=\"Details-\"] summary");
 revive(islands);
 initDisclosureWidgets(summaries);
+//#endregion
 export { trapFocus as n, removeTrapFocus as t };

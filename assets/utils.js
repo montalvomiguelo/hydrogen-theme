@@ -1,3 +1,4 @@
+//#region frontend/lib/utils.js
 function fetchConfig(type = "json") {
 	return {
 		method: "POST",
@@ -14,4 +15,5 @@ function debounce(fn, wait) {
 		t = setTimeout(() => fn.apply(this, args), wait);
 	};
 }
+//#endregion
 export { fetchConfig as n, debounce as t };

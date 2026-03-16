@@ -1,4 +1,5 @@
 import CartItems from "@theme/cart-items";
+//#region frontend/islands/cart-drawer-items.js
 var CartDrawerItems = class extends CartItems {
 	getSectionsToRender() {
 		return [{
@@ -13,3 +14,4 @@ var CartDrawerItems = class extends CartItems {
 	}
 };
 window.customElements.define("cart-drawer-items", CartDrawerItems);
+//#endregion

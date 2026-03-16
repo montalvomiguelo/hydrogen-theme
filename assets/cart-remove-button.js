@@ -1,3 +1,4 @@
+//#region frontend/islands/cart-remove-button.js
 var CartRemoveButton = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -8,3 +9,4 @@ var CartRemoveButton = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("cart-remove-button", CartRemoveButton);
+//#endregion
