@@ -1,3 +1,4 @@
+//#region frontend/islands/product-recommendations.js
 var ProductRecommendations = class extends window.HTMLElement {
 	connectedCallback() {
 		fetch(this.dataset.url).then((response) => response.text()).then((text) => {
@@ -11,3 +12,4 @@ var ProductRecommendations = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("product-recommendations", ProductRecommendations);
+//#endregion

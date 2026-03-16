@@ -1,3 +1,4 @@
+//#region frontend/islands/localization-form.js
 var LocalizationForm = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -49,3 +50,4 @@ var LocalizationForm = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("localization-form", LocalizationForm);
+//#endregion

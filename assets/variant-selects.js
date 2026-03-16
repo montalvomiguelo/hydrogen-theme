@@ -1,3 +1,4 @@
+//#region frontend/islands/variant-selects.js
 var VariantSelects = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -84,4 +85,5 @@ var VariantSelects = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("variant-selects", VariantSelects);
+//#endregion
 export { VariantSelects as default };

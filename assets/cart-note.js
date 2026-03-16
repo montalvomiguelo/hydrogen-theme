@@ -1,4 +1,5 @@
 import { n as fetchConfig } from "@theme/utils";
+//#region frontend/islands/cart-note.js
 var CartNote = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -13,3 +14,4 @@ var CartNote = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("cart-note", CartNote);
+//#endregion

@@ -1,5 +1,6 @@
 import { n as trapFocus, t as removeTrapFocus } from "@theme/theme";
 import DetailsModal from "@theme/details-modal";
+//#region frontend/islands/header-drawer.js
 var HeaderDrawer = class extends DetailsModal {
 	open(event) {
 		setTimeout(() => {
@@ -29,3 +30,4 @@ var HeaderDrawer = class extends DetailsModal {
 	}
 };
 window.customElements.define("header-drawer", HeaderDrawer);
+//#endregion

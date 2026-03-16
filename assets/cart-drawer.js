@@ -1,4 +1,5 @@
 import { n as trapFocus, t as removeTrapFocus } from "@theme/theme";
+//#region frontend/islands/cart-drawer.js
 var CartDrawer = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -61,3 +62,4 @@ var CartDrawer = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("cart-drawer", CartDrawer);
+//#endregion

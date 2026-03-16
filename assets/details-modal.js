@@ -1,4 +1,5 @@
 import { n as trapFocus, t as removeTrapFocus } from "@theme/theme";
+//#region frontend/islands/details-modal.js
 var DetailsModal = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -34,4 +35,5 @@ var DetailsModal = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("details-modal", DetailsModal);
+//#endregion
 export { DetailsModal as default };

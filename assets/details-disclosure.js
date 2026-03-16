@@ -1,3 +1,4 @@
+//#region frontend/islands/details-disclosure.js
 var DetailsDisclosure = class extends window.HTMLElement {
 	constructor() {
 		super();
@@ -22,4 +23,5 @@ var DetailsDisclosure = class extends window.HTMLElement {
 	}
 };
 window.customElements.define("details-disclosure", DetailsDisclosure);
+//#endregion
 export { DetailsDisclosure as default };
